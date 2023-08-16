@@ -285,30 +285,30 @@ $graph:
   - --duration
   - valueFrom: $( inputs.duration )
   inputs:
-  time:
-    type: string
-    doc: The start time of the simulation
-    s:name: Input time string
-    s:description: The start time of the simulation. Type dd-mm-yyyy
-    s:keywords:
-      - time
-      - string
-  oiltype:
-    type: string
-    doc: The type of the oil to run the simulation
-    s:name: Input oiltype string
-    s:description: The type of the oil to run the simulation
-    s:keywords:
-      - oiltype
-      - string
-  duration:
-    type: int
-    doc: The simulation duration
-    s:name: Input duration int
-    s:description: The simulation duration
-    s:keywords:
-      - duration
-      - int
+    time:
+      type: string
+      doc: The start time of the simulation
+      s:name: Input time string
+      s:description: The start time of the simulation. Type dd-mm-yyyy
+      s:keywords:
+        - time
+        - string
+    oiltype:
+      type: string
+      doc: The type of the oil to run the simulation
+      s:name: Input oiltype string
+      s:description: The type of the oil to run the simulation
+      s:keywords:
+        - oiltype
+        - string
+    duration:
+      type: int
+      doc: The simulation duration
+      s:name: Input duration int
+      s:description: The simulation duration
+      s:keywords:
+        - duration
+        - int
   outputs:
     result:
       type: File
