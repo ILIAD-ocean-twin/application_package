@@ -55,7 +55,7 @@ $graph:
         - duration
         - int
   steps:
-    step_1:
+    simulation:
       run: '#openoil'
       in:
         lat: lat
@@ -66,17 +66,17 @@ $graph:
       out:
       - simulation
       - metadata
-    step_2:
+    animation:
       run: '#animation'
       in:
-        file: step_1/simulation
+        file: simulation/simulation
       out:
       - animation
-    step_3:
+    2stac:
       run: '#2stac'
       in:
-        result: step_2/animation
-        metadata: step_1/metadata
+        result: animation/animation
+        metadata: simulation/metadata
       out:
       - results
     
