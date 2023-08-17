@@ -35,7 +35,7 @@ $graph:
   outputs:
   - id: wf_outputs_2
     outputSource:
-    - step_workflow/wf_outputs
+    - pipeline/wf_outputs
     type:
       Directory
   s:name: second_pipeline
