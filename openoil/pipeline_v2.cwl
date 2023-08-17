@@ -83,7 +83,7 @@ $graph:
   outputs:
   - id: wf_outputs
     outputSource:
-    - step_3/results
+    - 2stac/results
     type:
       Directory
   
