@@ -1,0 +1,18 @@
+FROM r-base
+
+ENV WORKSPACE_DIR=/usr/local/src/fisheries
+
+WORKDIR ${WORKSPACE_DIR}
+
+
+RUN apt-get update
+RUN apt-get -y install build-essential xml2 openssl nano
+
+# https://github.com/r-lib/systemfonts/issues/35
+RUN apt-get -y install libfontconfig1-dev  
+RUN apt-get -y install libgdal-dev libgeos-dev libproj-dev libharfbuzz-dev libfribidi-dev
+RUN apt-get update
+
+COPY Scripts/install_packages.R ${WORKSPACE_DIR}/install_packages.R
+
+RUN Rscript install_packages.R

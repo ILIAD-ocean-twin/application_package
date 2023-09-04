@@ -1,0 +1,25 @@
+FROM ubuntu:20.04
+
+SHELL ["/bin/bash", "-c"]
+ENV BASH_ENV=~/.bashrc \
+    MAMBA_ROOT_PREFIX=/srv/conda \
+    PATH=$PATH:/srv/conda/envs/model-env/bin
+
+ADD environment.yml /tmp/environment.yml
+
+ENV TMPDIR=/tmp
+
+RUN apt-get update
+RUN apt-get install -y ca-certificates ttf-dejavu file wget bash bzip2 mlocate
+RUN wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba --strip-components=1
+RUN ./micromamba shell init -s bash -p ~/micromamba
+RUN apt-get clean autoremove --yes
+RUN rm -rf /var/lib/{apt,dpkg,cache,log}
+RUN cp ./micromamba /usr/bin
+RUN micromamba create -f /tmp/environment.yml    
+
+COPY . /tmp
+
+RUN cd /tmp && /srv/conda/envs/model-env/bin/python setup.py install
+RUN rm -fr /srv/conda/pkgs
+RUN rm -fr /tmp/*
