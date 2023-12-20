@@ -97,6 +97,9 @@ $graph:
     - animation
   s:programmingLanguage: python
   s:softwareVersion: 1.0.10
+  s:spatialCoverage:
+    - class: s:geo:
+      s:box: 40.25 23.00 41.0 25.80 
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
