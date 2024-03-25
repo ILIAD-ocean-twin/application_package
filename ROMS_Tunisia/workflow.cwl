@@ -162,7 +162,7 @@ $graph:
   - class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
-  s:codeRepository: None
+  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/blob/main/ROMS_Tunisia/workflow.cwl
   s:description: Download a preparation of executable to be used when executing ROMS
   s:keywords:
   - roms
@@ -232,7 +232,7 @@ $graph:
   - class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
-  s:codeRepository: None
+  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/blob/main/ROMS_Tunisia/workflow.cwl
   s:description: Execution of ROMS model with data from the preparation
   s:keywords:
   - roms

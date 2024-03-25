@@ -145,7 +145,7 @@ $graph:
   - class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
-  s:codeRepository: None
+  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/blob/main/TSSM_Scotland/workflow.cwl
   s:description: Running TSSM Scotland
   s:keywords:
   - tssm
