@@ -7,7 +7,7 @@ $namespaces:
 $graph:
 
 - class: Workflow
-  id: urn:cwl:workflow:duth:gr:pipeline
+  id: 'urn:cwl:workflow:duth:gr:pipeline'
   doc: Animation of an oil spill with openoil
   inputs:
     lat:
@@ -232,7 +232,7 @@ $graph:
 
 - class: CommandLineTool
   baseCommand: animation
-  id: urn:cwl:tool:inesctec:pt:animation
+  id: 'urn:cwl:tool:inesctec:pt:animation'
 
   arguments:
   - --file
