@@ -9,7 +9,7 @@ $graph:
 - baseCommand: animation
   class: CommandLineTool
 
-  id: urn:cwl:tool:inesctec:pt:animation
+  id: animation
 
   arguments:
   - --file
