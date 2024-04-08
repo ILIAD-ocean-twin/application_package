@@ -22,21 +22,21 @@ $graph:
       - Hindcast
       s:name: Hindcast
     roms_password:
-      doc: Password for Motuclient Download
+      doc: Password for Copernicus Download
       type: string
-      s:description: Password for Motuclient Download
+      s:description: Password for Copernicus Download
       s:keywords:
       - string
       - password
-      s:name: Motuclient Password
+      s:name: Copernicus Password
     roms_username:
-      doc: Username for Motuclient Download
+      doc: Username for Copernicus Download
       type: string
-      s:description: Username for Motuclient Download
+      s:description: Username for Copernicus Download
       s:keywords:
       - string
       - username
-      s:name: Motuclient Username
+      s:name: Copernicus Username
     timenow:
       doc: Simulation start date. If none is provided, today is used as reference
       type: string
@@ -99,7 +99,7 @@ $graph:
   - tunisia
   s:name: ROMS Tunisia
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.1.0
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -116,7 +116,7 @@ $graph:
   - class: InlineJavascriptRequirement
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: hidromodadmin/iliad_roms_tunisia:1.0.0
+    dockerPull: hidromodadmin/iliad_roms_tunisia:1.1.0
   - class: NetworkAccess
     networkAccess: true
   - class: LoadListingRequirement
@@ -170,7 +170,7 @@ $graph:
   - preparation
   s:name: Preparation of ROMS Model
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.1.0
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -190,7 +190,7 @@ $graph:
       writable: true
       entry: $(inputs.roms_directory)
   - class: DockerRequirement
-    dockerPull: hidromodadmin/iliad_roms_tunisia:1.0.0
+    dockerPull: hidromodadmin/iliad_roms_tunisia:1.1.0
   - class: InlineJavascriptRequirement
   - class: NetworkAccess
     networkAccess: true
@@ -240,7 +240,7 @@ $graph:
   - execution
   s:name: Execution of ROMS Model
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.1.0
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -256,4 +256,4 @@ $namespaces:
 cwlVersion: v1.2
 s:description: Download metacinematographic data
 s:name: download metacinematographic data
-s:softwareVersion: 1.0.0
+s:softwareVersion: 1.1.0
