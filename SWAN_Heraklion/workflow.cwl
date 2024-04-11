@@ -84,7 +84,7 @@ $graph:
   - hidromod
   s:name: Execution of SWAN wave model
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.0.1
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -95,7 +95,7 @@ $graph:
   - class: InlineJavascriptRequirement
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: hidromodadmin/iliad_swan_heraklion:1.0.0
+    dockerPull: hidromodadmin/iliad_swan_heraklion:1.0.1
   - class: NetworkAccess
     networkAccess: true
   - class: LoadListingRequirement
@@ -134,6 +134,7 @@ $graph:
   - class: s:Person
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
+  s:codeRepository: https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/SWAN_Heraklion/workflow.cwl
   s:description: Download and preparation of all the required files to execute SWAN
   s:keywords:
   - swan
@@ -143,7 +144,10 @@ $graph:
   - preparation
   s:name: Preparation of SWAN wave Model
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.0.1
+  s:spatialCoverage:
+    class: s:geo
+    s:box: 25.0 35.32 25.3 35.57
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -157,7 +161,7 @@ $graph:
       writable: true
       entry: $(inputs.swan_directory)
   - class: DockerRequirement
-    dockerPull: hidromodadmin/iliad_swan_heraklion:1.0.0
+    dockerPull: hidromodadmin/iliad_swan_heraklion:1.0.1
   - class: InlineJavascriptRequirement
   - class: NetworkAccess
     networkAccess: true
@@ -193,6 +197,7 @@ $graph:
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
   s:description: Execution of SWAN wave model with data from the preparation
+  s:codeRepository: https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/SWAN_Heraklion/workflow.cwl
   s:keywords:
   - swan
   - Heraklion
@@ -201,7 +206,10 @@ $graph:
   - execution
   s:name: Execution of SWAN wave Model
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.0.1
+  s:spatialCoverage:
+    class: s:geo
+    s:box: 25.0 35.32 25.3 35.57
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -212,4 +220,4 @@ $namespaces:
 cwlVersion: v1.2
 s:description: "This 500 m resolution SWAN wave model is designed specifically for the Heraklion Port area, spanning a geographical range from West: 25.0 to East: 25.3, and South: 35.32 to North: 35.57. It utilizes ocean boundary conditions derived from the CMEMS Mediterranean Sea Waves Analysis and Forecast model to ensure accurate wave dynamics within the Mediterranean context. Meteorological forcing is provided by the high-resolution ICON 7km dataset, offering detailed and reliable atmospheric inputs."
 s:name: Execution of SWAN wave model
-s:softwareVersion: 1.0.0
+s:softwareVersion: 1.0.1

@@ -99,7 +99,7 @@ $graph:
   - tunisia
   s:name: ROMS Tunisia
   s:programmingLanguage: python
-  s:softwareVersion: 1.1.0
+  s:softwareVersion: 1.1.1
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -116,7 +116,7 @@ $graph:
   - class: InlineJavascriptRequirement
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: hidromodadmin/iliad_roms_tunisia:1.1.0
+    dockerPull: hidromodadmin/iliad_roms_tunisia:1.1.1
   - class: NetworkAccess
     networkAccess: true
   - class: LoadListingRequirement
@@ -162,7 +162,7 @@ $graph:
   - class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
-  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/blob/main/ROMS_Tunisia/workflow.cwl
+  s:codeRepository: https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/ROMS_Tunisia/workflow.cwl
   s:description: Download a preparation of executable to be used when executing ROMS
   s:keywords:
   - roms
@@ -170,7 +170,7 @@ $graph:
   - preparation
   s:name: Preparation of ROMS Model
   s:programmingLanguage: python
-  s:softwareVersion: 1.1.0
+  s:softwareVersion: 1.1.1
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -190,7 +190,7 @@ $graph:
       writable: true
       entry: $(inputs.roms_directory)
   - class: DockerRequirement
-    dockerPull: hidromodadmin/iliad_roms_tunisia:1.1.0
+    dockerPull: hidromodadmin/iliad_roms_tunisia:1.1.1
   - class: InlineJavascriptRequirement
   - class: NetworkAccess
     networkAccess: true
@@ -232,7 +232,7 @@ $graph:
   - class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
-  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/blob/main/ROMS_Tunisia/workflow.cwl
+  s:codeRepository: https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/ROMS_Tunisia/workflow.cwl
   s:description: Execution of ROMS model with data from the preparation
   s:keywords:
   - roms
@@ -240,7 +240,7 @@ $graph:
   - execution
   s:name: Execution of ROMS Model
   s:programmingLanguage: python
-  s:softwareVersion: 1.1.0
+  s:softwareVersion: 1.1.1
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -256,4 +256,4 @@ $namespaces:
 cwlVersion: v1.2
 s:description: Download metacinematographic data
 s:name: download metacinematographic data
-s:softwareVersion: 1.1.0
+s:softwareVersion: 1.1.1

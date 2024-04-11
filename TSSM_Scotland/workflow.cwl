@@ -80,11 +80,11 @@ $graph:
   - scotland
   s:name: TSSM Scotland
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.0.1
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
-    s:url: https://hidromod.com/  
+    s:url: https://hidromod.com/
   s:dateCreated: "2023-12-04"
   s:spatialCoverage:
     class: s:geo
@@ -97,7 +97,7 @@ $graph:
   - class: InlineJavascriptRequirement
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: hidromodadmin/iliad_tssm_scotland:1.0.0
+    dockerPull: hidromodadmin/iliad_tssm_scotland:1.0.1
   - class: NetworkAccess
     networkAccess: true
   - class: LoadListingRequirement
@@ -145,14 +145,14 @@ $graph:
   - class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
-  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/blob/main/TSSM_Scotland/workflow.cwl
+  s:codeRepository: https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/TSSM_Scotland/workflow.cwl
   s:description: Running TSSM Scotland
   s:keywords:
   - tssm
   - scotland
   s:name: TSSM Scotland
   s:programmingLanguage: python
-  s:softwareVersion: 1.0.0
+  s:softwareVersion: 1.0.1
   s:sourceOrganization:
   - class: s:Organization
     s:name: Hidromod
@@ -169,4 +169,4 @@ $namespaces:
 cwlVersion: v1.2
 s:description: TSSM Scotland
 s:name: TSSM Scotland
-s:softwareVersion: 1.0.0
+s:softwareVersion: 1.0.1
