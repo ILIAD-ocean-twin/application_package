@@ -21,11 +21,11 @@ $graph:
       - result
 
   outputs:
-  - id: results
-    outputSource:
-    - hello/result
-    type: File
-    s:fileFormat: "text/plain"
+    - id: results
+      outputSource:
+      - hello/result
+      type: File
+      s:fileFormat: "text/plain"
 
   s:softwareVersion: 0.2.0
   s:name: Hello World Example
