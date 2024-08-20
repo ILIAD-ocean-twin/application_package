@@ -25,6 +25,7 @@ $graph:
       type: stdout
 
   requirements:
+    InlineJavascriptRequirement: {}
     DockerRequirement:
       dockerPull: amarooliveira/helloworld:0.0.0
 
@@ -38,15 +39,15 @@ $graph:
   s:programmingLanguage: python
   s:sourceOrganization:
     - class: s:Organization
-    s:name: INESCTEC
-    s:url: https://inesctec.pt
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
   s:author:
     - class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:contributor:
     - class: s:Person
-    s:name: Marco Oliveira
-    s:email: marco.a.oliveira@inesctec.pt
+      s:name: Marco Oliveira
+      s:email: marco.a.oliveira@inesctec.pt
   s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
   s:dateCreated: "2024-08-20"
