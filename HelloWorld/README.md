@@ -40,7 +40,7 @@ it can be run with :
 python3 helloworld_v0.py Marco  
 ```
 
-wich will print a message in the console like:
+which will print a message in the console like:
 
 > Hello Marco from python 3.9.6!
 
@@ -99,7 +99,7 @@ With the above update you should change your code execution call with:
 ```bash
 python3 helloworld_v1.py --name Marco
 ```
-wich will print a message in the console like:
+which will print a message in the console like:
 
 > Hello Marco from python 3.9.6!
 
