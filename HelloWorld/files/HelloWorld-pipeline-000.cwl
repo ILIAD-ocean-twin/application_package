@@ -24,10 +24,10 @@ $graph:
 
   outputs:
   - id: result
-    outputsource:
-      - hello/result
-      type: File
-      s:fileFormat: "text/plain"
+    outputSource:
+    - hello/result
+    type: File
+    s:fileFormat: "text/plain"
 
   requirements:
     DockerRequirement:
