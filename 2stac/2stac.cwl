@@ -67,4 +67,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository:
-  s:dateCreated: 2024-08-20
+  s:dateCreated: "2024-08-20"
