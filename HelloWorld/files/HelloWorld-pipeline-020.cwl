@@ -6,6 +6,7 @@ $namespaces:
 $graph:
 - class: Workflow
   id: hello_pipeline
+  s:softwareVersion: 0.2.0
 
   inputs:
     name:
@@ -21,13 +22,12 @@ $graph:
       - result
 
   outputs:
-    - id: results
-      outputSource:
-      - hello/result
-      type: File
-      s:fileFormat: "text/plain"
-
-  s:softwareVersion: 0.2.0
+  - id: results
+    outputSource:
+    - hello/result
+    type: File
+    s:fileFormat: "text/plain"
+  
   s:name: Hello World Example
   s:description: A python hello world example application package
   s:keywords:
