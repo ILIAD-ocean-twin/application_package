@@ -1,0 +1,10 @@
+FROM python:alpine3.12
+
+WORKDIR /opt
+
+COPY HelloWorld_v2.py ./HelloWorld.py
+COPY requirements.txt ./
+
+RUN pip install -r requirements.txt
+
+CMD ["python", "/opt/HelloWorld.py",  "--help"]
