@@ -53,3 +53,7 @@ $graph:
       s:email: marco.a.oliveira@inesctec.pt
   s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
   s:dateCreated: "2024-08-20"
+
+s:softwareVersion: 0.2.0
+s:name: Hello World Example Tool
+s:description: A python hello world example application package tool
