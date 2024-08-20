@@ -262,5 +262,5 @@ For presentation purposes I use [cwltool](https://github.com/common-workflow-lan
 To run the Application Package, all you need to have access is to the CWL file.
 Find the CWL file location (not need to download), open a command-line on a system with CWL support, and execute:
 ```bash
-cwltool https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/HelloWorld/files/HelloWorld-pipeline-000.cwl#hello_pipeline --name Marco
+cwltool https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/HelloWorld/files/HelloWorld-pipeline-020.cwl#hello_pipeline --name Marco
 ``` 
