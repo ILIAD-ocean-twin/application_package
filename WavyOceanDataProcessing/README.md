@@ -4,7 +4,7 @@ In this tutorial we aim to show the practice of creating an application package 
 
 ## Our Jupyter Notebook python example
 
-The [`WavyOcean.ipynb`](files/WavyOcean.ipynb) file is a Jupyter Notebook that reads a specific header (`temp1`) on CSV files, from the WAVY Ocean drifters, from [MELOA](www.ec-meloa.eu/) Project. This CSV is passed as a public URL argument. This tool also allows the user to select the operator, i.e. eq (equal), lt (less than), gt (greater than), lte (less or equal), gte (greater or equal), ne (not equal), and the value to compare with the `temp1` column. The output is a CSV file with the rows that match the operator and value.
+The file [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) is a Jupyter Notebook (also available as [Google Colab Notebook](https://colab.research.google.com/drive/1vk8UBxYbeu4WwY8JgYDcTSL8FTFpFz8W?usp=sharing)) that reads a CSV observation file, from a WAVY Ocean drifter dataset, generated during the European project [MELOA](www.ec-meloa.eu/) and publicly available at the [project's catalogue](http://catalogue.ec-meloa.eu/). This notebook allows the user to select the dataset (and url for the csv file), the operation, i.e. `eq` (equal), `lt` (less than), `gt` (greater than), `lte` (less than or equal), `gte` (greater than or equal) or `ne` (not equal), to be performed and the value to be compared with the contents of `temp_1` column, and to extract and visualise all observations that are valid for the specified filter. The output of the notebook is a CSV file with the selected rows and an interactive map displaying these values.
 
 #### NOTE: this script only runs with python greater than 3.10.
 
