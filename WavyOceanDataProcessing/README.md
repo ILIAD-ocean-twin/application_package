@@ -358,3 +358,141 @@ $graph:
 If you intend to provide more than a too, then the CWL must also include the description of the _workflow_ class.
 
 Create a _`WavyOcean-pipeline.cwl`_ file with the following content:
+
+
+2stac registry https://iliad-registry.inesctec.pt/collections/aps/items/2stac
+
+
+### To STAC
+
+```cwl
+
+- class: CommandLineTool
+  id: 2stac
+
+  baseCommand: python
+  arguments:
+  - /opt/2stac.py
+  - --result
+  - valueFrom: $( inputs.result )
+  - --metadata
+  - valueFrom: $( inputs.metadata )
+
+  inputs:
+    result:
+      type: File
+      doc: The resulting file of the previous model to insert in STAC
+      s:name: Input result file
+      s:description: The resulting file of the previous model to insert in STAC
+      s:keywords:
+        - result
+        - File
+      s:fileFormat: "*/*"
+    metadata:
+      type: File
+      doc: The resulting metadata of the previous model to insert in STAC
+      s:name: Input metadata file
+      s:description: The resulting metadata of the previous model to insert in STAC
+      s:keywords:
+        - metadata
+        - File
+      s:fileFormat: "application/json"
+
+  outputs:
+    results:
+      outputBinding:
+        glob: .
+      type: Directory
+      doc: STAC output
+
+  requirements:
+    ResourceRequirement: {}
+    InlineJavascriptRequirement: {}
+    DockerRequirement:
+      dockerPull: iliad-repository.inesctec.pt/2stac:2.0.0
+
+  s:name: 2Stac
+  s:softwareVersion: 2.0.0
+  s:description: Transform the result into a STAC
+  s:keywords:
+    - stac
+    - metadata
+  s:programmingLanguage: python
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+  s:author:
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:codeRepository:
+  s:dateCreated: "2024-08-20"
+```
+
+
+
+### Pipeline
+
+```cwl
+- class: Workflow
+  id: filter
+  inputs:
+    url:
+      type: string
+      doc: CSV endpoint
+    base:
+      type: float
+      doc: baseline
+    op:
+      type: string?
+      doc: operation
+  steps:
+    step_1:
+      run: '#meloa-filter'
+      in:
+        url: url
+        base: base
+        op: op
+      out:
+      - results
+      - metadata
+    step_3:
+      run: '#2stac'
+      in:
+        result: step_1/results
+        metadata: step_1/metadata
+      out:
+      - results
+
+  outputs:
+  - id: wf_outputs
+    outputSource:
+    - step_3/results
+    type:
+      Directory
+
+  s:softwareVersion: 0.1.0
+  s:name: WO MELOA csv filter pipeline
+  s:description: A pipeline to filter WO data and provide a STAC output
+  s:keywords:
+    - python
+    - MELOA
+    - Wavy Ocean
+    - example pipeline
+  s:programmingLanguage: python
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+  s:author:
+    - class: s:Person
+      s:name: Marco Oliveira
+      s:email: marco.a.oliveira@inesctec.pt
+  s:contributor:
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
+  s:dateCreated: "2024-08-20"
+```
