@@ -185,12 +185,10 @@ To ensure that this tool can be run everywhere, we will follow the Application P
 
 **NOTE**: A complete version of the WavyOcean example (wich also includes [logging](https://docs.python.org/3/library/logging.html)) is available in the github repository: [WavyOcean.py](./files/WavyOcean_v2.py)
 
-### Application package software container
 
-#### The Dockerfile
+### The Dockerfile
 
-Create a `Dockerfile` file with the instruction to create a Docker Image.
-The file contents are:
+Create a `Dockerfile` file with the instruction to create a Docker Image:
 
 ```docker
 FROM python:alpine3.19
@@ -204,9 +202,9 @@ COPY WavyOcean.py /opt
 CMD ["python", "/opt/WavyOcean.py",  "--help"]
 ```
 
-#### Build the Docker Image
+### Build the Docker Image
 
-Use the Docker CLI to build your meloa-wo-filter:v0 Docker Image
+Use the Docker CLI to build your meloa-wo-filter:0.1.0 Docker Image
 
 Open a commandline in the same folder where you have the _`Dockerfile`_ and the _`WavyOcean.py`_ files and run:
 
@@ -214,7 +212,7 @@ Open a commandline in the same folder where you have the _`Dockerfile`_ and the 
 docker build . -t meloa-wo-filter:0.1.0 --no-cache
 ```
 
-#### Run the Docker Image
+### Run the Docker Image
 
 To test run the docker image we created just type on the command-line:
 
@@ -241,7 +239,7 @@ docker run -v ./result:/opt/result meloa-wo-filter:0.1.0 sh -c "python /opt/Wavy
 
 This command is slightly more complex but will not be required again. We need it to ensure we have our code working as expected. It will create the _`./result/result.csv`_ and _`./result/metadata.json`_ files.
 
-#### Upload the Docker Image to a Docker Repository
+### Upload the Docker Image to a Docker Repository
 
 I've created a [repository for this WavyOcean container image at DockerHub](https://hub.docker.com/repository/docker/amarooliveira/meloa-wo-filter/general) so, now I can tag them correctly and update this container image at the repository.
 
@@ -371,15 +369,149 @@ $graph:
 
 If you intend to provide more than a too, then the CWL must also include the description of the _workflow_ class.
 
-Create a _`WavyOcean-pipeline.cwl`_ file with the following content:
+We've previouslly seen that the output of an Application Package pipeline should be a STAC catalogue document. We already found a tool thar receives as input a data file and a metadata file and builds the pipeline output as a STAC Catalogue. This tool is avaliable in the [ILIAD Registry](https://iliad-registry.inesctec.pt/collections/aps/items/2stac) and the [CWL is available in the ILIAD GITHUB](https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/2stac/2stac.cwl)
 
+Create a _`WavyOcean-pipeline-010.cwl`_ file with the contents of both tools and the description of the pipeline:
 
-2stac registry https://iliad-registry.inesctec.pt/collections/aps/items/2stac
+```yml
+- class: Workflow
+  id: filter
+  inputs:
+    url:
+      type: string
+      doc: CSV endpoint
+    base:
+      type: float
+      doc: baseline
+    op:
+      type: string?
+      doc: operation
+  steps:
+    step_1:
+      run: '#meloa-filter'
+      in:
+        url: url
+        base: base
+        op: op
+      out:
+      - results
+      - metadata
+    step_3:
+      run: '#2stac'
+      in:
+        result: step_1/results
+        metadata: step_1/metadata
+      out:
+      - results
 
+  outputs:
+  - id: wf_outputs
+    outputSource:
+    - step_3/results
+    type:
+      Directory
 
-### To STAC
+  s:softwareVersion: 0.1.0
+  s:name: WO MELOA csv filter pipeline
+  s:description: A pipeline to filter WO data and provide a STAC output
+  s:keywords:
+    - python
+    - MELOA
+    - Wavy Ocean
+    - example pipeline
+  s:programmingLanguage: python
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+  s:author:
+    - class: s:Person
+      s:name: Marco Oliveira
+      s:email: marco.a.oliveira@inesctec.pt
+  s:contributor:
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
+  s:dateCreated: "2024-08-20"
 
-```cwl
+- class: CommandLineTool
+  baseCommand: python
+  id: meloa-filter
+
+  arguments:
+  - /opt/WavyOcean.py
+  - --url
+  - valueFrom: $( inputs.url )
+  - --base
+  - valueFrom: $( inputs.base )
+  - valueFrom: $(
+      function () {
+        if (inputs.op) {
+          return ["--op", inputs.op];
+        } else {
+          return [];
+        }
+      }())
+  inputs:
+    url:
+      type: string
+      doc: CSV dataset endpoint
+    base:
+      type: float
+      doc: base value
+    op:
+      type: string?
+      doc: operation to filter
+      default: "gt"
+
+  outputs:
+    results:
+      type: File
+      outputBinding:
+        glob: "result/result.csv"
+      doc: result file
+      s:fileFormat: "text/csv"
+    metadata:
+      type: File
+      outputBinding:
+        glob: "result/metadata.json"
+      doc: metadata description
+      s:fileFormat: "application/json"
+
+  requirements:
+    ResourceRequirement: {}
+    NetworkAccess:
+      networkAccess: true
+    InlineJavascriptRequirement: {}
+    DockerRequirement:
+      dockerPull: meloa-wo-filter:0.1.0
+
+  s:softwareVersion: 0.1.0
+  s:name: WO MELOA csv filter
+  s:description: A tool to filter WO data
+  s:keywords:
+    - python
+    - wavy
+    - meloa
+    - ocean
+    - data processing
+    - example tool
+  s:programmingLanguage: python
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+  s:author:
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:contributor:
+    - class: s:Person
+      s:name: Marco Oliveira
+      s:email: marco.a.oliveira@inesctec.pt
+  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
+  s:dateCreated: "2024-08-20"
 
 - class: CommandLineTool
   id: 2stac
@@ -441,72 +573,5 @@ Create a _`WavyOcean-pipeline.cwl`_ file with the following content:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository:
-  s:dateCreated: "2024-08-20"
-```
-
-
-
-### Pipeline
-
-```cwl
-- class: Workflow
-  id: filter
-  inputs:
-    url:
-      type: string
-      doc: CSV endpoint
-    base:
-      type: float
-      doc: baseline
-    op:
-      type: string?
-      doc: operation
-  steps:
-    step_1:
-      run: '#meloa-filter'
-      in:
-        url: url
-        base: base
-        op: op
-      out:
-      - results
-      - metadata
-    step_3:
-      run: '#2stac'
-      in:
-        result: step_1/results
-        metadata: step_1/metadata
-      out:
-      - results
-
-  outputs:
-  - id: wf_outputs
-    outputSource:
-    - step_3/results
-    type:
-      Directory
-
-  s:softwareVersion: 0.1.0
-  s:name: WO MELOA csv filter pipeline
-  s:description: A pipeline to filter WO data and provide a STAC output
-  s:keywords:
-    - python
-    - MELOA
-    - Wavy Ocean
-    - example pipeline
-  s:programmingLanguage: python
-  s:sourceOrganization:
-    - class: s:Organization
-      s:name: INESCTEC
-      s:url: https://inesctec.pt
-  s:author:
-    - class: s:Person
-      s:name: Marco Oliveira
-      s:email: marco.a.oliveira@inesctec.pt
-  s:contributor:
-    - class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
   s:dateCreated: "2024-08-20"
 ```
