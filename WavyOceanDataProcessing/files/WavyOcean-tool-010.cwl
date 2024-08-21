@@ -6,7 +6,7 @@ $namespaces:
 $graph:
 - class: CommandLineTool
   baseCommand: python
-  id: meloa-filter
+  id: meloa_filter
 
   arguments:
   - /opt/WavyOcean.py
