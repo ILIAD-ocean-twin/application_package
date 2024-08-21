@@ -581,3 +581,12 @@ $graph:
   s:codeRepository:
   s:dateCreated: "2024-08-20"
 ```
+
+
+To run the Application Package, all you need to have access is to the CWL file.
+Find the CWL file location (not need to download), open a command-line on a system with CWL support, and execute:
+```bash
+cwltool https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/WavyOceanDataProcessing/files/WavyOcean-pipeline-010.cwl#filter  --base 24 --url http://catalogue.ec-meloa.eu/dataset/24116ae9-7425-45e8-a605-29fbf917649c/resource/c2f7d170-e0eb-4f35-a82f-5a8bc4be38f6/download/meloa_test_00064_00wo52_20211029t111600_20220122t193600_13_133.csv
+``` 
+
+The execution and the outputs will be coherent independently of where you run it.
