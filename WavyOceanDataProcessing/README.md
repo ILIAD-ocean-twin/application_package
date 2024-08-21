@@ -374,6 +374,12 @@ We've previouslly seen that the output of an Application Package pipeline should
 Create a _`WavyOcean-pipeline-010.cwl`_ file with the contents of both tools and the description of the pipeline:
 
 ```yml
+cwlVersion: v1.2
+
+$namespaces:
+  s: https://schema.org/
+
+$graph:
 - class: Workflow
   id: filter
   inputs:
