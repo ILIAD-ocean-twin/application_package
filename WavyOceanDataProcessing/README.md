@@ -4,7 +4,7 @@ In this tutorial we aim to show the practice of creating an application package 
 
 ## Existing Notebook Example (tha basis for this tutorial)
 
-The file [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) is a Jupyter Notebook (also available as [Google Colab Notebook](https://colab.research.google.com/drive/1vk8UBxYbeu4WwY8JgYDcTSL8FTFpFz8W?usp=sharing)) that reads a CSV observation file, from a WAVY Ocean drifter dataset, generated during the European project [MELOA](www.ec-meloa.eu/) and publicly available at the [project's catalogue](http://catalogue.ec-meloa.eu/). This notebook allows the user to select the dataset (and url for the csv file), the operation, i.e. `eq` (equal), `lt` (less than), `gt` (greater than), `lte` (less than or equal), `gte` (greater than or equal) or `ne` (not equal), to be performed and the value to be compared with the contents of `temp_1` column, and to extract and visualise all observations that are valid for the specified filter. The output of the notebook is a CSV file with the selected rows and an interactive map displaying these values. 
+The file [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) is a Jupyter Notebook (also available as [Google Colab Notebook](https://colab.research.google.com/drive/1vk8UBxYbeu4WwY8JgYDcTSL8FTFpFz8W?usp=sharing)) that reads a CSV observation file, from a WAVY Ocean drifter dataset, generated during the European project [MELOA](www.ec-meloa.eu/) and publicly available at the [project's catalogue](http://catalogue.ec-meloa.eu/). This notebook allows the user to select the dataset (and url for the csv file), the operation, i.e. `eq` (equal), `lt` (less than), `gt` (greater than), `lte` (less than or equal), `gte` (greater than or equal) or `ne` (not equal), to be performed and the value to be compared with the contents of `temp_1` column, and to extract and visualise all observations that are valid for the specified filter. The output of the notebook is a CSV file with the selected rows and an interactive map displaying these values.
 
 You may have noticed that the notebook also creates a metadata.json file with geospatial and temporal boundaries from the outputed CSV file.
 ```json
@@ -34,7 +34,7 @@ This metadata file will be required later in this example. It will be used as in
 Create a _`WavyOcean.py`_ file. Copy the contents of the [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) notebook file to start editing the script.
 
 The main function in our code will require 3 arguments which will be the inputs for the WavyOcean processing tool (constants in the notebook):
-- OPERATION 
+- OPERATION
   - --op ->  the operation, i.e. eq (default), lt, gt, lte, gte, ne
 - BASE_VALUE
   - --base -> the base value
@@ -268,11 +268,11 @@ In an Application Package, the structure that is defined for a CWL document is c
 > $graph:
 >
 > - class: Workflow
->   id: wo_data_pipeline
+>   id: filter
 >   ...
 >
 > - class: CommandLineTool
->   id: wo_data_tool
+>   id: meloa-filter
 >   ...
 
 ### Describe the command-line Tool
@@ -288,7 +288,7 @@ $namespaces:
 $graph:
 - class: CommandLineTool
   baseCommand: python
-  id: wo_data_tool
+  id: meloa-filter
 
   arguments:
   - /opt/WavyOcean.py
