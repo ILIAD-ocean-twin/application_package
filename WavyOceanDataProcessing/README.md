@@ -4,7 +4,7 @@ In this tutorial we aim to show the practice on preparing an Application Package
 
 ## Our Jupyter Notebook python example
 
-The [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) file is a Jupyter Notebook that reads a specific header (`temp1`) on CSV files, from the WAVY Ocean drifters, from [MELOA](www.ec-meloa.eu/) Project. This CSV is passed as a public URL argument. This tool also allows the user to select the operator, i.e. eq (equal), lt (less than), gt (greater than), lte (less or equal), gte (greater or equal), ne (not equal), and the value to compare with the `temp1` column. The output is a CSV file with the rows that match the operator and value.
+The [`WavyOcean.ipynb`](files/WavyOcean.ipynb) file is a Jupyter Notebook that reads a specific header (`temp1`) on CSV files, from the WAVY Ocean drifters, from [MELOA](www.ec-meloa.eu/) Project. This CSV is passed as a public URL argument. This tool also allows the user to select the operator, i.e. eq (equal), lt (less than), gt (greater than), lte (less or equal), gte (greater or equal), ne (not equal), and the value to compare with the `temp1` column. The output is a CSV file with the rows that match the operator and value.
 
 #### NOTE: this script only runs with python greater than 3.10.
 
@@ -26,7 +26,7 @@ We will add the 3 possible arguments with the _Click_ Package (`pip install clic
 - --base -> base value
 - --url -> dataset file URL
 
-Create your code using the _Click_ Package. Copy the content of `WavyOceanDataProcessing.ipynb` to `WavyOceanDataProcessing.py` and edit:
+Create your code using the _Click_ Package. Copy the content of `WavyOcean.ipynb` to `WavyOcean.py` and edit:
 
 ```python
 import sys
@@ -140,7 +140,7 @@ if __name__ == "__main__":
 With the above python file you should be able to call with:
 
 ```bash
-python3 WavyOceanDataProcessing.py --base 24 --url http://catalogue.ec-meloa.eu/dataset/24116ae9-7425-45e8-a605-29fbf917649c/resource/c2f7d170-e0eb-4f35-a82f-5a8bc4be38f6/download/meloa_test_00064_00wo52_20211029t111600_20220122t193600_13_133.csv
+python3 WavyOcean.py --base 24 --url http://catalogue.ec-meloa.eu/dataset/24116ae9-7425-45e8-a605-29fbf917649c/resource/c2f7d170-e0eb-4f35-a82f-5a8bc4be38f6/download/meloa_test_00064_00wo52_20211029t111600_20220122t193600_13_133.csv
 ```
 
 which will generate 2 files inside the `./result` folder:
@@ -149,26 +149,27 @@ which will generate 2 files inside the `./result` folder:
 - `metadata.json` with the geo spacial and temporal information of the CSV file generated.
 
 You now also have a _--help_ option:
+
 ```bash
-python3 WavyOceanDataProcessing.py --help
+python3 WavyOcean.py --help
 ```
 
 which returns:
->Usage: WavyOceanDataProcessing.py [OPTIONS]
->  Wavy Ocean Data Processing
->
->Options:
->  -op, --op TEXT      operation
->  -base, --base TEXT  baseline  [required]
->  -url, --url TEXT    url  [required]
->  --help              Show this message and exit.
 
+> Usage: WavyOcean.py [OPTIONS]
+> Wavy Ocean Data Processing
+>
+> Options:
+> -op, --op TEXT operation
+> -base, --base TEXT baseline [required]
+> -url, --url TEXT url [required]
+> --help Show this message and exit.
 
 ## Application Packaging the Wavy Ocean Data Processing Tool
 
 To ensure that this tool can be run everywhere, we will follow the Application Packaging best practices with Application containerization and CWL tool description, as explained on [HelloWorld Tutorial](../HelloWorld/README.md).
 
-**NOTE**: A complete version of the WavyOceanDataProcessing example (wich also includes [logging](https://docs.python.org/3/library/logging.html)) is available in the github repository: [WavyOceanDataProcessing.py](./files/WavyOceanDataProcessing_v2.py)
+**NOTE**: A complete version of the WavyOcean example (wich also includes [logging](https://docs.python.org/3/library/logging.html)) is available in the github repository: [WavyOcean.py](./files/WavyOcean_v2.py)
 
 ### Application package software container
 
@@ -184,16 +185,17 @@ WORKDIR /opt
 
 RUN pip install click
 
-COPY WavyOceanDataProcessing.py /opt
+COPY WavyOcean.py /opt
 
-CMD ["python", "/opt/WavyOceanDataProcessing.py",  "--help"]
+CMD ["python", "/opt/WavyOcean.py",  "--help"]
 ```
 
 #### Build the Docker Image
 
 Use the Docker CLI to build your meloa-wo-filter:v0 Docker Image
 
-Open a commandline in the same folder where you have the _`Dockerfile`_ and the _`WavyOceanDataProcessing.py`_ files and run:
+Open a commandline in the same folder where you have the _`Dockerfile`_ and the _`WavyOcean.py`_ files and run:
+
 ```bash
 docker build . -t meloa-wo-filter:0.1.0 --no-cache
 ```
@@ -208,34 +210,37 @@ docker run meloa-wo-filter:0.1.0
 
 And you will get a response from the application help as seen before:
 
->Usage: WavyOceanDataProcessing.py [OPTIONS]
->  Wavy Ocean Data Processing
+> Usage: WavyOcean.py [OPTIONS]
+> Wavy Ocean Data Processing
 >
->Options:
->  -op, --op TEXT      operation
->  -base, --base TEXT  baseline  [required]
->  -url, --url TEXT    url  [required]
->  --help              Show this message and exit.
+> Options:
+> -op, --op TEXT operation
+> -base, --base TEXT baseline [required]
+> -url, --url TEXT url [required]
+> --help Show this message and exit.
 
 To execute the python code we added to the docker image type on the command-line:
 
 ```bash
-docker run -v ./result:/opt/result meloa-wo-filter:0.1.0 sh -c "python /opt/WavyOceanDataProcessing.py --base 24 --url http://catalogue.ec-meloa.eu/dataset/24116ae9-7425-45e8-a605-29fbf917649c/resource/c2f7d170-e0eb-4f35-a82f-5a8bc4be38f6/download/meloa_test_00064_00wo52_20211029t111600_20220122t193600_13_133.csv"
+docker run -v ./result:/opt/result meloa-wo-filter:0.1.0 sh -c "python /opt/WavyOcean.py --base 24 --url http://catalogue.ec-meloa.eu/dataset/24116ae9-7425-45e8-a605-29fbf917649c/resource/c2f7d170-e0eb-4f35-a82f-5a8bc4be38f6/download/meloa_test_00064_00wo52_20211029t111600_20220122t193600_13_133.csv"
 ```
+
 This command is slightly more complex but will not be required again. We need it to ensure we have our code working as expected. It will create the _`./result/result.csv`_ and _`./result/metadata.json`_ files.
 
 #### Upload the Docker Image to a Docker Repository
 
-I've created a [repository for this WavyOceanDataProcessing container image at DockerHub](https://hub.docker.com/repository/docker/amarooliveira/meloa-wo-filter/general) so, now I can tag them correctly and update this container image at the repository.
+I've created a [repository for this WavyOcean container image at DockerHub](https://hub.docker.com/repository/docker/amarooliveira/meloa-wo-filter/general) so, now I can tag them correctly and update this container image at the repository.
 
 **NOTE:** If you created your own repository at [Docker Hub](https://hub.docker.com/) you may need to [`docker login`](https://docs.docker.com/reference/cli/docker/login/) on the command-line.
 
 To update the image tag to include my repository name (_amarooliveria/meloa-wo-filter_) I need to execute:
+
 ```bash
 docker tag meloa-wo-filter:0.1.0 amarooliveira/meloa-wo-filter:0.1.0
 ```
 
 Now that I have the correct name for my image I can update the image in the repository:
+
 ```bash
 docker push amarooliveira/meloa-wo-filter:0.1.0
 ```
@@ -243,27 +248,24 @@ docker push amarooliveira/meloa-wo-filter:0.1.0
 ## Describe the Application Package Tool
 
 ### The CWL Document
+
 In an Application Package, the structure that is defined for a CWL document is composed of at least 2 classes, respectively the class _workflow_ that allows for the definition of parameters of the application, and an instance of the class _commandLineTool_ that enables the description of tools and respectively arguments.
 
->cwlVersion: v1.2
+> cwlVersion: v1.2
 >
->$graph:
->- class: Workflow
->  id: wo_data_pipeline
->  ...
+> $graph:
 >
->- class: CommandLineTool
->  id: wo_data_tool
->  ...
+> - class: Workflow
+>   id: wo_data_pipeline
+>   ...
+>
+> - class: CommandLineTool
+>   id: wo_data_tool
+>   ...
 
 ### Describe the command-line Tool
 
-
-
-
-
-
-To describe the Application Package Tool create a _`WavyOceanDataProcessing-tool.cwl`_ file with the following content:
+To describe the Application Package Tool create a _`WavyOcean-tool-010.cwl`_ file with the following content:
 
 ```cwl
 cwlVersion: v1.2
@@ -277,7 +279,7 @@ $graph:
   id: wo_data_tool
 
   arguments:
-  - /opt/WavyOceanDataProcessing.py
+  - /opt/WavyOcean.py
   - --url
   - valueFrom: $( inputs.url )
   - --base
@@ -355,5 +357,4 @@ $graph:
 
 If you intend to provide more than a too, then the CWL must also include the description of the _workflow_ class.
 
-Create a _`WavyOceanDataProcessing-pipeline.cwl`_ file with the following content:
-
+Create a _`WavyOcean-pipeline.cwl`_ file with the following content:
