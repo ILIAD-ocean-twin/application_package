@@ -54,7 +54,7 @@ $graph:
       networkAccess: true
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: meloa-wo-filter:0.1.0
+      dockerPull: amarooliveira/meloa-wo-filter:0.1.0
 
   s:softwareVersion: 0.1.0
   s:name: WO MELOA csv filter

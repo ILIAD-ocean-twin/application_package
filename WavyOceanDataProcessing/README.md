@@ -288,7 +288,7 @@ $namespaces:
 $graph:
 - class: CommandLineTool
   baseCommand: python
-  id: meloa-filter
+  id: meloa_filter
 
   arguments:
   - /opt/WavyOcean.py
@@ -336,7 +336,7 @@ $graph:
       networkAccess: true
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: meloa-wo-filter:0.1.0
+      dockerPull: amarooliveira/meloa-wo-filter:0.1.0
 
   s:softwareVersion: 0.1.0
   s:name: WO Data Processing Tool
@@ -388,7 +388,7 @@ Create a _`WavyOcean-pipeline-010.cwl`_ file with the contents of both tools and
       doc: operation
   steps:
     step_1:
-      run: '#meloa-filter'
+      run: '#meloa_filter'
       in:
         url: url
         base: base
@@ -437,7 +437,7 @@ Create a _`WavyOcean-pipeline-010.cwl`_ file with the contents of both tools and
 
 - class: CommandLineTool
   baseCommand: python
-  id: meloa-filter
+  id: meloa_filter
 
   arguments:
   - /opt/WavyOcean.py
@@ -485,7 +485,7 @@ Create a _`WavyOcean-pipeline-010.cwl`_ file with the contents of both tools and
       networkAccess: true
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: meloa-wo-filter:0.1.0
+      dockerPull: amarooliveira/meloa-wo-filter:0.1.0
 
   s:softwareVersion: 0.1.0
   s:name: WO MELOA csv filter
