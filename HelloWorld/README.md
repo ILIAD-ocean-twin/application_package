@@ -1,7 +1,8 @@
 # Application Packaging Best practices Tutorial (Hello World)
 
-In this tutorial we aim to show the practice on preparing an Application Package Tool with a Hello World python example. 
-It will run in a machine that has no python installed. All the required dependencies are embeded in the Application Package Tool.
+In this tutorial we want to show the practice of preparing an application package tool with a Hello World Python example. 
+It will run on a machine that does not have Python installed. 
+All the necessary dependencies are embedded in the Application Package Tool.
 
 ## Our initial Hello World python example
 
@@ -125,15 +126,15 @@ Now this last version of the code cannot be run in a python setup without the  _
 
 ## Application Packaging the HelloWorld Tool
 
-To ensure that this tool can be run everywhere, we will follow the Application Packaging best practices with Application containerization and CWL tool description.
+To ensure that this tool works everywhere, we will follow the Application Packaging Best Practices with Application Containerisation and CWL tool description.
 
-For Application Packaging you will need [Docker Engine](https://www.docker.com/) installed in your system. This tutorial is not aimed at teaching Docker, you can consult [Docker Docs](https://docs.docker.com/) if you need further learning materials
+For application packaging, you need to have the [Docker Engine](https://www.docker.com/) installed on your system. This tutorial is not intended to teach Docker, you can consult [Docker Docs](https://docs.docker.com/) if you need further learning materials.
 
-An Application Package provides the best practices for a Software engineer to adapt, build, describe and share a portable representation of a processing workflow. It can containerize the complete or individual steps of a processing pipeline, and should be sufficiently described, e.g., inputs, outputs, and spatial and temporal validity.
-In an Application Package, the tools should be prepared to be called for execution by passing a set of known parameters and expect the resulting output to be imputed to the next step of a processing pipeline, or to be available for the caller. 
-The Application Package is composed of two artifacts – a Docker container image and a CWL document.
+An application package provides best practices for a software engineer to customize, build, describe, and share a portable representation of a processing workflow. It can containerise the whole or individual steps of a processing pipeline, and should be sufficiently described, e.g. inputs, outputs, and spatial and temporal validity.
+In an Application Package, the tools should be prepared to be called for execution by passing a set of known parameters and expecting the resulting output to be imputed to the next step of a processing pipeline or to be available to the caller. 
+The application package consists of two artefacts - a Docker container image and a CWL document.
 
-Current version of our Hello World python example isn't outputing a file thus, if we build an Application Package Tool we might not be able to pass the tools output into an input of the tool in the following step of the pipeline.
+The current version of our Hello World Python example doesn't output a file, so if we were to build an Application Package tool, we might not be able to pass the tool's output to an input of the tool in the next step of the pipeline.
 
 Lets update the code to write to a file instead of to the console. Copy `HelloWorld_v1.py` to `HelloWorld_v2.py` and edit:
 
@@ -171,11 +172,11 @@ Now we have a Hello World version whose output is a text file with the same cont
 
 **NOTE**: It is also possible to write a CWL that outputs the process standard output as a file, you can see how in the [Application Packaging for HelloWorld_v0.py version of this tutorial](./ApplicationPackaging_HelloWorld_v0.md)
 
-### Application package software container
-An Application Package refers to a comprehensive collection of software, resources, and specifications bundled together, designed to distribute and execute specific data processing workflows. It ensures the application's easy distribution, installation, and execution across various computing environments. 
-Two main building blocks exist in an Application Package: Application Package Document and Application Package Container.
-The Application Package leverages on Docker technology for implementing the Application Package Container. A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings.
-The Application is executed as a command-line interface (CLI) tool that runs as a non-interactive executable program: it receives input arguments, performs a computation, and terminates after producing some output.
+### Application Package Software Container
+An Application Package refers to a comprehensive collection of software, resources, and specifications bundled together, designed to distribute and execute specific data processing workflows. t ensures that the application can be easily distributed, installed and run in different computing environments. 
+There are two main building blocks in an Application Package: Application Package Document and Application Package Container.
+The Application Package uses Docker technology to implement the Application Package Container. A Docker container image is a lightweight, self-contained, executable software package that contains everything needed to run an application: code, runtime, system tools, system libraries, and settings.
+The application is run as a command line interface (CLI) tool that runs as a non-interactive executable: it takes input arguments, performs a computation, and terminates after producing some output.
 
 #### The Dockerfile
 
@@ -246,8 +247,8 @@ docker push amarooliveira/helloworld:0.2.0
 
 ## Describe the Application Package Tool
 
-A Package that complies with the Best Practice for Application Package needs to be a valid [CWL document](https://www.commonwl.org/) with a single _Workflow_ Class and at least one _CommandLineTool_ Class at the root level, to define the command-line and respective arguments and container image for each CommandLineTool, to define the Application parameters, to define the requirements for runtime environment. 
-The _Workflow_ class orchestrates the execution of the application command line and retrieves all the outputs of the processing _steps_.
+A Package that conforms to the Best Practice for Application Package must be a valid [CWL document](https://www.commonwl.org/) with a single _Workflow_ class and at least one _CommandLineTool_ class at the root level to define the command line and associated arguments and container image for each CommandLineTool, to define the application parameters, and to define the requirements for the runtime environment. 
+The _Workflow_ class orchestrates the execution of the application command line and retrieves all the output of the processing _steps_.
 An Application Package Document is an information model for aggregating the resources that contribute to a scientific work, including domain-specific annotations and provenance traces.
 
 ### The CWL Document
@@ -265,13 +266,13 @@ In an Application Package, the structure that is defined for a CWL document is c
 >  ...
 
 ### Application Package Metadata
-To provide richer informations on the Application Package we use Schema.org metadata, which is globally defined within the _s:_ namespace tag in the CWL file. Schema.org metadata provides a standardised set of tags used to provide structured information about web content. When applied to CWL, Schema.org metadata serves as a powerful tool for describing and organising various aspects of tools and workflows, making them discoverable, accessible, and understandable. In the examples you can see the metadata elements that are being used.
+To provide richer information about the Application Package, we use Schema.org metadata, which is defined globally within the _s:_ namespace tag in the CWL file. Schema.org metadata is a standardised set of tags used to provide structured information about web content. When applied to CWL, Schema.org metadata serves as a powerful tool for describing and organising various aspects of tools and workflows, making them discoverable, accessible and understandable. The examples show the metadata elements used.
 
-### Describe the command-line Tool
-A command-line tool is a non-interactive executable program that reads some input, performs a computation, and terminates after producing some output.
-The _CommandLineTool_ class defines the actual interface of the command-line tool and its arguments according to the CWL _CommandLineTool_ standard.
-The CWL explicitly supports the use of software container technologies, such as Docker or Singularity, to enable the portability of the underlying analysis tools. The Application Package needs to explicitly provide for each command-line tool the container requirements defining the container image needed.
-The field _DockerRequirement_ indicates that the component should be run in a container and specifies how to fetch the image. InlineJavascriptRequirement is a field that enables the manipulation of input parameters in CWL, which is used in the Inputs & Outputs bullet below.
+### Describe the command line tool
+A command line tool is a non-interactive executable program that reads some input, performs some computation, and terminates after producing some output.
+The _CommandLineTool_ class defines the actual interface of the command line tool and its arguments according to the CWL _CommandLineTool_ standard.
+The CWL explicitly supports the use of software container technologies, such as Docker or Singularity, to enable portability of the underlying analysis tools. The application package must explicitly provide the container requirements for each command line tool, defining the required container image.
+The _DockerRequirement_ field indicates that the component should run in a container and specifies how to fetch the image. InlineJavascriptRequirement is a field that allows the manipulation of input parameters in CWL, which is used in the Inputs and Outputs sections below.
 
 To describe the Application Package Tool create a _`HelloWorld-tool-020.cwl`_ file with the following content:
 
