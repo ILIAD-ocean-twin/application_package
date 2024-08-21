@@ -2,31 +2,52 @@
 
 In this tutorial we aim to show the practice of creating an application package tool and pipeline from an existing Jupyter Notebook sample script.
 
-## Our Jupyter Notebook python example
+## Existing Notebook Example (tha basis for this tutorial)
 
-The file [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) is a Jupyter Notebook (also available as [Google Colab Notebook](https://colab.research.google.com/drive/1vk8UBxYbeu4WwY8JgYDcTSL8FTFpFz8W?usp=sharing)) that reads a CSV observation file, from a WAVY Ocean drifter dataset, generated during the European project [MELOA](www.ec-meloa.eu/) and publicly available at the [project's catalogue](http://catalogue.ec-meloa.eu/). This notebook allows the user to select the dataset (and url for the csv file), the operation, i.e. `eq` (equal), `lt` (less than), `gt` (greater than), `lte` (less than or equal), `gte` (greater than or equal) or `ne` (not equal), to be performed and the value to be compared with the contents of `temp_1` column, and to extract and visualise all observations that are valid for the specified filter. The output of the notebook is a CSV file with the selected rows and an interactive map displaying these values.
+The file [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) is a Jupyter Notebook (also available as [Google Colab Notebook](https://colab.research.google.com/drive/1vk8UBxYbeu4WwY8JgYDcTSL8FTFpFz8W?usp=sharing)) that reads a CSV observation file, from a WAVY Ocean drifter dataset, generated during the European project [MELOA](www.ec-meloa.eu/) and publicly available at the [project's catalogue](http://catalogue.ec-meloa.eu/). This notebook allows the user to select the dataset (and url for the csv file), the operation, i.e. `eq` (equal), `lt` (less than), `gt` (greater than), `lte` (less than or equal), `gte` (greater than or equal) or `ne` (not equal), to be performed and the value to be compared with the contents of `temp_1` column, and to extract and visualise all observations that are valid for the specified filter. The output of the notebook is a CSV file with the selected rows and an interactive map displaying these values. 
 
-#### NOTE: this script only runs with python greater than 3.10.
+You may have noticed that the notebook also creates a metadata.json file with geospatial and temporal boundaries from the outputed CSV file.
+```json
+{
+   "description":"MELOA_WO_TEMP1",
+   "geometry":{
+      "type":"MultiPoint",
+      "coordinates":[
+         [28.6095,-17.9338],[28.6147,-17.9268],[28.615,-17.9266],[28.6156,-17.9268]
+      ]
+   },
+   "media_type":"TEXT",
+   "start_datetime":"2021-10-28 11:59:00.000",
+   "end_datetime":"2021-10-29 19:15:00.000",
+   "bbox":[28.6095,-17.9387,28.6191,-17.9266]
+}
+```
 
-This code depends of 3 variables that will be the inputs of our tool:
+This metadata file will be required later in this example. It will be used as input for [[the tool](https://iliad-registry.inesctec.pt/collections/aps/items/2stac)] that will output the results of the processing pipeline as a STAC Catalogue.
 
-- operation
-- base_value
-- dataset
 
-The script will also generate a metadata.json file with geo spacial and temporal information of the CSV file generated.
+**NOTE**: Python version 3.10 or above is required to run this tool.
 
-TODO: example of the code execution
 
-### Create python scrypt code
+## The Python code for the tool
 
-We will add the 3 possible arguments with the _Click_ Package (`pip install click`), like in the [HelloWorld Tutorial](../HelloWorld/README.md):
+Create a _`WavyOcean.py`_ file. Copy the contents of the [`WavyOceanDataProcessing.ipynb`](files/WavyOceanDataProcessing.ipynb) notebook file to start editing the script.
 
-- --op -> operation: eq (default), lt, gt, lte, gte, ne
-- --base -> base value
-- --url -> dataset file URL
+The main function in our code will require 3 arguments which will be the inputs for the WavyOcean processing tool (constants in the notebook):
+- OPERATION 
+  - --op ->  the operation, i.e. eq (default), lt, gt, lte, gte, ne
+- BASE_VALUE
+  - --base -> the base value
+- DATASET
+  - --url -> the dataset URL
+To define these inputs for the tool we will use  the _Click_ Package, just like in [HelloWorld Tutorial](../HelloWorld/README.md).
 
-Create your code using the _Click_ Package. Copy the content of `WavyOcean.ipynb` to `WavyOcean.py` and edit:
+Install the _Click_ Package using pip:
+```bash
+pip install click
+```
+
+Edit `WavyOcean.py` to import click and define the options:
 
 ```python
 import sys
@@ -37,14 +58,7 @@ import csv
 import json
 
 
-@click.command(
-    short_help="WO Data Processing",
-    help="Wavy Ocean Data Processing",
-    context_settings=dict(
-        ignore_unknown_options=True,
-        allow_extra_args=True,
-    ),
-)
+@click.command()
 @click.option("--op", "-op", "op", help="operation", required=False, default="gt")
 @click.option("--base", "-base", "base", help="base value", required=True)
 @click.option("--url", "-url", "url", help="url / dataset", required=True)
@@ -137,7 +151,7 @@ if __name__ == "__main__":
     main()
 ```
 
-With the above python file you should be able to call with:
+With the above python file you should be able to execute with:
 
 ```bash
 python3 WavyOcean.py --base 24 --url http://catalogue.ec-meloa.eu/dataset/24116ae9-7425-45e8-a605-29fbf917649c/resource/c2f7d170-e0eb-4f35-a82f-5a8bc4be38f6/download/meloa_test_00064_00wo52_20211029t111600_20220122t193600_13_133.csv
