@@ -197,7 +197,7 @@ WORKDIR /opt
 
 RUN pip install click
 
-COPY WavyOcean.py /opt
+COPY WavyOcean.py ./
 
 CMD ["python", "/opt/WavyOcean.py",  "--help"]
 ```
