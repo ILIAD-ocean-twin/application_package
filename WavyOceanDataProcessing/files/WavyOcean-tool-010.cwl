@@ -6,10 +6,10 @@ $namespaces:
 $graph:
 - class: CommandLineTool
   baseCommand: python
-  id: wo_data_tool
+  id: meloa-filter
 
   arguments:
-  - /opt/WavyOceanDataProcessing.py
+  - /opt/WavyOcean.py
   - --url
   - valueFrom: $( inputs.url )
   - --base
@@ -57,8 +57,8 @@ $graph:
       dockerPull: meloa-wo-filter:0.1.0
 
   s:softwareVersion: 0.1.0
-  s:name: WO Data Processing Tool
-  s:description: A python Wavy Ocean Data Processing example tool
+  s:name: WO MELOA csv filter
+  s:description: A tool to filter WO data
   s:keywords:
     - python
     - wavy
@@ -81,3 +81,7 @@ $graph:
       s:email: marco.a.oliveira@inesctec.pt
   s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
   s:dateCreated: "2024-08-20"
+
+s:softwareVersion: 0.1.0
+s:name: WO MELOA csv filter
+s:description: A tool to filter WO data

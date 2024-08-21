@@ -4,6 +4,6 @@ WORKDIR /opt
 
 RUN pip install click
 
-COPY WavyOceanDataProcessing.py /opt
+COPY WavyOcean.py /opt
 
-CMD ["python", "/opt/WavyOceanDataProcessing.py",  "--help"]
+CMD ["python", "/opt/WavyOcean.py",  "--help"]
