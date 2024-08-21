@@ -1,6 +1,6 @@
 # Application Packaging Best practices Tutorial (Wavy Ocean Data Processing)
 
-In this tutorial we aim to show the practice on preparing an Application Package Tool with an existing Jupyter Notebook example script.
+In this tutorial we aim to show the practice of creating an application package tool and pipeline from an existing Jupyter Notebook sample script.
 
 ## Our Jupyter Notebook python example
 
