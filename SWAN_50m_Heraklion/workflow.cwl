@@ -113,6 +113,12 @@ $graph:
   - class: s:Person
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
+  - class: s:Person
+    s:email: vasmeth@iacm.forth.gr
+    s:name: Vassiliki Metheniti
+  - class: s:Person
+    s:email: antonisparasyris@iacm.forth.gr
+    s:name: Antonios Parasyris
   s:description: |-
     This 500m and 50m resolution SWAN wave model is designed specifically for the Heraklion Port area, spanning a geographical range from West: 25.0 to East: 25.3, and South: 35.32 to North: 35.57. It utilizes ocean boundary conditions derived from the CMEMS Mediterranean Sea Waves Analysis and Forecast model to ensure accurate wave dynamics within the Mediterranean context. Meteorological forcing is provided by the high-resolution ICON 7km dataset, offering detailed and reliable atmospheric inputs.
   s:keywords:
@@ -184,6 +190,12 @@ $graph:
   - class: s:Person
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
+  - class: s:Person
+    s:email: vasmeth@iacm.forth.gr
+    s:name: Vassiliki Metheniti
+  - class: s:Person
+    s:email: antonisparasyris@iacm.forth.gr
+    s:name: Antonios Parasyris
   s:description: Download and preparation of all the required files to execute SWAN
   s:keywords:
   - swan
@@ -243,6 +255,12 @@ $graph:
   - class: s:Person
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
+  - class: s:Person
+    s:email: vasmeth@iacm.forth.gr
+    s:name: Vassiliki Metheniti
+  - class: s:Person
+    s:email: antonisparasyris@iacm.forth.gr
+    s:name: Antonios Parasyris
   s:description: Execution of SWAN 500m wave model with data from the preparation
   s:keywords:
   - swan
@@ -302,6 +320,12 @@ $graph:
   - class: s:Person
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
+  - class: s:Person
+    s:email: vasmeth@iacm.forth.gr
+    s:name: Vassiliki Metheniti
+  - class: s:Person
+    s:email: antonisparasyris@iacm.forth.gr
+    s:name: Antonios Parasyris
   s:description: Execution of SWAN 50m wave model with data from the preparation and the execution of 500m
   s:keywords:
   - swan
