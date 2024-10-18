@@ -348,3 +348,6 @@ s:description: |-
   This 500m and 50m resolution SWAN wave model is designed specifically for the Heraklion Port area, spanning a geographical range from West: 25.0 to East: 25.3, and South: 35.32 to North: 35.57. It utilizes ocean boundary conditions derived from the CMEMS Mediterranean Sea Waves Analysis and Forecast model to ensure accurate wave dynamics within the Mediterranean context. Meteorological forcing is provided by the high-resolution ICON 7km dataset, offering detailed and reliable atmospheric inputs.
 s:name: Execution of SWAN wave model
 s:softwareVersion: 1.0.0
+s:spatialCoverage:
+  class: s:geo
+  s:box: 35.33499908 25.12233 35.36499786 25.17233
