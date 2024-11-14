@@ -61,4 +61,4 @@ separate .yml file that is called in the cwltool command.
 The given coordinates are for a trip from Athens to Heraklion Ports, but the code can identify if the ports are within the bounding box
 of the higher resolution models (1km waves currents and 3km atmospheric) or work in global mode with inputs from GFS (27km) and CMEMS (4.4 km).
 
-For access to the ftp please send a notification to antonisparasyris@iacm.forth.gr or vasmeth@iacm.forth.gr
+Contact CMRL, FORTH on the following emails: antonisparasyris@iacm.forth.gr and vasmeth@iacm.forth.gr for further access to WRF FTP server
