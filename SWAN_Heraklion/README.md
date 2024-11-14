@@ -34,4 +34,4 @@ The job.yml file has, for this specific workflow, the following variables:
 6. hindcast - (days) for example: 1
 7. forecast - (days) for example: 3
 
-Contact antonisparasyris@iacm.forth.gr and vasmeth@iacm.forth.gr for access to WRF FTP server
+Contact CMRL, FORTH on the following emails: antonisparasyris@iacm.forth.gr and vasmeth@iacm.forth.gr for further access to WRF FTP server
