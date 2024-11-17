@@ -99,7 +99,7 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/bathymetry/bathymetry_pipeline.cwl
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/bathymetry/bathymetry_pipeline_2s3_2_0_2.cwl
   s:dateCreated: "2024-11-16T15:30:00Z"
 
 

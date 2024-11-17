@@ -90,7 +90,7 @@ $graph:
   s:keywords:
     - bathymetry
     - stac
-  s:softwareVersion: 2.0.3
+  s:programmingLanguage: python
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
@@ -99,8 +99,8 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/bathymetry/bathymetry_pipeline_2s3_2_0_3.cwl
-  s:dateCreated: "2024-11-16T21:30:00Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/bathymetry/bathymetry_pipeline.cwl
+  s:dateCreated: "2024-11-14T16:00:00Z"
 
 
 # tools
@@ -218,10 +218,10 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac:2.0.3
+      dockerPull: iliad-repository.inesctec.pt/2stac:2.0.0
 
   s:name: 2Stac
-  s:softwareVersion: 2.0.3
+  s:softwareVersion: 2.0.0
   s:description: Transform the result into a STAC
   s:keywords:
     - stac
@@ -235,8 +235,8 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_2_0_3.cwl
-  s:dateCreated: "2024-11-16T21:31:53Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_2_0_0.cwl
+  s:dateCreated: "2024-11-14T19:46:28Z"
 
 - class: CommandLineTool
 
