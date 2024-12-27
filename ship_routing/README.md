@@ -1,4 +1,4 @@
-# VISIR Global CWL with higher resolution in Cretan Sea
+# VISIR-2 Global CWL with higher resolution in Cretan Sea
 
 ## How to use it:
 
