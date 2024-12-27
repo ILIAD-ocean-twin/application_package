@@ -58,7 +58,9 @@ With each variable meaning:
 In the example above, the optional inputs are commented out. To be able to use them, you need to uncomment them and put them into a 
 separate .yml file that is called in the cwltool command.
 
-The given coordinates are for a trip from Athens to Heraklion Ports, but the code can identify if the ports are within the bounding box
-of the higher resolution models (1km waves currents and 3km atmospheric) or work in global mode with inputs from GFS (27km) and CMEMS (4.4 km).
+This tool uses VISIR-2 software (https://zenodo.org/records/10960842 created by CMCC, Italy) and leverages advanced algorithms to determine the most efficient paths for vessels, offering real-time and predictive insights.
 
-Contact CMRL, FORTH on the following emails: antonisparasyris@iacm.forth.gr and vasmeth@iacm.forth.gr for further access to WRF FTP server
+The given coordinates are for a trip from Athens to Heraklion Ports, but the application package can identify if the ports are within the bounding box
+of the higher resolution models (1km waves currents and 3km atmospheric forecasts) or work in global mode with inputs from GFS (27km) and CMEMS (~4.4 km).
+
+Contact CMRL, FORTH on the following emails: antonisparasyris@iacm.forth.gr and vasmeth@iacm.forth.gr for further access to the high resolution WRF-NEMO-WWIII FTP server
