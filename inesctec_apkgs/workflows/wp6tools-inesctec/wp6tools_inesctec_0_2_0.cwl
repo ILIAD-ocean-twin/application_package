@@ -2,6 +2,7 @@ cwlVersion: v1.2
 $namespaces:
   s: https://schema.org/
   cwltool: http://commonwl.org/cwltool#
+  edam: http://edamontology.org/
 $graph:
   - class: Workflow
     id: wp6tools_pipeline
@@ -212,7 +213,7 @@ $graph:
       s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/wp6tools-inesctec/wp6tools_inesctec_0_2_0.cwl
-    s:dateCreated: '2025-02-07T18:38:04Z'
+    s:dateCreated: '2025-02-10T11:27:50Z'
   - class: CommandLineTool
     id: generate-model
     baseCommand: python

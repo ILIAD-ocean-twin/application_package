@@ -3,6 +3,7 @@ $namespaces:
   s: https://schema.org/
   cwltool: http://commonwl.org/cwltool#
   ogc: http://www.opengis.net/def/media-type/ogc/1.0/
+  edam: http://edamontology.org/
 $graph:
   - class: Workflow
     id: openoil_pipeline
@@ -144,7 +145,7 @@ $graph:
       s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/openoil-duth/openoil_duth_0_2_0.cwl
-    s:dateCreated: '2025-02-07T18:31:15Z'
+    s:dateCreated: '2025-02-10T11:20:53Z'
   - class: CommandLineTool
     id: openoil_simulation
     baseCommand: python
