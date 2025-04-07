@@ -1,0 +1,29 @@
+{
+  "lat_point": 36.75,
+  "lon_point": 179.23,
+  "date_spill": "2025-01-20T14:44:00Z",
+  "spill_dur": "0000",
+  "spill_res": "150.0",
+  "spill_tons": 0.8,
+  "username": "username",
+  "password": "pass"
+}
+
+## run with:
+###cwltool medslik.cwl#medslik input.json
+
+
+## date spill should be within 2 weeks and up to 4 days in the future:
+
+#some examples of point spills: 
+#amoudara 35.36, 25.06
+#saronikos 37.91, 23.60
+#rhodes 36.018, 28.332
+#england 51.018, -6.972
+
+#AZORES    "lat_point": 38.753,
+# "lon_point": -27.811,
+#red sea 19.789, 37.978
+#lagos 6.258, 3.349
+#melbourne port philip -37.988 144.832
+
