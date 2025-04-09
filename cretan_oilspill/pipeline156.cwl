@@ -8,7 +8,7 @@ $graph:
 
 - class: Workflow
   id: oilspill_pipeline_medslik_156
-  doc: Oil Spill Detection and Analysis Pipeline 1-2-3-4, Medslik forecasting
+  doc: Oil Spill Detection and Analysis Pipeline 1-2-3-5, Medslik forecasting
 
   inputs:
     use_case_directory:
