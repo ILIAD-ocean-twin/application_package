@@ -173,7 +173,7 @@ $graph:
       type: Directory
       outputSource: step_medslik/results
   
-  s:name: Sentinel-1 Oil Spill Object Detection Pipeline 1-2-3-4
+  s:name: Sentinel-1 Oil Spill Object Detection Pipeline 1-2-3-5
   s:description: Sentinel-1 Oil Spill Object Detection Pipeline using Deep Learning tecniques
   s:keywords:
   - oil spill
