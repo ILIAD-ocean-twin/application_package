@@ -1,5 +1,5 @@
 # Satellite detection of oil spills and forecasting through MEDSLIK II and high resolution models (Cretan Sea Domain) and lower resolution models (Global) options.
-# Co created with FORTH-Greece, MEEO-Italy and INESCTEC-Portugal.
+# Co created by FORTH-Greece, MEEO-Italy and INESCTEC-Portugal.
 
 ## How to use it:
 
