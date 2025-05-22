@@ -224,7 +224,7 @@ $graph:
     - class: InlineJavascriptRequirement
     - class: ShellCommandRequirement
     - class: DockerRequirement
-      dockerPull: antonisparasyris/iliad:visir-1.0
+      dockerPull: antonisparasyris/iliad:ship_routing
     - class: NetworkAccess
       networkAccess: true
     - class: LoadListingRequirement
