@@ -119,7 +119,7 @@ $graph:
       - longitude
       s:name: Ending Longitude
     maxDraught:
-      type: float?
+      type: float
       doc: Max Draught
       s:description: Max Draught
       s:keywords:
@@ -175,6 +175,7 @@ $graph:
   - class: s:Person
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
+  - class: s:Person
   s:contributor:
   - class: s:Person
     s:email: vasmeth@iacm.forth.gr
@@ -188,6 +189,7 @@ $graph:
   - class: s:Person
     s:email: miguel.delgado@hidromod.com
     s:name: Miguel Delgado
+  - class: s:Person
   s:description: |-
     Solving Dijkstra's optimization algorithm to find optimal ship routes that minimize CO2 emissions, trip time and distance. Using VISIR II software (https://zenodo.org/records/10960842 created by CMCC), that runs using forcing from either CMRL's (https://crl.iacm.forth.gr/en/) high resolution models in the southern Greece region forecasting atmospheric state (WRF 3km x 3km), hydrodynamics (NEMO 1km x 1km) and waves (Wavewatch III 1km x 1km), or the GFS/CMEMS lower resolution forecasts to be able to generalize to routes globally.
   s:keywords:
@@ -222,7 +224,7 @@ $graph:
     - class: InlineJavascriptRequirement
     - class: ShellCommandRequirement
     - class: DockerRequirement
-      dockerPull: hidromodadmin/iliad_visir:1.0.0
+      dockerPull: antonisparasyris/iliad:ship_routing
     - class: NetworkAccess
       networkAccess: true
     - class: LoadListingRequirement
@@ -297,6 +299,7 @@ s:author:
 - class: s:Person
   s:email: miguel.delgado@hidromod.com
   s:name: Miguel Delgado
+- class: s:Person
 s:contributor:
 - class: s:Person
   s:email: vasmeth@iacm.forth.gr
@@ -310,6 +313,7 @@ s:contributor:
 - class: s:Person
   s:email: miguel.delgado@hidromod.com
   s:name: Miguel Delgado
+- class: s:Person
 s:description: |-
   Solving Dijkstra's optimization algorithm to find optimal ship routes that minimize CO2 emissions, trip time and distance. Using VISIR II software (https://zenodo.org/records/10960842 created by CMCC), that runs using forcing from either CMRL's (https://crl.iacm.forth.gr/en/) high resolution models in the southern Greece region forecasting atmospheric state (WRF 3km x 3km), hydrodynamics (NEMO 1km x 1km) and waves (Wavewatch III 1km x 1km), or the GFS/CMEMS lower resolution forecasts to be able to generalize to routes globally.
 s:keywords:
