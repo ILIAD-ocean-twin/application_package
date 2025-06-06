@@ -5,7 +5,7 @@ If you want to see what an Application Package without the _Click_ Package would
 To create an application package you need to have the [Docker Engine](https://www.docker.com/) installed on your system. This tutorial is not intended to teach Docker, you can consult the [Docker Docs](https://docs.docker.com/) if you need further learning material.
 
 ## Application Package Software Container
-An Application Package is a comprehensive collection of software, resources, and specifications bundled together, designed to distribute and execute specific data processing workflows. It ensures that the application can be easily distributed, installed and run in different computing environments. 
+An Application Package is a comprehensive collection of software, resources, and specifications bundled together, designed to distribute and execute specific data processing workflows. It ensures that the application can be easily distributed, installed and run in different computing environments.
 There are two main building blocks in an Application Package: Application Package Document and Application Package Container.
 The Application Package uses Docker technology to implement the Application Package Container. A Docker container image is a lightweight, self-contained, executable software package that contains everything needed to run an application: code, runtime, system tools, system libraries, and settings.
 The application is run as a command line interface (CLI) tool that runs as a non-interactive executable: it takes input arguments, performs a computation, and terminates after producing some output.
@@ -13,7 +13,7 @@ The application is run as a command line interface (CLI) tool that runs as a non
 ### The Dockerfile
 
 Create a `Dockerfile` file with the instruction to create a Docker Image.
-The file contents are: 
+The file contents are:
 
 ```docker
 FROM python:alpine3.6
@@ -50,7 +50,7 @@ docker push amarooliveira/helloworld:0.0.0
 
 ## Describe the Application Package Tool
 
-A Package that conforms to the Best Practice for Application Package must be a valid [CWL document](https://www.commonwl.org/) with a single _Workflow_ class and at least one _CommandLineTool_ class at the root level. These define the command line and associated arguments and container image for each CommandLineTool, the application parameters, the requirements for the runtime environment. 
+A Package that conforms to the Best Practice for Application Package must be a valid [CWL document](https://www.commonwl.org/) with a single _Workflow_ class and at least one _CommandLineTool_ class at the root level. These define the command line and associated arguments and container image for each CommandLineTool, the application parameters, the requirements for the runtime environment.
 The _Workflow_ class orchestrates the execution of the application command line and retrieves all the output of the processing _steps_.
 An Application Package Document is an information model for aggregating the resources that contribute to a scientific work, including domain-specific annotations and provenance traces.
 
@@ -96,7 +96,7 @@ $graph:
   - valueFrom: $( inputs.name )
 
   stdout: output.txt
-  
+
   inputs:
     name:
       type: string
@@ -118,10 +118,20 @@ $graph:
     - hello world
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
@@ -156,11 +166,11 @@ $graph:
     name:
       type: string
       doc: the name to greet
-  
+
   steps:
     hello:
       run: '#hello_tool'
-      in: 
+      in:
         name: name
       out:
         result
@@ -184,10 +194,20 @@ $graph:
     - hello world
     - example
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
@@ -209,7 +229,7 @@ $graph:
   - valueFrom: $( inputs.name )
 
   stdout: output.txt
-  
+
   inputs:
     name:
       type: string
@@ -231,10 +251,20 @@ $graph:
     - hello world
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
@@ -251,7 +281,7 @@ You may have noticed that an Application Package includes all the description of
 
 ## Share the Application Package in the Iliad Registry
 
-Both the Tools and the Pipelines can be share through an Application Package Registry. 
+Both the Tools and the Pipelines can be share through an Application Package Registry.
 
 ## Execute the Hello World Application Package
 
@@ -263,4 +293,4 @@ To run the Application Package, all you need to have access is to the CWL file.
 Find the CWL file location (not need to download), open a command-line on a system with CWL support, and execute:
 ```bash
 cwltool https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/HelloWorld/files/HelloWorld-pipeline-020.cwl#hello_pipeline --name Marco
-``` 
+```

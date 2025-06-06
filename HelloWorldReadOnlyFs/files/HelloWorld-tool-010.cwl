@@ -2,7 +2,6 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
-  edam: http://edamontology.org/
 
 $graph:
 - class: CommandLineTool
@@ -11,17 +10,13 @@ $graph:
 
   arguments:
   - /opt/HelloWorld.py
-  - --name
-  - valueFrom: $( inputs.name )
 
-  inputs:
-    name:
-      type: string
-      doc: the name to greet
+  stdout: output.txt
+
+  inputs: []
 
   outputs:
     result:
-      format: edam:data_3671 # Plain text
       type: File
       outputBinding:
         glob: "result.txt"
@@ -30,11 +25,11 @@ $graph:
   requirements:
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: amarooliveira/helloworld:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/helloworld:v1
 
-  s:softwareVersion: 0.2.0
-  s:name: Hello World Example Tool
-  s:description: A python hello world example application package tool
+  s:softwareVersion: 0.1.0
+  s:name: Hello World Example Tool Working
+  s:description: A python hello world example application package tool that writes a file to a writable directory
   s:keywords:
     - python
     - hello world
@@ -58,13 +53,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:contributor:
-    - class: s:Person
-      s:name: Marco Oliveira
-      s:email: marco.a.oliveira@inesctec.pt
   s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/
-  s:dateCreated: "2024-08-20"
-
-s:softwareVersion: 0.2.0
-s:name: Hello World Example Tool
-s:description: A python hello world example application package tool
+  s:dateCreated: "2025-02-13"

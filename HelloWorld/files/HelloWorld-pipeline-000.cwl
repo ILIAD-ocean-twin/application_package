@@ -2,7 +2,7 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
-  ogc: http://www.opengis.net/def/media-type/ogc/1.0/
+  edam: http://edamontology.org/
 
 $graph:
 - class: Workflow
@@ -13,11 +13,11 @@ $graph:
     name:
       type: string
       doc: the name to greet
-  
+
   steps:
     hello:
       run: '#hello_tool'
-      in: 
+      in:
         name: name
       out:
       - result
@@ -27,7 +27,7 @@ $graph:
     outputSource:
     - hello/result
     type: File
-    s:fileFormat: "text/plain"
+    format: edam:data_3671 # Plain text
 
   s:softwareVersion: 0.0.0
   s:name: Hello World Example
@@ -37,10 +37,20 @@ $graph:
     - hello world
     - example
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
@@ -62,7 +72,7 @@ $graph:
   - valueFrom: $( inputs.name )
 
   stdout: output.txt
-  
+
   inputs:
     name:
       type: string
@@ -85,10 +95,20 @@ $graph:
     - hello world
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia

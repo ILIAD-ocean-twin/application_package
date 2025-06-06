@@ -2,6 +2,7 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
+  edam: http://edamontology.org/
 
 $graph:
 - class: Workflow
@@ -11,11 +12,11 @@ $graph:
     name:
       type: string
       doc: the name to greet
-  
+
   steps:
     hello:
       run: '#hello_tool'
-      in: 
+      in:
         name: name
       out:
       - result
@@ -26,7 +27,7 @@ $graph:
     - hello/result
     type: File
     s:fileFormat: "text/plain"
-  
+
   s:softwareVersion: 0.2.0
   s:name: Hello World Example
   s:description: A python hello world example application package
@@ -35,10 +36,20 @@ $graph:
     - hello world
     - example
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
@@ -59,7 +70,7 @@ $graph:
   - /opt/HelloWorld.py
   - --name
   - valueFrom: $( inputs.name )
-  
+
   inputs:
     name:
       type: string
@@ -67,11 +78,11 @@ $graph:
 
   outputs:
     result:
+      format: edam:data_3671 # Plain text
       type: File
       outputBinding:
         glob: "result.txt"
       doc: result file
-      s:fileFormat: "text/plain"
 
   requirements:
     InlineJavascriptRequirement: {}
@@ -86,10 +97,20 @@ $graph:
     - hello world
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia

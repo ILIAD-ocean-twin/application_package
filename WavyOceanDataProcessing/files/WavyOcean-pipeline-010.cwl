@@ -2,6 +2,7 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
+  edam: http://edamontology.org/
 
 $graph:
 
@@ -51,10 +52,20 @@ $graph:
     - Wavy Ocean
     - example pipeline
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Marco Oliveira
@@ -98,17 +109,17 @@ $graph:
 
   outputs:
     results:
+      format: edam:format_3752 # CSV
       type: File
       outputBinding:
         glob: "result/result.csv"
       doc: result file
-      s:fileFormat: "text/csv"
     metadata:
+      format: edam:format_3464 # JSON
       type: File
       outputBinding:
         glob: "result/metadata.json"
       doc: metadata description
-      s:fileFormat: "application/json"
 
   requirements:
     ResourceRequirement: {}
@@ -129,10 +140,20 @@ $graph:
     - data processing
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
@@ -186,19 +207,29 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac:2.0.0
+      dockerPull: iliad-repository.inesctec.pt/2stac:0.2.0
 
   s:name: 2Stac
-  s:softwareVersion: 2.0.0
+  s:softwareVersion: 0.2.0
   s:description: Transform the result into a STAC
   s:keywords:
     - stac
     - metadata
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia

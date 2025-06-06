@@ -2,6 +2,7 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
+  edam: http://edamontology.org/
 
 $graph:
 - class: CommandLineTool
@@ -36,12 +37,14 @@ $graph:
 
   outputs:
     results:
+      format: edam:format_3752 # CSV
       type: File
       outputBinding:
         glob: "result/result.csv"
       doc: result file
       s:fileFormat: "text/csv"
     metadata:
+      format: edam:format_3464 # JSON
       type: File
       outputBinding:
         glob: "result/metadata.json"
@@ -67,10 +70,20 @@ $graph:
     - data processing
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
