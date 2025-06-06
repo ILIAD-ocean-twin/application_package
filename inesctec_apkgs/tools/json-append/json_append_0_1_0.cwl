@@ -4,48 +4,60 @@ $namespaces:
   s: https://schema.org/
   edam: http://edamontology.org/
 
+
 $graph:
 - class: CommandLineTool
 
-  id: 2stac
+  id: json_append
 
   baseCommand: python
   arguments:
-  - /opt/2stac.py
-  - --result
-  - valueFrom: $( inputs.result )
-  - --metadata
-  - valueFrom: $( inputs.metadata )
+  - /opt/append.py
+  - valueFrom: $(
+      function () {
+
+        var files_array = [];
+
+        Object.keys(inputs.files).forEach(function (element) {
+            files_array.push('--file');
+            files_array.push(inputs.files[element]);
+        });
+
+        return files_array;
+
+      }())
 
   inputs:
-    result:
-      type: File
-      doc: The resulting file of the previous model to insert in STAC
-    metadata:
-      format: edam:format_3464 # JSON
-      type: File
-      doc: The resulting metadata of the previous model to insert in STAC
+    files:
+      type: File[]?
+      doc: files
 
   outputs:
-    results:
+    result:
+      format: edam:format_3464 # JSON
+      type: File
       outputBinding:
-        glob: .
-      type: Directory
-      doc: STAC output
+        glob: "appended.json"
+      doc: json file appended
 
   requirements:
+    NetworkAccess:
+      networkAccess: true
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/json-append:0.1.0
 
-  s:name: 2stac
-  s:softwareVersion: 0.2.0
-  s:description: Transform the result into a STAC
+
+  s:name: json_append
+  s:description: Append json files, objects and array of objects, to an array of objects
   s:keywords:
-    - stac
+    - json
+    - merge
+    - append
     - metadata
   s:programmingLanguage: python
+  s:softwareVersion: 0.1.0
   s:producer:
     class: s:Organization
     s:name: INESCTEC
@@ -64,5 +76,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_0_2_0.cwl
-  s:dateCreated: "2025-06-03T19:37:23Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/json-append/json_append_0_1_0.cwl
+  s:dateCreated: "2025-05-12T12:23:08Z"

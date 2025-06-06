@@ -35,7 +35,7 @@ $graph:
       type: File
     file_2:
       doc: file 2
-      type: File?
+      type: File
     metadata:
       format: edam:format_3464 # JSON
       doc: metadata file
@@ -53,16 +53,16 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac2:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/2stac2:0.1.2
 
   s:name: 2stac2
-  s:softwareVersion: 0.2.0
+  s:softwareVersion: 0.1.2
   s:description: Transform and array of files into a STAC
   s:keywords:
     - stac
     - metadata
   s:programmingLanguage: python
-  s:producer:
+  s:publisher:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
@@ -80,5 +80,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_0_2_0.cwl
-  s:dateCreated: "2025-06-04T17:02:42Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_0_1_2.cwl
+  s:dateCreated: "2025-03-19T11:38:18Z"

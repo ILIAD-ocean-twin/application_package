@@ -96,7 +96,7 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac2:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/2stac2:0.1.4
     InplaceUpdateRequirement:
       inplaceUpdate: true
     InitialWorkDirRequirement:
@@ -113,7 +113,7 @@ $graph:
         }
 
   s:name: 2stac2_wp6tools_pipeline
-  s:softwareVersion: 0.2.0
+  s:softwareVersion: 0.1.4
   s:description: 2stac2 for WP6 tools pipeline
   s:keywords:
     - stac
@@ -130,5 +130,5 @@ $graph:
     class: s:Person
     s:name: Miguel Correia
     s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_2_0.cwl
-  s:dateCreated: "2025-06-04T17:02:42Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_1_4.cwl
+  s:dateCreated: "2025-06-03T19:01:09Z"

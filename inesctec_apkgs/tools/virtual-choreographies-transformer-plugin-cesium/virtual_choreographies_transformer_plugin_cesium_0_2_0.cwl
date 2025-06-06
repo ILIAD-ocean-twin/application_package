@@ -7,32 +7,37 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: virtual-choreographies-generator
-
+  id: virtual-choreographies-transformer-plugin-cesium
   baseCommand: python
   arguments:
   - /opt/src/command.py
-  - valueFrom: $( inputs.dataset )
-  - valueFrom: $( inputs.template || inputs.template_url )
+  - valueFrom: $( inputs.vc )
+  - valueFrom: $( inputs.mappings || inputs.mappings_url )
+  - valueFrom: $( inputs.vc_recipe || inputs.vc_recipe_url )
+  - valueFrom: $( inputs.platform_recipe || inputs.platform_recipe_url)
 
   inputs:
-    template:
-     type: File?
-    template_url:
-     type: string?
-    dataset:
-     type: File
-  outputs:
     vc:
+     type: File
+    mappings:
+     type: File?
+    mappings_url:
+     type: string?
+    vc_recipe:
+      type: File?
+    vc_recipe_url:
+      type: File?
+    platform_recipe:
+      type: File?
+    platform_recipe_url:
+      type: File?
+  outputs:
+    platform_choreography:
       format: edam:format_3464 # JSON
       type: File
       outputBinding:
-        glob: vc.json
-    recipe:
-      format: edam:format_3464 # JSON
-      type: File
-      outputBinding:
-        glob: recipe.json
+        glob: result/platform_choreography.json
+        outputEval: ${self[0].basename="platform_choreography_cesium.json"; return self;}
 
   requirements:
     NetworkAccess:
@@ -40,14 +45,15 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/virtual-choreographies-generator:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/virtual-choreographies-transformer-plugin:0.2.0
 
-  s:name: virtual-choreographies-generator
-  s:description: Generator of virtual choreographies
+  s:name: virtual-choreographies-transformer-plugin-cesium
+  s:description: Generator of platform specific choregoraphies form generic virtual choreographies
   s:keywords:
     - wp6-tools
     - choreographies
     - virtual-choreographies
+    - transformer
   s:programmingLanguage: python
   s:softwareVersion: 0.2.0
   s:producer:
@@ -79,5 +85,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-generator/virtual_choreographies_generator_0_2_0.cwl
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-transformer-plugin-cesium/virtual_choreographies_transformer_plugin_cesium_0_2_0.cwl
   s:dateCreated: "2025-05-21T15:48:06Z"

@@ -11,7 +11,7 @@ $graph:
 
   baseCommand: python
   arguments:
-  - /opt/src/command.py
+  - /opt/src/vc_generator.py
   - valueFrom: $( inputs.dataset )
   - valueFrom: $( inputs.template || inputs.template_url )
 
@@ -28,11 +28,6 @@ $graph:
       type: File
       outputBinding:
         glob: vc.json
-    recipe:
-      format: edam:format_3464 # JSON
-      type: File
-      outputBinding:
-        glob: recipe.json
 
   requirements:
     NetworkAccess:
@@ -40,7 +35,7 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/virtual-choreographies-generator:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/virtual-choreographies-generator:0.1.0
 
   s:name: virtual-choreographies-generator
   s:description: Generator of virtual choreographies
@@ -49,7 +44,7 @@ $graph:
     - choreographies
     - virtual-choreographies
   s:programmingLanguage: python
-  s:softwareVersion: 0.2.0
+  s:softwareVersion: 0.1.0
   s:producer:
     class: s:Organization
     s:name: INESCTEC
@@ -79,5 +74,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-generator/virtual_choreographies_generator_0_2_0.cwl
-  s:dateCreated: "2025-05-21T15:48:06Z"
+  s:codeRepository: 
+  s:dateCreated: "2025-05-09T16:01:05Z"

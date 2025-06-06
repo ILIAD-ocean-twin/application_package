@@ -5,7 +5,6 @@ $namespaces:
   edam: http://edamontology.org/
 
 $graph:
-
 - class: CommandLineTool
 
   id: 2stac2_wp6tools_pipeline
@@ -13,21 +12,23 @@ $graph:
   arguments:
   - /opt/2stac2.py
   - valueFrom: $(
-      function () {
-        if (inputs["unity_choreography"]) {
-            return ["--file", inputs["unity_choreography"]];
-        } else {
-            return [];
-        }
-      }())
+        function () {
+            if (inputs["unity_choreography"]) {
+                return ["--file", inputs["unity_choreography"]];
+            } else {
+                return [];
+            }
+        }()
+  )
   - valueFrom: $(
-      function () {
-        if (inputs["cesium_choreography"]) {
-            return ["--file", inputs["cesium_choreography"]];
-        } else {
-            return [];
-        }
-      }())
+        function () {
+            if (inputs["cesium_choreography"]) {
+                return ["--file", inputs["cesium_choreography"]];
+            } else {
+                return [];
+            }
+        }()
+  )
   - valueFrom: $(
       function () {
         if (inputs["simulation"]) {
@@ -37,21 +38,14 @@ $graph:
         }
       }())
   - valueFrom: $(
-      function () {
-        if (inputs["animation"]) {
-            return ["--file", inputs["animation"]];
-        } else {
-            return [];
-        }
-      }())
-  - valueFrom: $(
-      function () {
-        if (inputs["bathymetry"]) {
-            return ["--file", inputs["bathymetry"]];
-        } else {
-            return [];
-        }
-      }())
+        function () {
+            if (inputs["animation"]) {
+                return ["--file", inputs["animation"]];
+            } else {
+                return [];
+            }
+        }())
+  - valueFrom: $(inputs.cesium_choreography)
   - --metadata
   - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
 
@@ -71,10 +65,6 @@ $graph:
     animation:
       format: edam:format_3467 # GIF
       doc: Animation GIF file
-      type: File?
-    bathymetry:
-      format: edam:format_3650 # NetCDF
-      doc: Bathymetry NetCDF file
       type: File?
     metadata:
       format: edam:format_3464 # JSON
@@ -96,7 +86,7 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac2:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/2stac2:0.1.2
     InplaceUpdateRequirement:
       inplaceUpdate: true
     InitialWorkDirRequirement:
@@ -104,17 +94,16 @@ $graph:
         ${
           const content = JSON.parse(inputs.metadata.contents);
           const metadata = [];
-          if(inputs.unity_choreography) metadata.push({...content, filename: inputs.unity_choreography.basename});
-          if(inputs.cesium_choreography) metadata.push({...content, filename: inputs.cesium_choreography.basename});
-          if(inputs.simulation) metadata.push({...content, filename: inputs.simulation.basename});
-          if(inputs.animation) metadata.push({...content, filename: inputs.animation.basename});
-          if(inputs.bathymetry) metadata.push({...content, filename: inputs.bathymetry.basename});
+          if(inputs.unity_choreography) metadata.push({...content, filename:"platform_choreography_unity.json"});
+          if(inputs.cesium_choreography) metadata.push({...content, filename:"platform_choreography_cesium.json"});
+          if(inputs.simulation) metadata.push({...content, filename:"simulation.nc"});
+          if(inputs.animation) metadata.push({...content, filename:"animation.gif"});
           return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
         }
 
   s:name: 2stac2_wp6tools_pipeline
-  s:softwareVersion: 0.2.0
-  s:description: 2stac2 for WP6 tools pipeline
+  s:softwareVersion: 0.1.2
+  s:description: Transform and array of files into a STAC
   s:keywords:
     - stac
     - metadata
@@ -130,5 +119,5 @@ $graph:
     class: s:Person
     s:name: Miguel Correia
     s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_2_0.cwl
-  s:dateCreated: "2025-06-04T17:02:42Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_1_2.cwl
+  s:dateCreated: "2025-03-19T11:38:18Z"

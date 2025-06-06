@@ -7,25 +7,21 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: 2stac
+  id: stac_simulation
 
   baseCommand: python
   arguments:
-  - /opt/2stac.py
-  - --result
-  - valueFrom: $( inputs.result )
-  - --metadata
-  - valueFrom: $( inputs.metadata )
+  - /opt/simulate.py
+  - valueFrom: "$(inputs.something)"
+    prefix: "--something"
+  # - valueFrom: $( inputs.something ? ['--something', inputs.something]:[] )
 
   inputs:
-    result:
-      type: File
-      doc: The resulting file of the previous model to insert in STAC
-    metadata:
-      format: edam:format_3464 # JSON
-      type: File
-      doc: The resulting metadata of the previous model to insert in STAC
-
+    something:
+      type:
+        - File?
+        - File[]?
+        - string?
   outputs:
     results:
       outputBinding:
@@ -34,14 +30,15 @@ $graph:
       doc: STAC output
 
   requirements:
+    MultipleInputFeatureRequirement: {}
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/stac-simulation:0.1.1
 
-  s:name: 2stac
-  s:softwareVersion: 0.2.0
-  s:description: Transform the result into a STAC
+  s:name: stac_simulation
+  s:softwareVersion: 0.1.1
+  s:description: Simulates a STAC result
   s:keywords:
     - stac
     - metadata
@@ -64,5 +61,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_0_2_0.cwl
-  s:dateCreated: "2025-06-03T19:37:23Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/stac-simulation/stac_simulation_0_1_1.cwl
+  s:dateCreated: "2025-06-05T23:02:01Z"

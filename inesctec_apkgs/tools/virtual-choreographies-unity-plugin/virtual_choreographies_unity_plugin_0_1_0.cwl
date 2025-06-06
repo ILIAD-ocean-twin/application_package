@@ -7,32 +7,27 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: virtual-choreographies-generator
-
+  id: virtual-choreographies-unity-plugin
   baseCommand: python
   arguments:
-  - /opt/src/command.py
-  - valueFrom: $( inputs.dataset )
-  - valueFrom: $( inputs.template || inputs.template_url )
+  - /opt/src/converter_unity.py
+  - valueFrom: $( inputs.vc )
+  - valueFrom: $( inputs.mappings || inputs.mappings_url )
 
   inputs:
-    template:
-     type: File?
-    template_url:
-     type: string?
-    dataset:
-     type: File
-  outputs:
     vc:
+     type: File
+    mappings:
+     type: File?
+    mappings_url:
+     type: string?
+  outputs:
+    platform_choreography:
       format: edam:format_3464 # JSON
       type: File
       outputBinding:
-        glob: vc.json
-    recipe:
-      format: edam:format_3464 # JSON
-      type: File
-      outputBinding:
-        glob: recipe.json
+        glob: platform_choreography.json
+        outputEval: ${self[0].basename="platform_choreography_unity.json"; return self;}
 
   requirements:
     NetworkAccess:
@@ -40,16 +35,17 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/virtual-choreographies-generator:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/virtual-choreographies-unity-plugin:0.1.0
 
-  s:name: virtual-choreographies-generator
-  s:description: Generator of virtual choreographies
+  s:name: virtual-choreographies-unity-plugin
+  s:description: Generator of unity inputs to virtual choreographies
   s:keywords:
     - wp6-tools
     - choreographies
     - virtual-choreographies
+    - unity
   s:programmingLanguage: python
-  s:softwareVersion: 0.2.0
+  s:softwareVersion: 0.1.0
   s:producer:
     class: s:Organization
     s:name: INESCTEC
@@ -79,5 +75,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-generator/virtual_choreographies_generator_0_2_0.cwl
-  s:dateCreated: "2025-05-21T15:48:06Z"
+  s:codeRepository: 
+  s:dateCreated: "2025-05-09T16:01:05Z"

@@ -7,32 +7,25 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: 2stac2_openoil_pipeline
-
+  id: 2stac2_wp6tools_pipeline
   baseCommand: python
   arguments:
   - /opt/2stac2.py
   - --file
-  - valueFrom: $(inputs.simulation)
-  - valueFrom: $(
-      function () {
-        if (inputs.animation) {
-          return ["--file", inputs.animation];
-        } else {
-          return [];
-        }
-      }())
+  - valueFrom: $(inputs.unity_choreography)
+  - --file
+  - valueFrom: $(inputs.cesium_choreography)
   - --metadata
   - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
 
   inputs:
-    simulation:
-      format: edam:format_3650 # NetCDF
-      doc: simulation NetCDF file
+    unity_choreography:
+      format: edam:format_3464 # JSON
+      doc: unity choreography json file
       type: File
-    animation:
-      format: edam:format_3467 # GIF
-      doc: animation Gif file
+    cesium_choreography:
+      format: edam:format_3464 # JSON
+      doc: cesium choreography json file
       type: File?
     metadata:
       format: edam:format_3464 # JSON
@@ -54,7 +47,7 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac2:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/2stac2:0.1.0
     InplaceUpdateRequirement:
       inplaceUpdate: true
     InitialWorkDirRequirement:
@@ -62,16 +55,14 @@ $graph:
         ${
           const content = JSON.parse(inputs.metadata.contents);
           const metadata = [];
-          metadata.push({...content, filename:inputs["simulation"].basename});
-          if(inputs["animation"] != null) {
-            metadata.push({...content, filename:inputs["animation"].basename , media_type:"image/gif" });
-          }
+          metadata.push({...content, filename:"platform_choreography_cesium.json"});
+          metadata.push({...content, filename:"platform_choreography_unity.json" });
           return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
         }
 
-  s:name: 2stac2_openoil_pipeline
-  s:softwareVersion: 0.2.0
-  s:description: 2stac2 tool to transform OpenOil simulation and animation files into a STAC
+  s:name: 2stac2_wp6tools_pipeline
+  s:softwareVersion: 0.1.0
+  s:description: Transform and array of files into a STAC
   s:keywords:
     - stac
     - metadata
@@ -87,5 +78,5 @@ $graph:
     class: s:Person
     s:name: Miguel Correia
     s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_2_0.cwl
-  s:dateCreated: "2025-06-04T17:02:42Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_1_0.cwl
+  s:dateCreated: "2025-03-15T07:53:14Z"

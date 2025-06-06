@@ -45,7 +45,7 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/workflow-url-merge:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/workflow-url-merge:0.1.0
 
   s:name: workflow-url-merge
   s:description: Update a cwl file workflow, with url on steps and merge them into a single file
@@ -53,8 +53,8 @@ $graph:
     - workflow
     - merge
   s:programmingLanguage: javascript
-  s:softwareVersion: 0.2.0
-  s:producer:
+  s:softwareVersion: 0.1.0
+  s:publisher:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
@@ -72,5 +72,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/workflow-url-merge/workflow_url_merge_0_2_0.cwl
-  s:dateCreated: "2025-05-12T15:35:51Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/workflow-url-merge/workflow_url_merge_0_1_0.cwl
+  s:dateCreated: "2025-03-17T11:27:44Z"

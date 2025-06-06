@@ -7,45 +7,42 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: 2stac
+  id: sleep
 
-  baseCommand: python
+  baseCommand: app-sleep
   arguments:
-  - /opt/2stac.py
-  - --result
-  - valueFrom: $( inputs.result )
-  - --metadata
-  - valueFrom: $( inputs.metadata )
+  - --seconds
+  - valueFrom: $( inputs.seconds )
 
   inputs:
-    result:
-      type: File
-      doc: The resulting file of the previous model to insert in STAC
-    metadata:
-      format: edam:format_3464 # JSON
-      type: File
-      doc: The resulting metadata of the previous model to insert in STAC
+    seconds:
+      type: int
+      doc: seconds to sleep
 
   outputs:
-    results:
+    res:
+      format: edam:format_3464 # JSON
+      type: File
       outputBinding:
-        glob: .
-      type: Directory
-      doc: STAC output
+        glob: "result/res.json"
+      doc: tree list
 
   requirements:
+    EnvVarRequirement:
+      envDef:
+        PATH: /opt/conda/envs/application/bin:/opt/conda/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/sleep:0.1.0
 
-  s:name: 2stac
-  s:softwareVersion: 0.2.0
-  s:description: Transform the result into a STAC
+  s:name: sleep
+  s:description: sleep time in seconds
   s:keywords:
-    - stac
-    - metadata
+    - sleep
+    - simulation
   s:programmingLanguage: python
+  s:softwareVersion: 0.1.0
   s:producer:
     class: s:Organization
     s:name: INESCTEC
@@ -64,5 +61,9 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_0_2_0.cwl
-  s:dateCreated: "2025-06-03T19:37:23Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/sleep/sleep_0_1_0.cwl
+  s:dateCreated: "2025-06-05T21:00:14Z"
+
+
+
+
