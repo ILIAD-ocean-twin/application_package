@@ -7,43 +7,39 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: 2stac
+  id: netcdf_metadata
 
   baseCommand: python
   arguments:
-  - /opt/2stac.py
-  - --result
-  - valueFrom: $( inputs.result )
-  - --metadata
-  - valueFrom: $( inputs.metadata )
+  - /opt/parse.py
+  - --netcdf_file
+  - valueFrom: $(inputs.netcdf_file)
+  - valueFrom: $(inputs.extra_props ? ['--extra_props', inputs.extra_props] :[])
 
   inputs:
-    result:
+    netcdf_file:
       type: File
-      doc: The resulting file of the previous model to insert in STAC
-    metadata:
-      format: edam:format_3464 # JSON
-      type: File
-      doc: The resulting metadata of the previous model to insert in STAC
-
+    extra_props:
+      type: File?
   outputs:
-    results:
+    metadata:
       outputBinding:
-        glob: .
-      type: Directory
-      doc: STAC output
+        glob: ./metadata.json
+      type: File
+      format: edam:format_3464 # JSON
 
   requirements:
+    MultipleInputFeatureRequirement: {}
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac:0.2.0
+      dockerPull: iliad-repository.inesctec.pt/netcdf-metadata:0.1.0
 
-  s:name: 2stac
-  s:softwareVersion: 0.2.0
-  s:description: Transform the result into a STAC
+  s:name: netcdf_metadata
+  s:softwareVersion: 0.1.0
+  s:description: Extract metadata from NetCDF file
   s:keywords:
-    - stac
+    - netcdf
     - metadata
   s:programmingLanguage: python
   s:producer:
@@ -64,5 +60,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_0_2_0.cwl
-  s:dateCreated: "2025-06-10T00:51:03Z"
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/netcdf-metadata/netcdf_metadata_0_1_0.cwl
+  s:dateCreated: "2025-06-10T01:07:05Z"

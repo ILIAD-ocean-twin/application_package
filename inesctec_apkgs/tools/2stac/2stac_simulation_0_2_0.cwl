@@ -5,9 +5,10 @@ $namespaces:
   edam: http://edamontology.org/
 
 $graph:
+
 - class: CommandLineTool
 
-  id: 2stac
+  id: 2stac_simulation
 
   baseCommand: python
   arguments:
@@ -15,16 +16,12 @@ $graph:
   - --result
   - valueFrom: $( inputs.result )
   - --metadata
-  - valueFrom: $( inputs.metadata )
+  - valueFrom: $(runtime.outdir + '/metadata.json')
 
   inputs:
     result:
       type: File
       doc: The resulting file of the previous model to insert in STAC
-    metadata:
-      format: edam:format_3464 # JSON
-      type: File
-      doc: The resulting metadata of the previous model to insert in STAC
 
   outputs:
     results:
@@ -32,16 +29,42 @@ $graph:
         glob: .
       type: Directory
       doc: STAC output
+    InitialWorkDirRequirement:
+      listing: |
+        ${
 
+          return [{
+            "class": "File",
+            "basename": "metadata.json",
+            "contents": JSON.stringify({
+              "description": "This is an example metadata file for 2stac2.",
+              "keywords": ["example", "metadata", "helloworld"],
+              "bbox": [-180, -90, 180, 90],
+              "datetime": new Date().toISOString(),
+              "media_type": "application/json",
+              "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                  [
+                    [-180, -90],
+                    [-180, 90],
+                    [180, 90],
+                    [180, -90],
+                    [-180, -90]
+                  ]
+                ]
+              },
+            })}];
+        }
   requirements:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
       dockerPull: iliad-repository.inesctec.pt/2stac:0.2.0
 
-  s:name: 2stac
+  s:name: 2stac_simulation
   s:softwareVersion: 0.2.0
-  s:description: Transform the result into a STAC
+  s:description: Simulates a STAC result
   s:keywords:
     - stac
     - metadata
@@ -64,5 +87,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_0_2_0.cwl
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_simulation_0_2_0.cwl
   s:dateCreated: "2025-06-10T00:51:03Z"

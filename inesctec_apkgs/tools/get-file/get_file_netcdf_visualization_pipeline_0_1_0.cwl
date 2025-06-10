@@ -3,6 +3,7 @@ cwlVersion: v1.2
 $namespaces:
   s: https://schema.org/
   cwltool: http://commonwl.org/cwltool#
+  edam: http://edamontology.org/
 
 $graph:
 - class: CommandLineTool
@@ -68,7 +69,7 @@ $graph:
 
   outputs:
     file_output:
-      # format: edam: # UNDEFINED / ANY
+      format: edam:format_3650 # NetCDF
       type: File
       outputBinding:
         glob: "$(inputs.filename)"
@@ -107,5 +108,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/get-file/get_file_0_1_0.cwl
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/get-file/get_file_netcdf_visualization_pipeline_0_1_0.cwl
   s:dateCreated: "2025-06-09T18:55:34Z"

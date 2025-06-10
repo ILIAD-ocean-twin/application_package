@@ -2,40 +2,41 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
-  edam: http://edamontology.org/
 
 $graph:
 - class: CommandLineTool
 
-  id: 2stac2_openoil_pipeline
+  id: 2stac2_medslik_pipeline
 
   baseCommand: python
   arguments:
   - /opt/2stac2.py
   - --file
-  - valueFrom: $(inputs.simulation)
-  - valueFrom: $(
-      function () {
-        if (inputs.animation) {
-          return ["--file", inputs.animation];
-        } else {
-          return [];
+  - valueFrom: |
+      ${
+        function findNetcdfFile(dir) {
+          if (dir.class === 'File' && dir.basename.endsWith('.nc')) return dir.path;
+          if (dir.class === 'Directory' && dir.listing) {
+            for (const f of dir.listing) {
+              const found = findNetcdfFile(f);
+              if (found) return found;
+            }
+          }
+          return null;
         }
-      }())
+        const ncPath = findNetcdfFile(inputs.medslik_result);
+        if (!ncPath) throw new Error('No NetCDF file found in directory');
+        return ncPath;
+      }
   - --metadata
   - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
 
   inputs:
-    simulation:
-      format: edam:format_3650 # NetCDF
-      doc: simulation NetCDF file
-      type: File
-    animation:
-      format: edam:format_3467 # GIF
-      doc: animation Gif file
-      type: File?
+    medslik_result:
+      doc: Medslik simulation result
+      type: Directory
+      loadListing: deep_listing
     metadata:
-      format: edam:format_3464 # JSON
       doc: metadata file description
       type: File
       loadContents: true
@@ -61,17 +62,13 @@ $graph:
       listing: |
         ${
           const content = JSON.parse(inputs.metadata.contents);
-          const metadata = [];
-          metadata.push({...content, filename:inputs["simulation"].basename});
-          if(inputs["animation"] != null) {
-            metadata.push({...content, filename:inputs["animation"].basename , media_type:"image/gif" });
-          }
+          const metadata = [{...JSON.parse(inputs.metadata.contents), filename: 'spill_properties.nc'}];
           return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
         }
 
-  s:name: 2stac2_openoil_pipeline
+  s:name: 2stac2_medslik_pipeline
   s:softwareVersion: 0.2.0
-  s:description: 2stac2 tool to transform OpenOil simulation and animation files into a STAC
+  s:description: 2stac2 tool to transform Medslik result into a STAC
   s:keywords:
     - stac
     - metadata
@@ -87,5 +84,5 @@ $graph:
     class: s:Person
     s:name: Miguel Correia
     s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_2_0.cwl
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_medslik_pipeline_0_2_0.cwl
   s:dateCreated: "2025-06-08T23:17:18Z"
