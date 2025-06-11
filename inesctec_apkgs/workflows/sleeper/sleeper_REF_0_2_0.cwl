@@ -26,7 +26,7 @@ $graph:
       out:
       - metadata
     step_2stac2:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_sleeper_pipeline_0_3_0.cwl#2stac2_sleeper_pipeline'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_sleeper_pipeline_0_3_1.cwl#2stac2_sleeper_pipeline'
       in:
         result: step_sleep/res
         metadata: step_simulate_metadata/metadata
@@ -66,7 +66,7 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/sleeper/sleeper_REF_0_2_0.cwl
-  s:dateCreated: "2025-06-10T01:49:38Z"
+  s:dateCreated: "2025-06-10T23:24:29Z"
 
 
 - class: ExpressionTool

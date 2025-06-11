@@ -145,7 +145,7 @@ $graph:
       out:
         - metadata
     step_2stac2:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_3_0.cwl#2stac2_wp6tools_pipeline'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_3_1.cwl#2stac2_wp6tools_pipeline'
       in:
         unity_choreography: step_virtual_choreographies_cesium_plugin/platform_choreography
         cesium_choreography: step_virtual_choreographies_unity_plugin/platform_choreography
@@ -200,4 +200,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/netcdf-visualization/netcdf_visualization_REF_0_1_0.cwl
-  s:dateCreated: "2025-06-10T01:54:24Z"
+  s:dateCreated: "2025-06-10T23:16:01Z"

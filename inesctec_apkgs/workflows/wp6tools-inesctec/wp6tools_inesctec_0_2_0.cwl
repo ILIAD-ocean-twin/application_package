@@ -284,7 +284,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/wp6tools-inesctec/wp6tools_inesctec_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:46:15Z'
+    s:dateCreated: '2025-06-10T23:26:33Z'
   - class: CommandLineTool
     id: point2bbox
     baseCommand: python
@@ -540,7 +540,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-generate-model/wp6tools_generate_model_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-06-10T01:57:48Z'
   - class: CommandLineTool
     id: extract_particles
     baseCommand: python
@@ -626,7 +626,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-extract-particles/wp6tools_extract_particles_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-06-10T01:57:48Z'
   - class: CommandLineTool
     id: crop_frames
     baseCommand: python
@@ -693,7 +693,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-crop-frames/wp6tools_crop_frames_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-06-10T01:57:48Z'
   - class: CommandLineTool
     id: generate_contours
     baseCommand: python
@@ -765,7 +765,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-generate-contours/wp6tools_generate_contours_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-06-10T01:57:48Z'
   - class: CommandLineTool
     id: dir2files
     baseCommand: python
@@ -1192,7 +1192,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-metadata-2stac2/wp6tools_metadata_2stac2_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-06-10T01:57:48Z'
   - class: CommandLineTool
     id: 2stac2_wp6tools_pipeline
     baseCommand: python
@@ -1255,7 +1255,7 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.0
+        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.1
       InplaceUpdateRequirement:
         inplaceUpdate: true
       InitialWorkDirRequirement:
@@ -1271,7 +1271,7 @@ $graph:
             return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
           }
     s:name: 2stac2_wp6tools_pipeline
-    s:softwareVersion: 0.3.0
+    s:softwareVersion: 0.3.1
     s:description: 2stac2 for WP6 tools pipeline
     s:keywords:
       - stac
@@ -1289,8 +1289,8 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:47:37Z'
+      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_3_1.cwl
+    s:dateCreated: '2025-06-10T15:27:44Z'
   - class: CommandLineTool
     id: 2s3
     baseCommand: python

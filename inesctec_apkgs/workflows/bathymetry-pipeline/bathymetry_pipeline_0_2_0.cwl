@@ -82,7 +82,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/bathymetry-pipeline/bathymetry_pipeline_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:30:32Z'
+    s:dateCreated: '2025-06-11T01:46:49Z'
   - class: CommandLineTool
     id: bathymetry
     baseCommand: python

@@ -55,7 +55,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/hello-world/hello_world_0_3_0.cwl
-    s:dateCreated: '2025-06-10T04:01:43Z'
+    s:dateCreated: '2025-06-10T15:35:48Z'
   - class: CommandLineTool
     id: helloworld
     baseCommand: python
@@ -133,7 +133,7 @@ $graph:
             /opt/conda/envs/application/bin:/opt/conda/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.0
+        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.1
       InitialWorkDirRequirement:
         listing: |
           ${
@@ -163,7 +163,7 @@ $graph:
               }])}];
           }
     s:name: 2stac2_simulation
-    s:softwareVersion: 0.3.0
+    s:softwareVersion: 0.3.1
     s:description: Simulates a STAC result
     s:keywords:
       - stac
@@ -188,5 +188,5 @@ $graph:
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_simulation_0_3_0.cwl
-    s:dateCreated: '2025-06-10T03:57:26Z'
+      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_simulation_0_3_1.cwl
+    s:dateCreated: '2025-06-10T15:27:44Z'

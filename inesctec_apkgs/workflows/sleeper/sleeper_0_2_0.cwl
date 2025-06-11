@@ -63,7 +63,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/sleeper/sleeper_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:49:38Z'
+    s:dateCreated: '2025-06-10T23:24:29Z'
   - class: ExpressionTool
     id: simulate_metadata_2stac
     inputs: []
@@ -190,11 +190,11 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.0
+        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.1
       InplaceUpdateRequirement:
         inplaceUpdate: true
     s:name: 2stac2_sleeper_pipeline
-    s:softwareVersion: 0.3.0
+    s:softwareVersion: 0.3.1
     s:description: 2stac2 for the sleeper pipeline
     s:keywords:
       - stac
@@ -212,5 +212,5 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_sleeper_pipeline_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:47:37Z'
+      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_sleeper_pipeline_0_3_1.cwl
+    s:dateCreated: '2025-06-10T15:27:44Z'

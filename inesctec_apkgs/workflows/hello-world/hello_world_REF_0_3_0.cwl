@@ -19,7 +19,7 @@ $graph:
       out:
       - result
     step_2stac:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_simulation_0_3_0.cwl#2stac2_simulation'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_simulation_0_3_1.cwl#2stac2_simulation'
       in:
         result: step_helloworld/result
       out:
@@ -58,4 +58,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/hello-world/hello_world_REF_0_3_0.cwl
-  s:dateCreated: "2025-06-10T04:01:43Z"
+  s:dateCreated: "2025-06-10T15:35:48Z"

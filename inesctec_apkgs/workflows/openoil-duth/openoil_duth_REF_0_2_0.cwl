@@ -98,7 +98,7 @@ $graph:
       out:
       - animation
     step_2stac2:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_3_0.cwl#2stac2_openoil_pipeline'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_3_1.cwl#2stac2_openoil_pipeline'
       in:
         animation: step_animation/animation
         simulation: step_simulation/simulation
@@ -168,4 +168,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/openoil-duth/openoil_duth_REF_0_2_0.cwl
-  s:dateCreated: "2025-06-10T03:48:57Z"
+  s:dateCreated: "2025-06-10T23:18:07Z"
