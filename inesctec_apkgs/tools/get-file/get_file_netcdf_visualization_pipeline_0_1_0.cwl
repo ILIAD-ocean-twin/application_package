@@ -29,7 +29,7 @@ $graph:
   - valueFrom: |
       ${ return inputs.s3_session_token ? ["--s3_session_token", inputs.s3_session_token] : [] }
   - valueFrom: |
-      ${ return inputs.s3_bucket ? ["--s3_bucket", inputs.s3_bucket] : [] }
+      ${ return inputs.s3_bucket_name ? ["--s3_bucket", inputs.s3_bucket_name] : [] }
   - valueFrom: |
       ${ return inputs.s3_path ? ["--s3_path", inputs.s3_path] : [] }
 
@@ -60,7 +60,7 @@ $graph:
     s3_session_token:
       type: string?
       doc: S3 storage region
-    s3_bucket:
+    s3_bucket_name:
       type: string?
       doc: S3 storage bucket
     s3_path:
@@ -109,4 +109,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/get-file/get_file_netcdf_visualization_pipeline_0_1_0.cwl
-  s:dateCreated: "2025-06-09T18:55:34Z"
+  s:dateCreated: "2025-06-12T15:37:01Z"

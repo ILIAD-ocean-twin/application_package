@@ -26,19 +26,19 @@ $graph:
     s3_session_token:
       type: string?
       doc: S3 storage region
-    s3_bucket:
+    s3_bucket_name:
       type: string?
       doc: S3 storage bucket
     s3_path:
       type: string?
       doc: S3 path to file
 
-    netcdf_file:
-      type:
-        - File?
-        - string?
-      label: netcdf file
-      format: edam:format_3650 # NetCDF
+    # netcdf_file:
+    #   type:
+    #     - File?
+    #     - string?
+    #   label: netcdf file
+    #   format: edam:format_3650 # NetCDF
     frames:
       type: string
       label: narratives
@@ -46,28 +46,19 @@ $graph:
       type: string
       label: narratives
 
-    latitude:
-      type: float
-    longitude:
-      type: float
-    radius:
-      type: float
-    time:
-      type: string
-
   steps:
     step_get_file:
       run: 'https://pipe-drive.inesctec.pt/application-packages/tools/get-file/get_file_netcdf_visualization_pipeline_0_1_0.cwl#get_file'
       in:
         filename:
           default: "simulation.nc"
-        file: netcdf_file
+        # file: netcdf_file
         s3_endpoint: s3_endpoint
         s3_region: s3_region
         s3_access_key: s3_access_key
         s3_secret_key: s3_secret_key
         s3_session_token: s3_session_token
-        s3_bucket: s3_bucket
+        s3_bucket_name: s3_bucket_name
         s3_path: s3_path
       out:
       - file_output
@@ -175,7 +166,7 @@ $graph:
   s:description: netcdf visualization pipeline
   s:keywords:
     - oil spill
-    - opendrift
+    - netcdf
     - choreographies
     - virtual choreographies
     - wp6
@@ -200,4 +191,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/netcdf-visualization/netcdf_visualization_REF_0_1_0.cwl
-  s:dateCreated: "2025-06-10T23:16:01Z"
+  s:dateCreated: "2025-06-12T15:42:08Z"
