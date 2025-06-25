@@ -111,7 +111,7 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/cwl/deliberable/openoil_pipeline.cwl
+  s:codeRepository: https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/refs/heads/main/inesctec_apkgs/d52.cwl
   s:license: https://opensource.org/licenses/MIT
   s:temporalCoverage: 2024-01-01T00:00:00Z/2024-12-31T23:59:59Z
   s:spatialCoverage:
