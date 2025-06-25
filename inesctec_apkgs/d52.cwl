@@ -1,4 +1,3 @@
-
 cwlVersion: v1.2
 
 $namespaces:
@@ -7,7 +6,6 @@ $namespaces:
   edam: http://edamontology.org/
 
 $graph:
-
 - class: Workflow
   id: d52_openoil_pipeline
   doc: This pipeline runs an oil spill simulation with openoil, creates an animation of the simulation and stores it in S3.
@@ -55,6 +53,7 @@ $graph:
       out:
       - simulation
       - metadata
+
     step_2stac:
       run: '#2stac'
       in:
@@ -62,20 +61,21 @@ $graph:
         metadata: step_simulation/metadata
       out:
       - results
+
   outputs:
   - id: wf_outputs
     outputSource:
     - step_2stac/results
     type:
       Directory
-
   hints:
     "cwltool:Secrets":
-      secrets: [password]
+      secrets: ["password"]
+
   requirements:
     InlineJavascriptRequirement: {}
 
-  s:identifier: urn:apkg:workflow:d.u.th:gr:d52_openoil_pipeline:0.1.0
+  s:identifier: urn:apkg:workflow:d.u.th:gr:d52_openoil_pipeline:0.2.0
   s:name: openOil pipeline
   s:description: |
     This pipeline runs an oil spill simulation with openoil.
@@ -83,32 +83,27 @@ $graph:
     - oil spill
     - openoil
     - opendrift
-  s:softwareVersion: 0.1.0
+  s:softwareVersion: 0.2.0
   s:programmingLanguage: python
   s:producer:
     class: s:Organization
     s:name: D.U.TH
     s:url: https://env.duth.gr
     s:address:
-        class: s:PostalAddress
-        s:addressCountry: GR
+      class: s:PostalAddress
+      s:addressCountry: GR
   s:sourceOrganization:
-    - class: s:Organization
-      s:name: INESCTEC
-      s:url: https://inesctec.pt
-      s:address:
-          class: s:PostalAddress
-          s:addressCountry: PT
     - class: s:Organization
       s:name: D.U.TH
       s:url: https://env.duth.gr
       s:address:
-          class: s:PostalAddress
-          s:addressCountry: GR
+        class: s:PostalAddress
+        s:addressCountry: GR
   s:author:
     - class: s:Person
       s:name: Georgios Sylaios
       s:email: gsylaios@env.duth.gr
+  s:maintainer:
     - class: s:Person
       s:name: Nikolaos Kokkos
       s:email: nikolaoskokkos@gmail.com
@@ -122,7 +117,6 @@ $graph:
   s:spatialCoverage:
     class: s:geo
     s:box: 40.25 23.00 41.0 25.80
-
 
 - class: CommandLineTool
 
@@ -175,7 +169,6 @@ $graph:
       format: edam:format_3650 # NetCDF
       outputBinding:
         glob: "result/simulation.nc"
-
     metadata:
       type: File
       format: edam:format_3464 # JSON
@@ -192,10 +185,10 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/openoil-simulation-duth:0.1.0
+      dockerPull: iliad-repository.inesctec.pt/openoil-simulation-duth:0.2.0
   hints:
     "cwltool:Secrets":
-      secrets: [username,password]
+      secrets: [password]
 
   s:name: openOil model
   s:description: Simulation of oil spill
@@ -204,31 +197,26 @@ $graph:
     - openoil
     - opendrift
   s:programmingLanguage: python
-  s:softwareVersion: 0.1.0
+  s:softwareVersion: 0.2.0
   s:producer:
     class: s:Organization
     s:name: D.U.TH
     s:url: https://env.duth.gr
     s:address:
-        class: s:PostalAddress
-        s:addressCountry: GR
+      class: s:PostalAddress
+      s:addressCountry: GR
   s:sourceOrganization:
-    - class: s:Organization
-      s:name: INESCTEC
-      s:url: https://inesctec.pt
-      s:address:
-          class: s:PostalAddress
-          s:addressCountry: PT
     - class: s:Organization
       s:name: D.U.TH
       s:url: https://env.duth.gr
       s:address:
-          class: s:PostalAddress
-          s:addressCountry: GR
+        class: s:PostalAddress
+        s:addressCountry: GR
   s:author:
     - class: s:Person
       s:name: Georgios Sylaios
       s:email: gsylaios@env.duth.gr
+  s:maintainer:
     - class: s:Person
       s:name: Nikolaos Kokkos
       s:email: nikolaoskokkos@gmail.com
@@ -236,7 +224,7 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:identifier: urn:apkg:tool:d.u.th:gr:openoil_simulation:0.1.0
+  s:identifier: urn:apkg:tool:d.u.th:gr:openoil_simulation:0.2.0
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/openoil-simulation-duth/openoil_simulation_duth_0_2_0.cwl
   s:dateCreated: "2024-12-02T17:02:10Z"
   s:license: https://opensource.org/licenses/MIT
@@ -278,10 +266,10 @@ $graph:
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/2stac:0.1.0
+      dockerPull: iliad-repository.inesctec.pt/2stac:0.2.0
 
   s:name: 2Stac
-  s:softwareVersion: 0.1.0
+  s:softwareVersion: 0.2.0
   s:description: Transform the result into a STAC
   s:keywords:
     - stac
@@ -292,15 +280,15 @@ $graph:
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
-        class: s:PostalAddress
-        s:addressCountry: PT
+      class: s:PostalAddress
+      s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
-          class: s:PostalAddress
-          s:addressCountry: PT
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia
