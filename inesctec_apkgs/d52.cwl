@@ -75,7 +75,7 @@ $graph:
   requirements:
     InlineJavascriptRequirement: {}
 
-  s:identifier: urn:apkg:workflow:D.U.TH:GR:d52_openoil_pipeline
+  s:identifier: urn:apkg:workflow:d.u.th:gr:d52_openoil_pipeline
   s:name: openOil pipeline
   s:description: |
     This pipeline runs an oil spill simulation with openoil.
@@ -236,7 +236,7 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:identifier: urn:apkg:tool:D.U.TH:GR:openoil_simulation
+  s:identifier: urn:apkg:tool:d.u.th:gr:openoil_simulation
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/openoil-simulation-duth/openoil_simulation_duth_0_2_0.cwl
   s:dateCreated: "2024-12-02T17:02:10Z"
   s:license: https://opensource.org/licenses/MIT
