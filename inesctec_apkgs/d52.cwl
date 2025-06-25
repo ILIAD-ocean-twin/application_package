@@ -8,7 +8,7 @@ $namespaces:
 $graph:
 - class: Workflow
   id: d52_openoil_pipeline
-  doc: This pipeline runs an oil spill simulation with openoil, creates an animation of the simulation and stores it in S3.
+  doc: This pipeline runs an oil spill simulation with openoil.
   inputs:
     lat:
       label: openoil
