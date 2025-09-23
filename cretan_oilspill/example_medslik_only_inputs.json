@@ -1,12 +1,23 @@
 {
-  "lat_point": 36.75,
-  "lon_point": 179.23,
-  "date_spill": "2025-01-20T14:44:00Z",
-  "spill_dur": "0000",
+"use_case_directory": "MEDSLIK_GLO",
+  "min_lon": 24.40,
+  "max_lon": 25.50,
+  "min_lat": 35.26,
+  "max_lat": 35.80,
+  "lat_point": 35.53,
+  "lon_point": 25.08,
+  "date_spill": "2025-09-22T14:44:00Z",
+  "spill_dur": "0003",
   "spill_res": "150.0",
   "spill_tons": 0.8,
-  "username": "username",
-  "password": "pass"
+  "username": "Aparasyris",
+  "password": "Cmems1441",
+  "ftp_server": "139.91.194.189",
+  "ftp_user": "iliad",
+  "ftp_password": "Vgst83@stA!",
+  "remote_dir": "/iliad",
+  "cds_token": "40d8b300-afa6-49d9-a1be-18ac497df74d",
+  "use_high_res": "YES"
 }
 
 ## run with:
