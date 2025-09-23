@@ -11,12 +11,12 @@
   "spill_res": "150.0",
   "spill_tons": 0.8,
   "username": "Aparasyris",
-  "password": "Cmems1441",
-  "ftp_server": "139.91.194.189",
+  "password": "Cmems1234",
+  "ftp_server": "139.91.194.190",
   "ftp_user": "iliad",
-  "ftp_password": "Vgst83@stA!",
+  "ftp_password": "password_ask_moderators",
   "remote_dir": "/iliad",
-  "cds_token": "40d8b300-afa6-49d9-a1be-18ac497df74d",
+  "cds_token": "yourCDStoken",
   "use_high_res": "YES"
 }
 
