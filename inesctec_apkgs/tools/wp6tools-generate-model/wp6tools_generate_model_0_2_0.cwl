@@ -8,7 +8,7 @@ $graph:
 
 - class: CommandLineTool
 
-  id: generate-model
+  id: generate_model
 
   baseCommand: python
   arguments:
@@ -30,6 +30,18 @@ $graph:
   - valueFrom: $( inputs.time )
   - --minutes
   - valueFrom: $( inputs.minutes )
+  - valueFrom: $(
+      function () {
+        if (inputs["output-animation"]) {
+            return ["--output-animation", "true"];
+        } else {
+            return [];
+        }
+      }())
+  - valueFrom: $(
+      function () {
+            return ["--depth", inputs["depth"]];
+      }())
   - --output-url
   - output/oceandrift.nc
 
@@ -50,6 +62,11 @@ $graph:
       type: string
     minutes:
       type: string
+    output-animation:
+      type: boolean?
+    depth:
+      type: float?
+      default: 0.0
 
   outputs:
     result:
@@ -57,6 +74,11 @@ $graph:
       type: File
       outputBinding:
         glob: output/oceandrift.nc
+    animation:
+      format: edam:format_3467 # GIF
+      type: File?
+      outputBinding:
+        glob: output/animation.gif
 
   requirements:
     NetworkAccess:
@@ -69,27 +91,34 @@ $graph:
     DockerRequirement:
       dockerPull: iliad-repository.inesctec.pt/wp6tools:0.2.0
 
-  s:name: generate-model
+  s:name: generate_model
   s:description: generate model frames from wp6-tools
   s:keywords:
     - wp6-tools
     - model
   s:programmingLanguage: python
   s:softwareVersion: 0.2.0
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Alexandre Valle
-    s:email: alexandre.valle@inesctec.pt
+    - class: s:Person
+      s:name: Alexandre Valle
+      s:email: alexandre.valle@inesctec.pt
   s:contributor:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-generate-model/wp6tools_generate_model_0_2_0.cwl
-  s:dateCreated: "2025-02-07T18:04:41Z"
+  s:dateCreated: "2025-06-10T01:57:48Z"

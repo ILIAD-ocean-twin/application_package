@@ -9,7 +9,7 @@
   "asf_password": "password_asf",
   "cont_slick": "YES",
   "sat": "YES",
-  "use_high_res": "NO",
+  "use_high_res": "YES",
   "min_lon": 24.07,
   "max_lon": 24.69,
   "min_lat": 35.70,
@@ -26,7 +26,7 @@
   "ftp_user": "iliad",
   "ftp_password": "password_request_forth",
   "remote_dir": "/iliad",
-  "cds_token": "40d8b300-afa6-49d9-a1be-18ac497df73c"
+  "cds_token": "your_CDS_TOKEN"
 }
 
 #some identified examples through SAT:

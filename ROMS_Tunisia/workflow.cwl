@@ -8,45 +8,18 @@ $graph:
     forecast:
       doc: forecast for the model
       type: int
-      s:description: forecast for the model
-      s:keywords:
-      - int
-      - forecast
-      s:name: Hindcast
     hindcast:
       doc: Hindcast for the model
       type: int
-      s:description: Hindcast for the model
-      s:keywords:
-      - int
-      - Hindcast
-      s:name: Hindcast
     roms_password:
       doc: Password for Copernicus Download
       type: string
-      s:description: Password for Copernicus Download
-      s:keywords:
-      - string
-      - password
-      s:name: Copernicus Password
     roms_username:
       doc: Username for Copernicus Download
       type: string
-      s:description: Username for Copernicus Download
-      s:keywords:
-      - string
-      - username
-      s:name: Copernicus Username
     timenow:
       doc: Simulation start date. If none is provided, today is used as reference
       type: string
-      s:description: Simulation start date.  If none is provided, today is used as
-        reference
-      s:keywords:
-      - string
-      - start
-      - date
-      s:name: Simulation start date
 
   outputs:
     roms_output:
@@ -73,7 +46,7 @@ $graph:
       run: '#run_roms'
       out:
       - roms_output
-  
+
   id: download_metoceanographic_data
   s:author:
   - class: s:Person
@@ -100,10 +73,20 @@ $graph:
   s:name: ROMS Tunisia
   s:programmingLanguage: python
   s:softwareVersion: 1.1.1
-  s:sourceOrganization:
-  - class: s:Organization
+  s:producer:
+    class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: Hidromod
+      s:url: https://hidromod.com/
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:dateCreated: "2023-12-04"
   s:spatialCoverage:
     class: s:geo
@@ -148,7 +131,7 @@ $graph:
       "/move_struct.sh $(runtime.outdir)"; python3 /model/RomsOP.py --type preparation --forecast $(inputs.forecast) --hindcast $(inputs.hindcast) \
        --roms_password $(inputs.roms_password) --roms_username $(inputs.roms_username) --timenow $(inputs.timenow);
     shellQuote: false
- 
+
   id: download_data
   s:author:
   - class: s:Person
@@ -171,10 +154,20 @@ $graph:
   s:name: Preparation of ROMS Model
   s:programmingLanguage: python
   s:softwareVersion: 1.1.1
-  s:sourceOrganization:
-  - class: s:Organization
+  s:producer:
+    class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: Hidromod
+      s:url: https://hidromod.com/
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:dateCreated: "2023-12-04"
   s:spatialCoverage:
     class: s:geo
@@ -218,7 +211,7 @@ $graph:
   - valueFrom: |
       python3 /model/RomsOP.py --type execution --forecast $(inputs.forecast) --hindcast $(inputs.hindcast) --timenow $(inputs.timenow);
     shellQuote: false
-  
+
   id: run_roms
   s:author:
   - class: s:Person
@@ -241,10 +234,20 @@ $graph:
   s:name: Execution of ROMS Model
   s:programmingLanguage: python
   s:softwareVersion: 1.1.1
-  s:sourceOrganization:
-  - class: s:Organization
+  s:producer:
+    class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: Hidromod
+      s:url: https://hidromod.com/
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:dateCreated: "2023-12-04"
   s:spatialCoverage:
     class: s:geo
@@ -254,6 +257,3 @@ $namespaces:
   ogc: http://www.opengis.net/def/media-type/ogc/1.0/
   s: https://schema.org/
 cwlVersion: v1.2
-s:description: Download metacinematographic data
-s:name: download metacinematographic data
-s:softwareVersion: 1.1.1

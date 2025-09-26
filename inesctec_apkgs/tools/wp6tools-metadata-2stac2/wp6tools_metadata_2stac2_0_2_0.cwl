@@ -8,7 +8,7 @@ $graph:
 
 - class: CommandLineTool
 
-  id: metadata-2stact2
+  id: metadata_2stact2
 
   baseCommand: python
   arguments:
@@ -55,7 +55,7 @@ $graph:
     DockerRequirement:
       dockerPull: iliad-repository.inesctec.pt/wp6tools:0.2.0
 
-  s:name: metadata-2stact2
+  s:name: metadata_2stact2
   s:description: generate metadata from wp6-tools to the 2stac2
   s:keywords:
     - wp6-tools
@@ -63,16 +63,23 @@ $graph:
     - 2stac2
   s:programmingLanguage: python
   s:softwareVersion: 0.2.0
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-metadata-2stac2/wp6tools_metadata_2stac2_0_2_0.cwl
-  s:dateCreated: "2025-02-07T18:04:41Z"
+  s:dateCreated: "2025-06-10T01:57:48Z"

@@ -7,7 +7,7 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: wo-data-filter-mamba
+  id: wo_data_filter_mamba
 
   baseCommand: python
   arguments:
@@ -61,7 +61,7 @@ $graph:
     DockerRequirement:
       dockerPull: iliad-repository.inesctec.pt/wo-data-processing-mamba:0.2.0
 
-  s:name: wo-data-filter-mamba
+  s:name: wo_data_filter_mamba
   s:description: WO csv filter
   s:keywords:
     - meloa
@@ -71,16 +71,23 @@ $graph:
     - filter
   s:programmingLanguage: python
   s:softwareVersion: 0.2.0
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/wo-data-processing-mamba/wo_data_processing_mamba_0_2_0.cwl
-  s:dateCreated: "2025-02-07T17:56:32Z"
+  s:dateCreated: "2025-06-09T21:09:34Z"

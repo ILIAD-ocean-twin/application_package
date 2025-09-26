@@ -2,7 +2,6 @@ cwlVersion: v1.2
 $namespaces:
   s: https://schema.org/
   cwltool: http://commonwl.org/cwltool#
-  ogc: http://www.opengis.net/def/media-type/ogc/1.0/
   edam: http://edamontology.org/
 $graph:
   - class: Workflow
@@ -14,50 +13,31 @@ $graph:
       lat:
         type: float
         doc: The latitude of the study area
+        label: openoil
       lon:
         type: float
         doc: The longitude of the study area
+        label: openoil
       time:
         type: string
         doc: The start time of the simulation
+        label: openoil
       oiltype:
         type: string
         doc: The type of the oil to run the simulation
+        label: openoil
       duration:
         type: int
         doc: The simulation duration
+        label: openoil
       username:
         type: string
         doc: The CMEMS username
+        label: cmems_credentials
       password:
         type: string
         doc: The CMEMS password
-      animation:
-        default: true
-        type: boolean?
-        doc: Run (or not) the animation step
-      endpoint:
-        type: string?
-        doc: S3 storage endpoint
-      region:
-        type: string?
-        doc: S3 storage region
-      access_key:
-        type: string?
-        doc: S3 storage access_key
-      secret_key:
-        type: string?
-        doc: S3 storage secret_key
-      session_token:
-        type: string?
-        doc: S3 storage region
-      bucket:
-        type: string?
-        doc: S3 storage bucket
-      base_path:
-        type: string?
-        doc: S3 storage final directory name
-        default: openoil_pipeline
+        label: cmems_credentials
     steps:
       step_simulation:
         run: '#openoil_simulation'
@@ -74,10 +54,8 @@ $graph:
           - metadata
       step_animation:
         run: '#openoil_animation'
-        when: $(inputs.animation == true || inputs.animation == "true")
         in:
           file: step_simulation/simulation
-          animation: animation
         out:
           - animation
       step_2stac2:
@@ -88,20 +66,6 @@ $graph:
           metadata: step_simulation/metadata
         out:
           - stac_result
-      step_2s3:
-        run: '#2s3'
-        when: $(inputs.endpoint != null && inputs.endpoint != "")
-        in:
-          region: region
-          endpoint: endpoint
-          access_key: access_key
-          secret_key: secret_key
-          session_token: session_token
-          bucket: bucket
-          directory: step_2stac2/stac_result
-          base_path: base_path
-        out:
-          - base_path
     outputs:
       - id: wf_outputs
         outputSource:
@@ -110,7 +74,9 @@ $graph:
     hints:
       cwltool:Secrets:
         secrets:
-          - username
+          - access_key
+          - secret_key
+          - session_token
           - password
     requirements:
       InlineJavascriptRequirement: {}
@@ -132,20 +98,27 @@ $graph:
       - opendrift
       - animation
     s:softwareVersion: 0.2.0
-    s:sourceOrganization:
+    s:producer:
       class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
     s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/openoil-duth/openoil_duth_0_2_0.cwl
-    s:dateCreated: '2025-02-10T11:20:53Z'
+    s:dateCreated: '2025-06-10T23:18:07Z'
   - class: CommandLineTool
     id: openoil_simulation
     baseCommand: python
@@ -209,11 +182,10 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/openoil-simulation-duth:0.2.0
+        dockerPull: iliad-repository.inesctec.pt/openoil-simulation-duth:0.1.0
     hints:
       cwltool:Secrets:
         secrets:
-          - username
           - password
     s:name: openoil_simulation
     s:description: Simulation of oil spill
@@ -222,29 +194,41 @@ $graph:
       - openoil
       - opendrift
     s:programmingLanguage: python
-    s:softwareVersion: 0.2.0
-    s:sourceOrganization:
+    s:softwareVersion: 0.1.0
+    s:producer:
       class: s:Organization
       s:name: D.U.TH
       s:url: https://env.duth.gr
       s:address:
         class: s:PostalAddress
         s:addressCountry: GR
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
+      - class: s:Organization
+        s:name: D.U.TH
+        s:url: https://env.duth.gr
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: GR
     s:author:
-      class: s:Person
-      s:name: Georgios Sylaios
-      s:email: gsylaios@env.duth.gr
-    s:maintainer:
-      class: s:Person
-      s:name: Nikolaos Kokkos
-      s:email: nikolaoskokkos@gmail.com
+      - class: s:Person
+        s:name: Georgios Sylaios
+        s:email: gsylaios@env.duth.gr
+      - class: s:Person
+        s:name: Nikolaos Kokkos
+        s:email: nikolaoskokkos@gmail.com
     s:contributor:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/openoil-simulation-duth/openoil_simulation_duth_0_2_0.cwl
-    s:dateCreated: '2025-02-07T17:28:37Z'
+      https://pipe-drive.inesctec.pt/application-packages/tools/openoil-simulation-duth/openoil_simulation_duth_0_1_0.cwl
+    s:dateCreated: '2025-05-12T12:31:30Z'
   - class: CommandLineTool
     id: openoil_animation
     baseCommand: python
@@ -273,7 +257,7 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/openoil-animation-duth:0.2.0
+        dockerPull: iliad-repository.inesctec.pt/openoil-animation-duth:0.1.0
     s:name: openoil_animation
     s:description: Animation of oil spill simulation
     s:keywords:
@@ -283,29 +267,41 @@ $graph:
       - openoil
       - opendrift
     s:programmingLanguage: python
-    s:softwareVersion: 0.2.0
-    s:sourceOrganization:
+    s:softwareVersion: 0.1.0
+    s:producer:
       class: s:Organization
       s:name: D.U.TH
       s:url: https://env.duth.gr
       s:address:
         class: s:PostalAddress
         s:addressCountry: GR
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
+      - class: s:Organization
+        s:name: D.U.TH
+        s:url: https://env.duth.gr
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: GR
     s:author:
-      class: s:Person
-      s:name: Georgios Sylaios
-      s:email: gsylaios@env.duth.gr
-    s:maintainer:
-      class: s:Person
-      s:name: Nikolaos Kokkos
-      s:email: nikolaoskokkos@gmail.com
+      - class: s:Person
+        s:name: Georgios Sylaios
+        s:email: gsylaios@env.duth.gr
+      - class: s:Person
+        s:name: Nikolaos Kokkos
+        s:email: nikolaoskokkos@gmail.com
     s:contributor:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/openoil-animation-duth/openoil_animation_duth_0_2_0.cwl
-    s:dateCreated: '2025-02-07T17:26:39Z'
+      https://pipe-drive.inesctec.pt/application-packages/tools/openoil-animation-duth/openoil_animation_duth_0_1_0.cwl
+    s:dateCreated: '2025-05-12T12:29:29Z'
   - class: CommandLineTool
     id: 2stac2_openoil_pipeline
     baseCommand: python
@@ -346,7 +342,7 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/2stac2:0.2.0
+        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.1
       InplaceUpdateRequirement:
         inplaceUpdate: true
       InitialWorkDirRequirement:
@@ -361,8 +357,10 @@ $graph:
             return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
           }
     s:name: 2stac2_openoil_pipeline
-    s:softwareVersion: 0.2.0
-    s:description: Transform and array of files into a STAC
+    s:softwareVersion: 0.3.1
+    s:description: >-
+      2stac2 tool to transform OpenOil simulation and animation files into a
+      STAC
     s:keywords:
       - stac
       - metadata
@@ -379,123 +377,5 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_2_0.cwl
-    s:dateCreated: '2025-02-07T17:01:25Z'
-  - class: CommandLineTool
-    id: 2s3
-    baseCommand: python
-    arguments:
-      - /opt/2s3.py
-      - '--endpoint'
-      - valueFrom: $( inputs.endpoint )
-      - '--access_key'
-      - valueFrom: $( inputs.access_key )
-      - '--secret_key'
-      - valueFrom: $( inputs.secret_key )
-      - '--bucket'
-      - valueFrom: $( inputs.bucket )
-      - '--endpoint'
-      - valueFrom: $( inputs.endpoint )
-      - valueFrom: >-
-          $( function () { if (inputs.region) { return ["--region",
-          inputs.region]; } else { return []; } }())
-      - valueFrom: >-
-          $( function () { if (inputs.base_path) { return ["--base_path",
-          `${inputs.base_path}_${new Date().toISOString().replace(/:/g,
-          '').replace(/\-/g, '').split('.')[0]}`]; } else { return []; } }())
-      - valueFrom: >-
-          $( function () { if (inputs.session_token) { return
-          ["--session_token", inputs.session_token]; } else { return []; } }())
-      - valueFrom: >-
-          $( function () { if(inputs.files) { var files_array = [];
-
-          Object.keys(inputs.files).forEach(function (element) {
-          files_array.push('--file'); files_array.push(inputs.files[element]);
-          });
-
-          return files_array; } else { return []; } }())
-      - valueFrom: >-
-          $( function () { if(inputs.directories) { var directories_array = [];
-
-          Object.keys(inputs.directories).forEach(function (element) {
-          directories_array.push('--directory');
-          directories_array.push(inputs.directories[element]); });
-
-          return directories_array; } else { return []; } }())
-      - valueFrom: >-
-          $( function () { if(inputs.file) { return ['--file', inputs.file]; }
-          else { return []; } }())
-      - valueFrom: >-
-          $( function () { if(inputs.directory) { return ['--directory',
-          inputs.directory]; } else { return []; } }())
-    inputs:
-      endpoint:
-        type: string?
-        doc: S3 storage endpoint
-      region:
-        type: string?
-        doc: S3 storage region
-      access_key:
-        type: string?
-        doc: S3 storage access_key
-      secret_key:
-        type: string?
-        doc: S3 storage secret_key
-      session_token:
-        type: string?
-        doc: S3 storage region
-      bucket:
-        type: string?
-        doc: S3 storage bucket
-      base_path:
-        type: string?
-        doc: S3 storage final directory name
-      files:
-        type: File[]?
-        doc: Multiple files to upload
-      directories:
-        type: Directory[]?
-        doc: Multiple directories to upload
-      directory:
-        type: Directory?
-        doc: Single directory to upload
-      file:
-        type: File?
-        doc: Single file to upload
-    outputs:
-      base_path:
-        type: string
-    requirements:
-      NetworkAccess:
-        networkAccess: true
-      ResourceRequirement: {}
-      InlineJavascriptRequirement: {}
-      DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/2s3:0.2.0
-    hints:
-      cwltool:Secrets:
-        secrets:
-          - access_key
-          - secret_key
-          - session_token
-    s:name: 2s3
-    s:description: Uploads files and/or folders to a S3 bucket storage.
-    s:keywords:
-      - s3
-      - storage
-    s:programmingLanguage: python
-    s:softwareVersion: 0.2.0
-    s:sourceOrganization:
-      class: s:Organization
-      s:name: INESCTEC
-      s:url: https://inesctec.pt
-      s:address:
-        class: s:PostalAddress
-        s:addressCountry: PT
-    s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2s3/2s3_0_2_0.cwl
-    s:dateCreated: '2025-02-07T16:52:37Z'
+      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_3_1.cwl
+    s:dateCreated: '2025-06-10T15:27:44Z'

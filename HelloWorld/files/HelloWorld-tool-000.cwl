@@ -2,7 +2,6 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
-  ogc: http://www.opengis.net/def/media-type/ogc/1.0/
 
 $graph:
 - class: CommandLineTool
@@ -14,7 +13,7 @@ $graph:
   - valueFrom: $( inputs.name )
 
   stdout: output.txt
-  
+
   inputs:
     name:
       type: string
@@ -37,10 +36,20 @@ $graph:
     - hello world
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia

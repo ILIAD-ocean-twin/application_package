@@ -11,7 +11,7 @@ $graph:
 
   baseCommand: python
   arguments:
-  - /opt/src/vc_generator.py
+  - /opt/src/command.py
   - valueFrom: $( inputs.dataset )
   - valueFrom: $( inputs.template || inputs.template_url )
 
@@ -28,6 +28,11 @@ $graph:
       type: File
       outputBinding:
         glob: vc.json
+    recipe:
+      format: edam:format_3464 # JSON
+      type: File
+      outputBinding:
+        glob: recipe.json
 
   requirements:
     NetworkAccess:
@@ -45,24 +50,34 @@ $graph:
     - virtual-choreographies
   s:programmingLanguage: python
   s:softwareVersion: 0.2.0
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
-  s:contributor:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Fernando Cassola
-    s:email: fernando.c.marques@inesctec.pt
-  s:mantainer:
-    class: s:Person
-    s:name: Vitor Cavaleiro
-    s:email: up202004724@edu.fe.up.pt
-  s:codeRepository: 
-  s:dateCreated: "2025-02-07T17:42:52Z"
+    - class: s:Person
+      s:name: Fernando Cassola
+      s:email: fernando.c.marques@inesctec.pt
+    - class: s:Person
+      s:name: Vitor Cavaleiro
+      s:email: vitor.cavaleiro@inesctec.pt
+  s:maintainer:
+    - class: s:Person
+      s:name: Vitor Cavaleiro
+      s:email: vitor.cavaleiro@inesctec.pt
+  s:contributor:
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-generator/virtual_choreographies_generator_0_2_0.cwl
+  s:dateCreated: "2025-05-21T15:48:06Z"

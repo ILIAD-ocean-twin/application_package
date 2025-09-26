@@ -46,16 +46,23 @@ $graph:
     - stac
     - metadata
   s:programmingLanguage: python
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_0_2_0.cwl
-  s:dateCreated: "2025-02-07T16:53:16Z"
+  s:dateCreated: "2025-06-10T00:51:03Z"

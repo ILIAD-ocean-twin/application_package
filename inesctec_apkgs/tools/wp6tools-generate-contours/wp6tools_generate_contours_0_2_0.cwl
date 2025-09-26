@@ -7,7 +7,7 @@ $graph:
 
 - class: CommandLineTool
 
-  id: generate-contours
+  id: generate_contours
 
   baseCommand: python
   arguments:
@@ -55,27 +55,34 @@ $graph:
     DockerRequirement:
       dockerPull: iliad-repository.inesctec.pt/wp6tools:0.2.0
 
-  s:name: generate-contours
+  s:name: generate_contours
   s:description: generate contours frames from wp6-tools
   s:keywords:
     - wp6-tools
     - contours
   s:programmingLanguage: python
   s:softwareVersion: 0.2.0
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Alexandre Valle
-    s:email: alexandre.valle@inesctec.pt
+    - class: s:Person
+      s:name: Alexandre Valle
+      s:email: alexandre.valle@inesctec.pt
   s:contributor:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-generate-contours/wp6tools_generate_contours_0_2_0.cwl
-  s:dateCreated: "2025-02-07T18:04:41Z"
+  s:dateCreated: "2025-06-10T01:57:48Z"

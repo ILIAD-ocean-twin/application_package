@@ -3,7 +3,6 @@ cwlVersion: v1.2
 $namespaces:
   s: https://schema.org/
   cwltool: http://commonwl.org/cwltool#
-  ogc: http://www.opengis.net/def/media-type/ogc/1.0/
 
 $graph:
 
@@ -12,45 +11,24 @@ $graph:
   inputs:
     lon_min:
       type: float
-      label: Minimum Longitude
       doc: The minimum longitude of the study area
+      label: area
     lon_max:
       type: float
-      label: Maximum Longitude
       doc: The maximum longitude of the study area
+      label: area
     lat_min:
       type: float
-      label: Minimum Latitude
       doc: The minimum latitude of the study area
+      label: area
     lat_max:
       type: float
-      label: Maximum Latitude
       doc: The maximum latitude of the study area
-    endpoint:
-      type: string?
-      doc: S3 storage endpoint
-    region:
-      type: string?
-      doc: S3 storage region
-    access_key:
-      type: string?
-      doc: S3 storage access_key
-    secret_key:
-      type: string?
-      doc: S3 storage secret_key
-    session_token:
-      type: string?
-      doc: S3 storage region
-    bucket:
-      type: string?
-      doc: S3 storage bucket
-    base_path:
-      type: string?
-      doc: S3 storage final directory name
-      default: "bathymetry_pipeline"
+      label: area
+
   steps:
     step_bathymetry:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/bathymetry-forth/bathymetry_forth_0_2_0.cwl#bathymetry'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/bathymetry-forth/bathymetry_forth_0_1_0.cwl#bathymetry'
       in:
         lon_min: lon_min
         lon_max: lon_max
@@ -66,20 +44,6 @@ $graph:
         metadata: step_bathymetry/metadata
       out:
       - results
-    step_2s3:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/2s3/2s3_0_2_0.cwl#2s3'
-      when: $(inputs.endpoint != null && inputs.endpoint != "")
-      in:
-        region: region
-        endpoint: endpoint
-        access_key: access_key
-        secret_key: secret_key
-        session_token: session_token
-        bucket: bucket
-        directory: step_2stac/results
-        base_path: base_path
-      out:
-        - base_path
 
   outputs:
   - id: wf_outputs
@@ -95,24 +59,29 @@ $graph:
 
   s:name: bathymetry_pipeline
   s:description: |
-    This pipeline crops the bathymetry for a given area, transforms the result to STAC format and stores the results in a S3 bucket.
-
-    The step of saving the results to S3 is optional: if the input endpoint is not set, the S3 step is skipped.
+    This pipeline crops the bathymetry for a given area, transforms the result to STAC format.
 
   s:keywords:
     - bathymetry
     - stac
   s:softwareVersion: 0.2.0
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/bathymetry-pipeline/bathymetry_pipeline_REF_0_2_0.cwl
-  s:dateCreated: "2025-02-10T11:20:14Z"
+  s:dateCreated: "2025-06-11T15:41:32Z"

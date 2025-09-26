@@ -35,7 +35,7 @@ $graph:
       type: File
     file_2:
       doc: file 2
-      type: File
+      type: File?
     metadata:
       format: edam:format_3464 # JSON
       doc: metadata file
@@ -62,16 +62,23 @@ $graph:
     - stac
     - metadata
   s:programmingLanguage: python
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_0_2_0.cwl
-  s:dateCreated: "2025-02-07T17:01:25Z"
+  s:dateCreated: "2025-06-08T23:17:18Z"

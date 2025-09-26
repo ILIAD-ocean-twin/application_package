@@ -104,6 +104,7 @@ $graph:
       out:
         - results
         - sentinel_list
+      #when: $(inputs.sat == 'YES')
 
     step_preprocessing:
       in:
@@ -115,6 +116,7 @@ $graph:
       out:
         - results
         - db_list
+      #when: $(inputs.sat == 'YES')
 
     step_object_detection:
       in:
@@ -127,6 +129,7 @@ $graph:
         - results
         - png_output_path
         - csv_output_path
+      #when: $(inputs.sat == 'YES')
 
     step_segmentation:
       in:
@@ -139,6 +142,7 @@ $graph:
       run: "#segmentation_tool"
       out:
         - results # This contains the .tif file in SAT/
+      #when: $(inputs.sat == 'YES')
 
     step_medslik:
       in:
@@ -297,8 +301,8 @@ $graph:
         glob: $(inputs.use_case_directory)/raw_sentinel/sentinel_paths.txt
   
   requirements:
-    - class: DockerRequirement
-      dockerPull:  registry.services.meeo.it/outmani/iliad_oil_spill_pilot/oilspill001:1.0.0 
+    - class: DockerRequirement 
+      dockerPull:  antonisparasyris/iliad:ladi01
     - class: NetworkAccess
       networkAccess: true
     - class: InlineJavascriptRequirement
@@ -397,7 +401,7 @@ $graph:
           entry: $(inputs.use_case_directory)
           writable: true
     - class: DockerRequirement
-      dockerPull: registry.services.meeo.it/outmani/iliad_oil_spill_pilot/oilspill002:1.0.0
+      dockerPull: antonisparasyris/iliad:ladi02
     - class: NetworkAccess
       networkAccess: true
     - class: InlineJavascriptRequirement
@@ -508,7 +512,7 @@ $graph:
           entry: $(inputs.use_case_directory)
           writable: true
     - class: DockerRequirement
-      dockerPull: registry.services.meeo.it/outmani/iliad_oil_spill_pilot/oilspill003:2.0.0
+      dockerPull: antonisparasyris/iliad:ladi03
     - class: NetworkAccess
       networkAccess: true
     - class: InlineJavascriptRequirement
@@ -628,7 +632,7 @@ $graph:
           entry: $(inputs.use_case_directory)
           writable: true
     - class: DockerRequirement
-      dockerPull: registry.services.meeo.it/outmani/iliad_oil_spill_pilot/oilspill005:2.0.0
+      dockerPull: antonisparasyris/iliad:ladi05
     - class: NetworkAccess
       networkAccess: true
     - class: InlineJavascriptRequirement

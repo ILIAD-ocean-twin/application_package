@@ -71,7 +71,7 @@ $graph:
 
   s:name: 2stac2_openoil_pipeline
   s:softwareVersion: 0.2.0
-  s:description: Transform and array of files into a STAC
+  s:description: 2stac2 tool to transform OpenOil simulation and animation files into a STAC
   s:keywords:
     - stac
     - metadata
@@ -88,4 +88,4 @@ $graph:
     s:name: Miguel Correia
     s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_2_0.cwl
-  s:dateCreated: "2025-02-07T17:01:25Z"
+  s:dateCreated: "2025-06-08T23:17:18Z"

@@ -9,59 +9,24 @@ $graph:
     cmems_password:
       doc: Password for CMEMS Download
       type: string
-      s:description: Password for CMEMS Download
-      s:keywords:
-      - string
-      - password
-      s:name: CMEMS Password
     cmems_username:
       doc: Username for CMEMS Download
       type: string
-      s:description: Username for CMEMS Download
-      s:keywords:
-      - string
-      - username
-      s:name: CMEMS Username
     forecast:
       doc: forecast for the model
       type: int
-      s:description: forecast for the model
-      s:keywords:
-      - int
-      - forecast
-      s:name: Hindcast
     hindcast:
       doc: Hindcast for the model
       type: int
-      s:description: Hindcast for the model
-      s:keywords:
-      - int
-      - Hindcast
-      s:name: Hindcast
     wrf_ftpserver:
       doc: Password for WRF Download
       type: string
-      s:description: FTP Server for WRF Download
-      s:keywords:
-      - string
-      - password
-      s:name: WRF Password
     wrf_password:
       doc: Username for WRF Download
       type: string
-      s:description: Username for WRF Download
-      s:keywords:
-      - string
-      - username
-      s:name: WRF Username
     wrf_username:
       doc: Username for WRF Download
       type: string
-      s:description: Username for WRF Download
-      s:keywords:
-      - string
-      - username
-      s:name: WRF Username
 
   outputs:
     swan_output:
@@ -129,10 +94,24 @@ $graph:
   s:name: Execution of SWAN wave model
   s:programmingLanguage: python
   s:softwareVersion: 1.0.0
-  s:sourceOrganization:
-  - class: s:Organization
+  s:producer:
+    class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: Hidromod
+      s:url: https://hidromod.com/
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:spatialCoverage:
+    class: s:geo
+    s:box: 35.33499908 25.12233 35.36499786 25.17233
+
 - class: CommandLineTool
 
   requirements:
@@ -206,10 +185,20 @@ $graph:
   s:name: Preparation of SWAN wave Model
   s:programmingLanguage: python
   s:softwareVersion: 1.0.0
-  s:sourceOrganization:
-  - class: s:Organization
+  s:producer:
+    class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: Hidromod
+      s:url: https://hidromod.com/
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
 - class: CommandLineTool
 
   requirements:
@@ -271,10 +260,20 @@ $graph:
   s:name: Execution of SWAN wave Model
   s:programmingLanguage: python
   s:softwareVersion: 1.0.0
-  s:sourceOrganization:
-  - class: s:Organization
+  s:producer:
+    class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: Hidromod
+      s:url: https://hidromod.com/
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
 - class: CommandLineTool
 
   requirements:
@@ -336,18 +335,20 @@ $graph:
   s:name: Execution of SWAN wave Model
   s:programmingLanguage: python
   s:softwareVersion: 1.0.0
-  s:sourceOrganization:
-  - class: s:Organization
+  s:producer:
+    class: s:Organization
     s:name: Hidromod
     s:url: https://hidromod.com/
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: Hidromod
+      s:url: https://hidromod.com/
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
 $namespaces:
-  ogc: http://www.opengis.net/def/media-type/ogc/1.0/
   s: https://schema.org/
 cwlVersion: v1.2
-s:description: |-
-  This 500m and 50m resolution SWAN wave model is designed specifically for the Heraklion Port area, spanning a geographical range from West: 25.0 to East: 25.3, and South: 35.32 to North: 35.57. It utilizes ocean boundary conditions derived from the CMEMS Mediterranean Sea Waves Analysis and Forecast model to ensure accurate wave dynamics within the Mediterranean context. Meteorological forcing is provided by the high-resolution ICON 7km dataset, offering detailed and reliable atmospheric inputs.
-s:name: Execution of SWAN wave model
-s:softwareVersion: 1.0.0
-s:spatialCoverage:
-  class: s:geo
-  s:box: 35.33499908 25.12233 35.36499786 25.17233

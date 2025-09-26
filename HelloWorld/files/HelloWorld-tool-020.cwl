@@ -2,6 +2,7 @@ cwlVersion: v1.2
 
 $namespaces:
   s: https://schema.org/
+  edam: http://edamontology.org/
 
 $graph:
 - class: CommandLineTool
@@ -12,7 +13,7 @@ $graph:
   - /opt/HelloWorld.py
   - --name
   - valueFrom: $( inputs.name )
-  
+
   inputs:
     name:
       type: string
@@ -20,11 +21,11 @@ $graph:
 
   outputs:
     result:
+      format: edam:data_3671 # Plain text
       type: File
       outputBinding:
         glob: "result.txt"
       doc: result file
-      s:fileFormat: "text/plain"
 
   requirements:
     InlineJavascriptRequirement: {}
@@ -39,10 +40,20 @@ $graph:
     - hello world
     - example tool
   s:programmingLanguage: python
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:sourceOrganization:
     - class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
   s:author:
     - class: s:Person
       s:name: Miguel Correia

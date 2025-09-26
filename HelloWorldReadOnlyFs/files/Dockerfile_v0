@@ -1,0 +1,7 @@
+FROM python:alpine3.12
+
+WORKDIR /opt
+
+COPY HelloWorld_v0.py ./HelloWorld.py
+
+CMD ["python", "/opt/HelloWorld.py",  "--help"]
