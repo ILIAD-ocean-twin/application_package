@@ -1,0 +1,41 @@
+FROM ubuntu:20.04
+
+ENV OPENDRIFT_VERSION=1.14.3
+
+LABEL maintainer="Miguel Correia <miguel.r.correia@inesctec.pt>"
+LABEL version=${OPENDRIFT_VERSION}
+
+ENV WORKSPACE_DIR=/opt
+
+WORKDIR ${WORKSPACE_DIR}
+
+# Set up environment variables
+ENV PATH=/opt/miniconda3/bin:$PATH
+
+# Install dependencies
+RUN apt-get update && apt-get install -y wget git
+
+# Install Miniconda
+RUN wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/miniconda3 && \
+    rm ~/miniconda.sh && \
+    echo ". /opt/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate opendrift" >> ~/.bashrc
+
+# Configure and install opendrift
+RUN git clone --branch v${OPENDRIFT_VERSION} https://github.com/OpenDrift/opendrift.git
+
+RUN conda config --add channels conda-forge
+RUN conda config --add channels terradue
+
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+RUN conda env create -f opendrift/environment.yml
+
+SHELL ["conda", "run", "-n", "opendrift", "/bin/bash", "-c"]
+SHELL ["/bin/bash", "--login", "-c"]
+
+RUN conda install -n opendrift -y python=3.13 pip
+
+RUN /opt/miniconda3/envs/opendrift/bin/pip install --no-deps -e opendrift
