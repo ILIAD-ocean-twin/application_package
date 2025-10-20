@@ -122,5 +122,5 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/aquaculture-sintef
-  s:dateCreated: "2025-10-20T10:43:34Z"
+  s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/tree/main/aquaculture-norway
+  s:dateCreated: "2025-10-20T11:00:58Z"
