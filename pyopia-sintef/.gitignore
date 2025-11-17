@@ -1,0 +1,10 @@
+docker_*
+inputs
+tests
+# *.keras
+workflow.cwl
+.DS_Store
+vd_*.png
+particles.png
+*.nc
+nc_metadata.json

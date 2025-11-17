@@ -8,11 +8,11 @@ $graph:
 
 - class: CommandLineTool
 
-  id: aquaculture_sintef
+  id: mpa_sintef
 
   baseCommand: python
   arguments:
-   - /aquaculturedemo/runnorkystforecast.py
+   - /mpa/runnorkystforecast.py
   inputs:
     aqua_site_file:
       type: string
@@ -70,24 +70,22 @@ $graph:
   requirements:
     NetworkAccess:
       networkAccess: true
-    EnvVarRequirement:
-      envDef:
-        PATH: /opt/miniconda3/envs/opendrift/bin:/opt/conda/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     ResourceRequirement: {}
     InlineJavascriptRequirement: {}
     DockerRequirement:
-      dockerPull: iliad-repository.inesctec.pt/aquaculture-sintef:0.1.3
+      dockerPull: iliad-repository.inesctec.pt/mpa-sintef:0.2.0
 
-  s:name: aquaculture_sintef
-  s:description: Runs (i) OpenDrift, and (ii) calculates the connectivity matrix for nearby aquaculture sites. The script outputs trajectories from OpenDrift and the connectivity matrix between sites. OpenDrift uses the Norkyst800 ocean model.
+  s:name: mpa_sintef
+  s:description: Runs (i) OpenDrift, and (ii) the connectivity analysis for aquaculture sites in Norway using the NorKyst800 model data, for Marine Protected Areas (MPAs).
   s:keywords:
     - opendrift
+    - mpa
     - aquaculture
     - connectivity
     - norway
     - norkyst800
   s:programmingLanguage: python
-  s:softwareVersion: 0.1.3
+  s:softwareVersion: 0.2.0
   s:producer:
     class: s:Organization
     s:name: SINTEF OCEAN
@@ -123,4 +121,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/tree/main/aquaculture-norway
-  s:dateCreated: "2025-10-20T11:00:58Z"
+  s:dateCreated: "2025-11-17T11:25:31Z"

@@ -1,0 +1,7 @@
+docker_*
+inputs/*
+tests/*
+vd_*.png
+particles.png
+*.nc
+nc_metadata.json
