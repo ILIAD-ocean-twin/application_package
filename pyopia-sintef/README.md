@@ -1,6 +1,6 @@
 # pyopia-sintef
 
-This tool runs the PyOpiA framework.
+This tool runs the PyOPIA framework.
 
 ## Run the pyopia-sintef tool
 
