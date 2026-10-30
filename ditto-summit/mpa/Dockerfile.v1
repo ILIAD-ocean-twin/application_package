@@ -1,0 +1,60 @@
+FROM alpine:3.22 AS opendrift
+
+ARG OPENDRIFT_VERSION="1.14.6"
+
+LABEL maintainer="Joao Campos <joao.campos@inesctec.pt>"
+LABEL org.opencontainers.image.title="opendrift"
+LABEL org.opencontainers.image.version="${OPENDRIFT_VERSION}"
+
+RUN apk add --no-cache \
+    build-base \
+    cmake \
+    gcc \
+    gdal-dev \
+    gdal-driver-hdf5 \
+    gdal-driver-netcdf \
+    git \
+    hdf5-dev \
+    linux-headers \
+    musl-dev \
+    netcdf-dev \
+    python3-dev \
+    py3-pip
+
+RUN python3 -m venv /.venv
+
+ENV PATH="/.venv/bin:$PATH"
+
+RUN pip --no-cache-dir install \
+    psutil \
+    "opendrift @ git+https://github.com/OpenDrift/opendrift.git@v${OPENDRIFT_VERSION}"
+
+
+FROM opendrift AS mpa
+
+LABEL maintainer="Miguel Correia <miguel.r.correia@inesctec.pt>"
+LABEL version=0.2.0
+
+ENV WORKSPACE_DIR=/opt
+WORKDIR ${WORKSPACE_DIR}
+
+ENV PATH=/opt/miniconda3/envs/opendrift/bin:/opt/miniconda3/bin:$PATH
+
+ENV PATH=/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUN pip install click click2cwl
+
+COPY requirements.txt .
+RUN pip install -r /opt/requirements.txt
+
+COPY mpa.py /opt/mpa.py
+
+RUN apk add --no-cache curl
+
+RUN mkdir /opt/output
+
+RUN mkdir -p /opt/data \
+    && curl -fL \
+        "https://ows.emodnet-humanactivities.eu/geonetwork/srv/api/records/ddbe3597-4e3f-4e74-8d31-947c4efef2e9/attachments/EMODnet_HA_OG_Offshore_Installations_20240216.zip" \
+        -o /tmp/emodnet.zip \
+    && unzip -oq /tmp/emodnet.zip -d /opt/data \
+    && rm /tmp/emodnet.zip
