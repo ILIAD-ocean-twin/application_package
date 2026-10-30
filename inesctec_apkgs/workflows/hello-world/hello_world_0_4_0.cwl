@@ -63,9 +63,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/workflows/hello-world/hello_world_0_4_0.cwl
-    s:dateCreated: '2025-07-21T17:23:40Z'
+    s:dateCreated: '2025-11-24T23:07:35Z'
   - class: CommandLineTool
     id: sleep
     baseCommand: app-sleep
@@ -117,9 +115,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/sleep/sleep_0_1_0.cwl
-    s:dateCreated: '2025-06-05T21:00:14Z'
+    s:dateCreated: '2025-11-13T21:43:12Z'
   - class: CommandLineTool
     id: helloworld
     baseCommand: python
@@ -167,16 +163,14 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/hello-world/hello_world_0_1_0.cwl
-    s:dateCreated: '2025-05-12T12:21:05Z'
+    s:dateCreated: '2025-11-13T17:24:46Z'
   - class: CommandLineTool
     id: 2stac2_simulation
     baseCommand: python
     arguments:
       - /opt/2stac2.py
       - '--file'
-      - valueFrom: $( inputs.result )
+      - valueFrom: $(inputs.result)
       - '--metadata'
       - valueFrom: $(runtime.outdir + '/metadata.json')
     inputs:
@@ -251,6 +245,4 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_simulation_0_3_1.cwl
-    s:dateCreated: '2025-06-10T15:27:44Z'
+    s:dateCreated: '2025-11-17T16:08:31Z'

@@ -75,7 +75,7 @@ $graph:
 
   steps:
     step_simulation:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/openoil-simulation-duth/openoil_simulation_duth_0_1_0.cwl#openoil_simulation'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/openoil-simulation-duth/openoil_simulation_duth_0_2_0.cwl#openoil_simulation'
       in:
         lat: lat
         lon: lon
@@ -89,7 +89,7 @@ $graph:
       - metadata
     step_animation:
       when: $(inputs.animation == true || inputs.animation == "true")
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/openoil-animation-duth/openoil_animation_duth_0_1_0.cwl#openoil_animation'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/openoil-animation-duth/openoil_animation_duth_0_2_0.cwl#openoil_animation'
       in:
         file: step_simulation/simulation
         animation: animation
@@ -165,5 +165,4 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/openoil-duth/openoil_duth_REF_0_3_0.cwl
-  s:dateCreated: "2025-06-13T01:59:52Z"
+  s:dateCreated: "2025-11-24T23:23:27Z"

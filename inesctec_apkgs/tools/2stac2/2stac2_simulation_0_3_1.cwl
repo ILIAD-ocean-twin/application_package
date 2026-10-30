@@ -14,7 +14,7 @@ $graph:
   arguments:
   - /opt/2stac2.py
   - --file
-  - valueFrom: $( inputs.result )
+  - valueFrom: $(inputs.result)
   - --metadata
   - valueFrom: $(runtime.outdir + '/metadata.json')
 
@@ -92,5 +92,4 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_simulation_0_3_1.cwl
-  s:dateCreated: "2025-06-10T15:27:44Z"
+  s:dateCreated: "2026-01-27T16:00:40Z"

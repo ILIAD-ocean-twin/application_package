@@ -52,6 +52,14 @@ $graph:
             return [];
         }
       }())
+  - valueFrom: $(
+      function () {
+        if (inputs["contours"]) {
+            return ["--file", inputs["contours"]];
+        } else {
+            return [];
+        }
+      }())
   - --metadata
   - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
 
@@ -75,6 +83,10 @@ $graph:
     bathymetry:
       format: edam:format_3650 # NetCDF
       doc: Bathymetry NetCDF file
+      type: File?
+    contours:
+      format: edam:format_3464 # JSON
+      doc: Contours file
       type: File?
     metadata:
       format: edam:format_3464 # JSON
@@ -109,6 +121,7 @@ $graph:
           if(inputs.simulation) metadata.push({...content, filename: inputs.simulation.basename});
           if(inputs.animation) metadata.push({...content, filename: inputs.animation.basename});
           if(inputs.bathymetry) metadata.push({...content, filename: inputs.bathymetry.basename});
+          if(inputs.contours) metadata.push({...content, filename: inputs.contours.basename});
           return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
         }
 
@@ -119,16 +132,22 @@ $graph:
     - stac
     - metadata
   s:programmingLanguage: python
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_3_1.cwl
-  s:dateCreated: "2025-06-10T15:27:44Z"
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:dateCreated: "2026-01-27T16:00:40Z"

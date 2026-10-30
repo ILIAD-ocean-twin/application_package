@@ -8,7 +8,7 @@ $namespaces:
 $graph:
 - class: CommandLineTool
 
-  id: get_file
+  id: get_csv_file
 
   baseCommand: python
   arguments:
@@ -69,7 +69,7 @@ $graph:
 
   outputs:
     file_output:
-      format: edam:format_3650 # NetCDF
+      format: edam:format_3752 # csv
       type: File
       outputBinding:
         glob: "$(inputs.filename)"
@@ -83,10 +83,11 @@ $graph:
       dockerPull: iliad-repository.inesctec.pt/get-file:0.1.0
 
 
-  s:name: get_file
-  s:description: Tool to download a file from a URL or S3 storage
+  s:name: get_csv_file
+  s:description: Tool to download a CSV file from a URL or S3 storage
   s:keywords:
     - s3
+    - csv
     - storage
   s:programmingLanguage: python
   s:softwareVersion: 0.1.0
@@ -108,5 +109,4 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/get-file/get_file_netcdf_visualization_pipeline_0_1_0.cwl
-  s:dateCreated: "2025-06-12T15:37:01Z"
+  s:dateCreated: "2025-11-13T17:24:08Z"

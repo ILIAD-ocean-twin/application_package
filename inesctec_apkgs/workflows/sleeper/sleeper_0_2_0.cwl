@@ -61,9 +61,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/workflows/sleeper/sleeper_0_2_0.cwl
-    s:dateCreated: '2025-06-10T23:24:29Z'
+    s:dateCreated: '2025-11-24T23:39:18Z'
   - class: ExpressionTool
     id: simulate_metadata_2stac
     inputs: []
@@ -155,9 +153,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/sleep/sleep_0_1_0.cwl
-    s:dateCreated: '2025-06-05T21:00:14Z'
+    s:dateCreated: '2025-11-13T21:43:12Z'
   - class: CommandLineTool
     id: 2stac2_sleeper_pipeline
     baseCommand: python
@@ -200,17 +196,22 @@ $graph:
       - stac
       - metadata
     s:programmingLanguage: python
-    s:sourceOrganization:
+    s:producer:
       class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
     s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_sleeper_pipeline_0_3_1.cwl
-    s:dateCreated: '2025-06-10T15:27:44Z'
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
+    s:dateCreated: '2025-11-17T16:08:31Z'

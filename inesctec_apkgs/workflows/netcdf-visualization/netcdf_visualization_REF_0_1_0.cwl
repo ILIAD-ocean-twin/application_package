@@ -33,12 +33,12 @@ $graph:
       type: string?
       doc: S3 path to file
 
-    # netcdf_file:
-    #   type:
-    #     - File?
-    #     - string?
-    #   label: netcdf file
-    #   format: edam:format_3650 # NetCDF
+    netcdf_file:
+      type:
+        - File?
+        - string?
+      label: netcdf file
+      format: edam:format_3650 # NetCDF
     frames:
       type: string
       label: narratives
@@ -52,7 +52,7 @@ $graph:
       in:
         filename:
           default: "simulation.nc"
-        # file: netcdf_file
+        file: netcdf_file
         s3_endpoint: s3_endpoint
         s3_region: s3_region
         s3_access_key: s3_access_key
@@ -73,9 +73,9 @@ $graph:
         projection-resolution:
           default: "none"
         latitude-variable:
-          default: "latitude"
+          default: "lat"
         longitude-variable:
-          default: "longitude"
+          default: "lon"
         time-variable:
           default: "time"
       out:
@@ -190,5 +190,4 @@ $graph:
     - class: s:Person
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/workflows/netcdf-visualization/netcdf_visualization_REF_0_1_0.cwl
-  s:dateCreated: "2025-06-12T15:42:08Z"
+  s:dateCreated: "2025-11-17T17:06:25Z"

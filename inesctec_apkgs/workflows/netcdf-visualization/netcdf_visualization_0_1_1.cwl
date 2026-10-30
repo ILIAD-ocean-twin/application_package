@@ -23,7 +23,7 @@ $graph:
       s3_session_token:
         type: string?
         doc: S3 storage region
-      s3_bucket:
+      s3_bucket_name:
         type: string?
         doc: S3 storage bucket
       s3_path:
@@ -41,17 +41,9 @@ $graph:
       density:
         type: string
         label: narratives
-      latitude:
-        type: float
-      longitude:
-        type: float
-      radius:
-        type: float
-      time:
-        type: string
     steps:
       step_get_file:
-        run: '#get_file'
+        run: '#get_netcdf_file'
         in:
           filename:
             default: simulation.nc
@@ -61,7 +53,7 @@ $graph:
           s3_access_key: s3_access_key
           s3_secret_key: s3_secret_key
           s3_session_token: s3_session_token
-          s3_bucket: s3_bucket
+          s3_bucket_name: s3_bucket_name
           s3_path: s3_path
         out:
           - file_output
@@ -76,9 +68,9 @@ $graph:
           projection-resolution:
             default: none
           latitude-variable:
-            default: latitude
+            default: lat
           longitude-variable:
-            default: longitude
+            default: lon
           time-variable:
             default: time
         out:
@@ -144,11 +136,12 @@ $graph:
           unity_choreography: step_virtual_choreographies_cesium_plugin/platform_choreography
           cesium_choreography: step_virtual_choreographies_unity_plugin/platform_choreography
           simulation: step_get_file/file_output
+          contours: json_append/result
           metadata: step_netcdf_metadata/metadata
         out:
           - stac_result
     outputs:
-      - id: openoil
+      - id: wf_outputs
         outputSource:
           - step_2stac2/stac_result
         type: Directory
@@ -164,7 +157,7 @@ $graph:
     s:description: netcdf visualization pipeline
     s:keywords:
       - oil spill
-      - opendrift
+      - netcdf
       - choreographies
       - virtual choreographies
       - wp6
@@ -188,11 +181,9 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/workflows/netcdf-visualization/netcdf_visualization_0_1_1.cwl
-    s:dateCreated: '2025-06-10T01:54:24Z'
+    s:dateCreated: '2025-11-24T23:22:49Z'
   - class: CommandLineTool
-    id: get_file
+    id: get_netcdf_file
     baseCommand: python
     arguments:
       - /opt/get-file.py
@@ -214,8 +205,9 @@ $graph:
       - valueFrom: >
           ${ return inputs.s3_session_token ? ["--s3_session_token",
           inputs.s3_session_token] : [] }
-      - valueFrom: |
-          ${ return inputs.s3_bucket ? ["--s3_bucket", inputs.s3_bucket] : [] }
+      - valueFrom: >
+          ${ return inputs.s3_bucket_name ? ["--s3_bucket",
+          inputs.s3_bucket_name] : [] }
       - valueFrom: |
           ${ return inputs.s3_path ? ["--s3_path", inputs.s3_path] : [] }
     inputs:
@@ -242,7 +234,7 @@ $graph:
       s3_session_token:
         type: string?
         doc: S3 storage region
-      s3_bucket:
+      s3_bucket_name:
         type: string?
         doc: S3 storage bucket
       s3_path:
@@ -260,14 +252,15 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/get-file:0.1.0
-    s:name: get_file
-    s:description: Tool to download a file from a URL or S3 storage
+        dockerPull: iliad-repository.inesctec.pt/get-file:0.1.1
+    s:name: get_netcdf_file
+    s:description: Tool to download a NetCDF file from a URL or S3 storage
     s:keywords:
       - s3
+      - netcdf
       - storage
     s:programmingLanguage: python
-    s:softwareVersion: 0.1.0
+    s:softwareVersion: 0.1.1
     s:producer:
       class: s:Organization
       s:name: INESCTEC
@@ -286,9 +279,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/get-file/get_file_netcdf_visualization_pipeline_0_1_0.cwl
-    s:dateCreated: '2025-06-09T18:55:34Z'
+    s:dateCreated: '2025-11-17T17:28:44Z'
   - class: CommandLineTool
     id: extract_particles
     baseCommand: python
@@ -372,9 +363,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-extract-particles/wp6tools_extract_particles_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-10-29T22:16:49Z'
   - class: CommandLineTool
     id: crop_frames
     baseCommand: python
@@ -439,9 +428,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-crop-frames/wp6tools_crop_frames_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-10-29T22:16:49Z'
   - class: CommandLineTool
     id: generate_contours
     baseCommand: python
@@ -511,9 +498,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-generate-contours/wp6tools_generate_contours_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:24:42Z'
+    s:dateCreated: '2025-10-29T22:16:49Z'
   - class: CommandLineTool
     id: dir2files
     baseCommand: python
@@ -561,9 +546,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/dir2files/dir2files_0_1_0.cwl
-    s:dateCreated: '2025-05-12T12:12:44Z'
+    s:dateCreated: '2025-11-13T17:08:43Z'
   - class: CommandLineTool
     id: json_append_wp6tools_pipeline
     baseCommand: python
@@ -606,20 +589,25 @@ $graph:
       - metadata
     s:programmingLanguage: python
     s:softwareVersion: 0.1.0
-    s:sourceOrganization:
+    s:producer:
       class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
     s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/json-append/json_append_wp6tools_pipeline_0_1_0.cwl
-    s:dateCreated: '2025-05-12T12:23:08Z'
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
+    s:dateCreated: '2025-11-13T17:32:08Z'
   - class: CommandLineTool
     id: virtual_choreographies_generator
     baseCommand: python
@@ -691,9 +679,8 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-generator/virtual_choreographies_generator_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:22:25Z'
+    s:codeRepository: https://iliad.inesctec.pt/mite/
+    s:dateCreated: '2025-11-13T21:55:58Z'
   - class: CommandLineTool
     id: virtual_choreographies_transformer_plugin_unity
     baseCommand: python
@@ -777,9 +764,8 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-transformer-plugin-unity/virtual_choreographies_transformer_plugin_unity_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:22:25Z'
+    s:codeRepository: https://iliad.inesctec.pt/mite/
+    s:dateCreated: '2025-11-13T21:55:58Z'
   - class: CommandLineTool
     id: virtual_choreographies_transformer_plugin_cesium
     baseCommand: python
@@ -865,9 +851,8 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-transformer-plugin-cesium/virtual_choreographies_transformer_plugin_cesium_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:22:25Z'
+    s:codeRepository: https://iliad.inesctec.pt/mite/
+    s:dateCreated: '2025-11-13T21:55:58Z'
   - class: CommandLineTool
     id: netcdf_metadata
     baseCommand: python
@@ -918,9 +903,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/netcdf-metadata/netcdf_metadata_0_1_0.cwl
-    s:dateCreated: '2025-06-10T01:07:05Z'
+    s:dateCreated: '2025-11-13T17:39:29Z'
   - class: CommandLineTool
     id: 2stac2_wp6tools_pipeline
     baseCommand: python
@@ -941,6 +924,9 @@ $graph:
       - valueFrom: >-
           $( function () { if (inputs["bathymetry"]) { return ["--file",
           inputs["bathymetry"]]; } else { return []; } }())
+      - valueFrom: >-
+          $( function () { if (inputs["contours"]) { return ["--file",
+          inputs["contours"]]; } else { return []; } }())
       - '--metadata'
       - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
     inputs:
@@ -964,6 +950,10 @@ $graph:
         format: edam:format_3650
         doc: Bathymetry NetCDF file
         type: File?
+      contours:
+        format: edam:format_3464
+        doc: Contours file
+        type: File?
       metadata:
         format: edam:format_3464
         doc: metadata file description
@@ -983,7 +973,7 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.0
+        dockerPull: iliad-repository.inesctec.pt/2stac2:0.3.1
       InplaceUpdateRequirement:
         inplaceUpdate: true
       InitialWorkDirRequirement:
@@ -996,26 +986,32 @@ $graph:
             if(inputs.simulation) metadata.push({...content, filename: inputs.simulation.basename});
             if(inputs.animation) metadata.push({...content, filename: inputs.animation.basename});
             if(inputs.bathymetry) metadata.push({...content, filename: inputs.bathymetry.basename});
+            if(inputs.contours) metadata.push({...content, filename: inputs.contours.basename});
             return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
           }
     s:name: 2stac2_wp6tools_pipeline
-    s:softwareVersion: 0.3.0
+    s:softwareVersion: 0.3.1
     s:description: 2stac2 for WP6 tools pipeline
     s:keywords:
       - stac
       - metadata
     s:programmingLanguage: python
-    s:sourceOrganization:
+    s:producer:
       class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
     s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_3_1.cwl
-    s:dateCreated: '2025-06-10T00:47:37Z'
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
+    s:dateCreated: '2025-11-17T16:08:31Z'

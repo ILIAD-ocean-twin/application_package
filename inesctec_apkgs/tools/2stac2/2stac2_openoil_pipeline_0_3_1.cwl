@@ -12,33 +12,28 @@ $graph:
   baseCommand: python
   arguments:
   - /opt/2stac2.py
-  - --file
-  - valueFrom: $(inputs.simulation)
-  - valueFrom: $(
-      function () {
-        if (inputs.animation) {
-          return ["--file", inputs.animation];
-        } else {
-          return [];
-        }
-      }())
-  - --metadata
-  - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
 
   inputs:
     simulation:
-      format: edam:format_3650 # NetCDF
+      format: edam:format_3650
       doc: simulation NetCDF file
       type: File
+      inputBinding:
+        prefix: --file
     animation:
-      format: edam:format_3467 # GIF
+      format: edam:format_3467
       doc: animation Gif file
       type: File?
+      inputBinding:
+        prefix: --file
     metadata:
-      format: edam:format_3464 # JSON
+      format: edam:format_3464
       doc: metadata file description
       type: File
       loadContents: true
+      inputBinding:
+        prefix: --metadata
+        valueFrom: $(runtime.outdir + '/multiple_metadata.json')
 
   outputs:
     stac_result:
@@ -76,16 +71,22 @@ $graph:
     - stac
     - metadata
   s:programmingLanguage: python
-  s:sourceOrganization:
+  s:producer:
     class: s:Organization
     s:name: INESCTEC
     s:url: https://inesctec.pt
     s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
   s:author:
-    class: s:Person
-    s:name: Miguel Correia
-    s:email: miguel.r.correia@inesctec.pt
-  s:codeRepository: https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_3_1.cwl
-  s:dateCreated: "2025-06-10T15:27:44Z"
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:dateCreated: "2026-01-27T16:00:40Z"

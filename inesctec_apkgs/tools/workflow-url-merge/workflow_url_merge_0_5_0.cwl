@@ -1,0 +1,75 @@
+cwlVersion: v1.2
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+
+$graph:
+- class: CommandLineTool
+
+  id: workflow_url_merge
+
+  baseCommand: node
+  arguments:
+  - /app/index.js
+  - valueFrom: $( inputs.cwl_workflow )
+#   - valueFrom: $(
+#       function () {
+#         if (inputs.output_filename) {
+#           return [inputs.output_filename];
+#         } else {
+#           return [];
+#         }
+#       }())
+
+  inputs:
+    cwl_workflow:
+      format: edam:format_3857 # CWL
+      type: File
+      doc: cwl file input
+    output_filename:
+      type: string?
+      doc: output filename
+
+  outputs:
+    result:
+      format: edam:format_3857 # CWL
+      type: File
+      outputBinding:
+        glob: "workflow_merged.cwl"
+      doc: file output
+
+  requirements:
+    NetworkAccess:
+      networkAccess: true
+    ResourceRequirement: {}
+    InlineJavascriptRequirement: {}
+    DockerRequirement:
+      dockerPull: iliad-repository.inesctec.pt/workflow-url-merge:0.5.0
+
+  s:name: workflow_url_merge
+  s:description: Update a cwl file workflow, with url on steps and merge them into a single file
+  s:keywords:
+    - workflow
+    - merge
+  s:programmingLanguage: javascript
+  s:softwareVersion: 0.5.0
+  s:producer:
+    class: s:Organization
+    s:name: INESCTEC
+    s:url: https://inesctec.pt
+    s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+  s:sourceOrganization:
+    - class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
+  s:author:
+    - class: s:Person
+      s:name: Miguel Correia
+      s:email: miguel.r.correia@inesctec.pt
+  s:dateCreated: "2025-11-18T15:42:06Z"

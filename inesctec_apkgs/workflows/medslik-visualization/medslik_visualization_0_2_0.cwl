@@ -267,7 +267,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://pipe-drive.inesctec.pt/application-packages/workflows/medslik-visualization/medslik_visualization_0_2_0.cwl
-    s:dateCreated: '2025-06-10T23:10:18Z'
+    s:dateCreated: '2025-11-24T23:14:53Z'
   - class: ExpressionTool
     id: extract_file_from_directory
     inputs:
@@ -1433,9 +1433,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-extract-particles/wp6tools_extract_particles_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:57:48Z'
+    s:dateCreated: '2025-10-29T22:16:49Z'
   - class: CommandLineTool
     id: crop_frames
     baseCommand: python
@@ -1500,9 +1498,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-crop-frames/wp6tools_crop_frames_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:57:48Z'
+    s:dateCreated: '2025-10-29T22:16:49Z'
   - class: CommandLineTool
     id: generate_contours
     baseCommand: python
@@ -1572,9 +1568,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-generate-contours/wp6tools_generate_contours_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:57:48Z'
+    s:dateCreated: '2025-10-29T22:16:49Z'
   - class: CommandLineTool
     id: dir2files
     baseCommand: python
@@ -1622,9 +1616,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/dir2files/dir2files_0_1_0.cwl
-    s:dateCreated: '2025-05-12T12:12:44Z'
+    s:dateCreated: '2025-11-13T17:08:43Z'
   - class: CommandLineTool
     id: json_append_wp6tools_pipeline
     baseCommand: python
@@ -1667,20 +1659,25 @@ $graph:
       - metadata
     s:programmingLanguage: python
     s:softwareVersion: 0.1.0
-    s:sourceOrganization:
+    s:producer:
       class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
     s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/json-append/json_append_wp6tools_pipeline_0_1_0.cwl
-    s:dateCreated: '2025-05-12T12:23:08Z'
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
+    s:dateCreated: '2025-11-13T17:32:08Z'
   - class: CommandLineTool
     id: virtual_choreographies_generator
     baseCommand: python
@@ -1752,9 +1749,8 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-generator/virtual_choreographies_generator_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:22:25Z'
+    s:codeRepository: https://iliad.inesctec.pt/mite/
+    s:dateCreated: '2025-11-13T21:55:58Z'
   - class: CommandLineTool
     id: virtual_choreographies_transformer_plugin_unity
     baseCommand: python
@@ -1838,9 +1834,8 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-transformer-plugin-unity/virtual_choreographies_transformer_plugin_unity_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:22:25Z'
+    s:codeRepository: https://iliad.inesctec.pt/mite/
+    s:dateCreated: '2025-11-13T21:55:58Z'
   - class: CommandLineTool
     id: virtual_choreographies_transformer_plugin_cesium
     baseCommand: python
@@ -1926,9 +1921,8 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/virtual-choreographies-transformer-plugin-cesium/virtual_choreographies_transformer_plugin_cesium_0_3_0.cwl
-    s:dateCreated: '2025-06-10T00:22:25Z'
+    s:codeRepository: https://iliad.inesctec.pt/mite/
+    s:dateCreated: '2025-11-13T21:55:58Z'
   - class: CommandLineTool
     id: metadata_2stact2
     baseCommand: python
@@ -1999,9 +1993,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/wp6tools-metadata-2stac2/wp6tools_metadata_2stac2_0_2_0.cwl
-    s:dateCreated: '2025-06-10T01:57:48Z'
+    s:dateCreated: '2025-10-29T22:16:49Z'
   - class: CommandLineTool
     id: 2stac2_wp6tools_pipeline
     baseCommand: python
@@ -2022,6 +2014,9 @@ $graph:
       - valueFrom: >-
           $( function () { if (inputs["bathymetry"]) { return ["--file",
           inputs["bathymetry"]]; } else { return []; } }())
+      - valueFrom: >-
+          $( function () { if (inputs["contours"]) { return ["--file",
+          inputs["contours"]]; } else { return []; } }())
       - '--metadata'
       - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
     inputs:
@@ -2044,6 +2039,10 @@ $graph:
       bathymetry:
         format: edam:format_3650
         doc: Bathymetry NetCDF file
+        type: File?
+      contours:
+        format: edam:format_3464
+        doc: Contours file
         type: File?
       metadata:
         format: edam:format_3464
@@ -2077,6 +2076,7 @@ $graph:
             if(inputs.simulation) metadata.push({...content, filename: inputs.simulation.basename});
             if(inputs.animation) metadata.push({...content, filename: inputs.animation.basename});
             if(inputs.bathymetry) metadata.push({...content, filename: inputs.bathymetry.basename});
+            if(inputs.contours) metadata.push({...content, filename: inputs.contours.basename});
             return [{"class": "File", "basename": "multiple_metadata.json", "contents": JSON.stringify(metadata) }];
           }
     s:name: 2stac2_wp6tools_pipeline
@@ -2086,17 +2086,22 @@ $graph:
       - stac
       - metadata
     s:programmingLanguage: python
-    s:sourceOrganization:
+    s:producer:
       class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
     s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_wp6tools_pipeline_0_3_1.cwl
-    s:dateCreated: '2025-06-10T15:27:44Z'
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
+    s:dateCreated: '2025-11-17T16:08:31Z'

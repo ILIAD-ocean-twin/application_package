@@ -23,6 +23,35 @@ $graph:
         type: float
         doc: The maximum latitude of the study area
         label: area
+      endpoint:
+        type: string?
+        doc: S3 storage endpoint
+        label: s3storage
+      region:
+        type: string?
+        doc: S3 storage region
+        label: s3storage
+      access_key:
+        type: string?
+        doc: S3 storage access_key
+        label: s3storage
+      secret_key:
+        type: string?
+        doc: S3 storage secret_key
+        label: s3storage
+      session_token:
+        type: string?
+        doc: S3 storage region
+        label: s3storage
+      bucket:
+        type: string?
+        doc: S3 storage bucket
+        label: s3storage
+      base_path:
+        type: string?
+        doc: S3 storage final directory name
+        default: bathymetry_pipeline
+        label: s3storage
     steps:
       step_bathymetry:
         run: '#bathymetry'
@@ -41,6 +70,20 @@ $graph:
           metadata: step_bathymetry/metadata
         out:
           - results
+      step_2s3:
+        run: '#2s3'
+        when: $(inputs.endpoint != null && inputs.endpoint != "")
+        in:
+          region: region
+          endpoint: endpoint
+          access_key: access_key
+          secret_key: secret_key
+          session_token: session_token
+          bucket: bucket
+          directory: step_2stac/results
+          base_path: base_path
+        out:
+          - base_path
     outputs:
       - id: wf_outputs
         outputSource:
@@ -57,7 +100,11 @@ $graph:
     s:name: bathymetry_pipeline
     s:description: >
       This pipeline crops the bathymetry for a given area, transforms the result
-      to STAC format.
+      to STAC format and stores the results in a S3 bucket.
+
+
+      The step of saving the results to S3 is optional: if the input endpoint is
+      not set, the S3 step is skipped.
     s:keywords:
       - bathymetry
       - stac
@@ -80,9 +127,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/workflows/bathymetry-pipeline/bathymetry_pipeline_0_2_0.cwl
-    s:dateCreated: '2025-06-11T15:41:32Z'
+    s:dateCreated: '2025-11-24T23:06:57Z'
   - class: CommandLineTool
     id: bathymetry
     baseCommand: python
@@ -170,9 +215,7 @@ $graph:
       - class: s:Person
         s:email: miguel.r.correia@inesctec.pt
         s:name: Miguel Correia
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/bathymetry-forth/bathymetry_forth_0_1_0.cwl
-    s:dateCreated: '2025-05-12T11:45:31Z'
+    s:dateCreated: '2025-11-13T16:59:57Z'
   - class: CommandLineTool
     id: 2stac
     baseCommand: python
@@ -226,6 +269,127 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac/2stac_0_2_0.cwl
-    s:dateCreated: '2025-06-10T00:51:03Z'
+    s:dateCreated: '2025-11-13T16:51:54Z'
+  - class: CommandLineTool
+    id: 2s3
+    baseCommand: python
+    arguments:
+      - /opt/2s3.py
+      - '--endpoint'
+      - valueFrom: $( inputs.endpoint )
+      - '--access_key'
+      - valueFrom: $( inputs.access_key )
+      - '--secret_key'
+      - valueFrom: $( inputs.secret_key )
+      - '--bucket'
+      - valueFrom: $( inputs.bucket )
+      - '--endpoint'
+      - valueFrom: $( inputs.endpoint )
+      - valueFrom: >-
+          $( function () { if (inputs.region) { return ["--region",
+          inputs.region]; } else { return []; } }())
+      - valueFrom: >-
+          $( function () { if (inputs.base_path) { return ["--base_path",
+          `${inputs.base_path}_${new Date().toISOString().replace(/:/g,
+          '').replace(/\-/g, '').split('.')[0]}`]; } else { return []; } }())
+      - valueFrom: >-
+          $( function () { if (inputs.session_token) { return
+          ["--session_token", inputs.session_token]; } else { return []; } }())
+      - valueFrom: >-
+          $( function () { if(inputs.files) { var files_array = [];
+
+          Object.keys(inputs.files).forEach(function (element) {
+          files_array.push('--file'); files_array.push(inputs.files[element]);
+          });
+
+          return files_array; } else { return []; } }())
+      - valueFrom: >-
+          $( function () { if(inputs.directories) { var directories_array = [];
+
+          Object.keys(inputs.directories).forEach(function (element) {
+          directories_array.push('--directory');
+          directories_array.push(inputs.directories[element]); });
+
+          return directories_array; } else { return []; } }())
+      - valueFrom: >-
+          $( function () { if(inputs.file) { return ['--file', inputs.file]; }
+          else { return []; } }())
+      - valueFrom: >-
+          $( function () { if(inputs.directory) { return ['--directory',
+          inputs.directory]; } else { return []; } }())
+    inputs:
+      endpoint:
+        type: string?
+        doc: S3 storage endpoint
+      region:
+        type: string?
+        doc: S3 storage region
+      access_key:
+        type: string?
+        doc: S3 storage access_key
+      secret_key:
+        type: string?
+        doc: S3 storage secret_key
+      session_token:
+        type: string?
+        doc: S3 storage region
+      bucket:
+        type: string?
+        doc: S3 storage bucket
+      base_path:
+        type: string?
+        doc: S3 storage final directory name
+      files:
+        type: File[]?
+        doc: Multiple files to upload
+      directories:
+        type: Directory[]?
+        doc: Multiple directories to upload
+      directory:
+        type: Directory?
+        doc: Single directory to upload
+      file:
+        type: File?
+        doc: Single file to upload
+    outputs:
+      base_path:
+        type: string
+    requirements:
+      NetworkAccess:
+        networkAccess: true
+      ResourceRequirement: {}
+      InlineJavascriptRequirement: {}
+      DockerRequirement:
+        dockerPull: iliad-repository.inesctec.pt/2s3:0.1.0
+    hints:
+      cwltool:Secrets:
+        secrets:
+          - access_key
+          - secret_key
+          - session_token
+    s:name: 2s3
+    s:description: Uploads files and/or folders to a S3 bucket storage.
+    s:keywords:
+      - s3
+      - storage
+    s:programmingLanguage: python
+    s:softwareVersion: 0.1.0
+    s:producer:
+      class: s:Organization
+      s:name: INESCTEC
+      s:url: https://inesctec.pt
+      s:address:
+        class: s:PostalAddress
+        s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
+    s:author:
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
+    s:dateCreated: '2025-11-13T16:51:16Z'

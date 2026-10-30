@@ -165,9 +165,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/workflows/openoil-duth/openoil_duth_0_3_0.cwl
-    s:dateCreated: '2025-06-13T01:59:52Z'
+    s:dateCreated: '2025-11-24T23:23:27Z'
   - class: CommandLineTool
     id: openoil_simulation
     baseCommand: python
@@ -224,14 +222,10 @@ $graph:
     requirements:
       NetworkAccess:
         networkAccess: true
-      EnvVarRequirement:
-        envDef:
-          PATH: >-
-            /opt/miniconda3/envs/opendrift/bin:/opt/conda/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/openoil-simulation-duth:0.1.0
+        dockerPull: iliad-repository.inesctec.pt/openoil-simulation-duth:0.2.0
     hints:
       cwltool:Secrets:
         secrets:
@@ -243,7 +237,7 @@ $graph:
       - openoil
       - opendrift
     s:programmingLanguage: python
-    s:softwareVersion: 0.1.0
+    s:softwareVersion: 0.2.0
     s:producer:
       class: s:Organization
       s:name: D.U.TH
@@ -275,9 +269,7 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/openoil-simulation-duth/openoil_simulation_duth_0_1_0.cwl
-    s:dateCreated: '2025-05-12T12:31:30Z'
+    s:dateCreated: '2025-11-17T11:38:11Z'
   - class: CommandLineTool
     id: openoil_animation
     baseCommand: python
@@ -299,14 +291,10 @@ $graph:
     requirements:
       NetworkAccess:
         networkAccess: true
-      EnvVarRequirement:
-        envDef:
-          PATH: >-
-            /opt/miniconda3/envs/opendrift/bin:/opt/conda/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/openoil-animation-duth:0.1.0
+        dockerPull: iliad-repository.inesctec.pt/openoil-animation-duth:0.2.0
     s:name: openoil_animation
     s:description: Animation of oil spill simulation
     s:keywords:
@@ -316,7 +304,7 @@ $graph:
       - openoil
       - opendrift
     s:programmingLanguage: python
-    s:softwareVersion: 0.1.0
+    s:softwareVersion: 0.2.0
     s:producer:
       class: s:Organization
       s:name: D.U.TH
@@ -348,35 +336,33 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/openoil-animation-duth/openoil_animation_duth_0_1_0.cwl
-    s:dateCreated: '2025-05-12T12:29:29Z'
+    s:dateCreated: '2025-11-13T15:38:01Z'
   - class: CommandLineTool
     id: 2stac2_openoil_pipeline
     baseCommand: python
     arguments:
       - /opt/2stac2.py
-      - '--file'
-      - valueFrom: $(inputs.simulation)
-      - valueFrom: >-
-          $( function () { if (inputs.animation) { return ["--file",
-          inputs.animation]; } else { return []; } }())
-      - '--metadata'
-      - valueFrom: $(runtime.outdir + '/multiple_metadata.json')
     inputs:
       simulation:
         format: edam:format_3650
         doc: simulation NetCDF file
         type: File
+        inputBinding:
+          prefix: '--file'
       animation:
         format: edam:format_3467
         doc: animation Gif file
         type: File?
+        inputBinding:
+          prefix: '--file'
       metadata:
         format: edam:format_3464
         doc: metadata file description
         type: File
         loadContents: true
+        inputBinding:
+          prefix: '--metadata'
+          valueFrom: $(runtime.outdir + '/multiple_metadata.json')
     outputs:
       stac_result:
         outputBinding:
@@ -414,20 +400,25 @@ $graph:
       - stac
       - metadata
     s:programmingLanguage: python
-    s:sourceOrganization:
+    s:producer:
       class: s:Organization
       s:name: INESCTEC
       s:url: https://inesctec.pt
       s:address:
         class: s:PostalAddress
         s:addressCountry: PT
+    s:sourceOrganization:
+      - class: s:Organization
+        s:name: INESCTEC
+        s:url: https://inesctec.pt
+        s:address:
+          class: s:PostalAddress
+          s:addressCountry: PT
     s:author:
-      class: s:Person
-      s:name: Miguel Correia
-      s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2stac2/2stac2_openoil_pipeline_0_3_1.cwl
-    s:dateCreated: '2025-06-10T15:27:44Z'
+      - class: s:Person
+        s:name: Miguel Correia
+        s:email: miguel.r.correia@inesctec.pt
+    s:dateCreated: '2025-11-17T16:08:31Z'
   - class: CommandLineTool
     id: 2s3
     baseCommand: python
@@ -550,6 +541,4 @@ $graph:
       - class: s:Person
         s:name: Miguel Correia
         s:email: miguel.r.correia@inesctec.pt
-    s:codeRepository: >-
-      https://pipe-drive.inesctec.pt/application-packages/tools/2s3/2s3_0_1_0.cwl
-    s:dateCreated: '2025-05-12T11:03:57Z'
+    s:dateCreated: '2025-11-13T16:51:16Z'
