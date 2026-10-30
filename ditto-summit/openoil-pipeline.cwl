@@ -13,23 +13,18 @@ $graph:
       lat:
         type: float
         doc: The latitude of the study area
-        label: openoil
       lon:
         type: float
         doc: The longitude of the study area
-        label: openoil
       time:
         type: string
         doc: The start time of the simulation
-        label: openoil
       oiltype:
         type: string
         doc: The type of the oil to run the simulation
-        label: openoil
       duration:
         type: int
         doc: The simulation duration
-        label: openoil
       username:
         type: string
         doc: The CMEMS username
@@ -41,7 +36,6 @@ $graph:
       animation:
         type: boolean?
         doc: Run (or not) the animation step
-        label: openoil
     steps:
       step_simulation:
         run: '#openoil_simulation'
