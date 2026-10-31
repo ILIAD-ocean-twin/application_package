@@ -10,10 +10,10 @@ $graph:
     inputs:
       startdate:
         type: string
-        doc: norkyst_agg
+        doc: The start time of the simulation
       duration:
         type: int
-        doc: The start time of the simulation
+        doc: The duration of the simulation
       username:
         type: string
         doc: The CMEMS username
@@ -82,7 +82,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://github.com/ILIAD-ocean-twin/application_package/tree/main/mpa-norway
-    s:dateCreated: '2026-10-31T02:32:45Z'
+    s:dateCreated: '2026-10-31T03:04:54Z'
   - class: CommandLineTool
     id: mpa_ditto_summit_lundy
     baseCommand: python
@@ -121,7 +121,7 @@ $graph:
       ResourceRequirement: {}
       InlineJavascriptRequirement: {}
       DockerRequirement:
-        dockerPull: iliad-repository.inesctec.pt/mpa-ditto-summit-lundy:0.1.0
+        dockerPull: iliad-repository.inesctec.pt/mpa-ditto-summit-lundy:0.1.1
     hints:
       cwltool:Secrets:
         secrets:
@@ -132,7 +132,7 @@ $graph:
       - opendrift
       - mpa
     s:programmingLanguage: python
-    s:softwareVersion: 0.1.0
+    s:softwareVersion: 0.1.1
     s:producer:
       class: s:Organization
       s:name: SINTEF OCEAN
@@ -166,7 +166,7 @@ $graph:
         s:email: miguel.r.correia@inesctec.pt
     s:codeRepository: >-
       https://github.com/ILIAD-ocean-twin/application_package/tree/main/ditto-summut/mpa
-    s:dateCreated: '2026-10-31T02:26:57Z'
+    s:dateCreated: '2026-10-31T03:01:13Z'
   - class: CommandLineTool
     id: netcdf_metadata
     baseCommand: python

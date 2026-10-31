@@ -13,10 +13,10 @@ $graph:
   inputs:
     startdate:
       type: string
-      doc: norkyst_agg
+      doc: The start time of the simulation
     duration:
       type: int
-      doc: The start time of the simulation
+      doc: The duration of the simulation
     username:
       type: string
       doc: The CMEMS username
@@ -25,7 +25,7 @@ $graph:
       doc: The CMEMS password
   steps:
     step_simulation:
-      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/mpa-ditto-summit-lundy/mpa_ditto_summit_lundy_0_1_0.cwl#mpa_ditto_summit_lundy'
+      run: 'https://pipe-drive.inesctec.pt/application-packages/tools/mpa-ditto-summit-lundy/mpa_ditto_summit_lundy_0_1_1.cwl#mpa_ditto_summit_lundy'
       in:
         startdate: startdate
         duration: duration
@@ -85,4 +85,4 @@ $graph:
       s:name: Miguel Correia
       s:email: miguel.r.correia@inesctec.pt
   s:codeRepository: https://github.com/ILIAD-ocean-twin/application_package/tree/main/mpa-norway
-  s:dateCreated: "2026-10-31T02:32:45Z"
+  s:dateCreated: "2026-10-31T03:04:54Z"
